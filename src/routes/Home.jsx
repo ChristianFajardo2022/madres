@@ -106,29 +106,7 @@ const Home = () => {
         },
         "<"
       );
-      tl.fromTo(
-        ".gradientBlack",
-        {
-          opacity: 1,
-        },
-        {
-          opacity: 0,
-          duration: 0.2,
-          ease: "power1.out",
-        }
-      );
-      tl.fromTo(
-        ".gradientBlur",
-        {
-          opacity: 1,
-        },
-        {
-          opacity: 0,
-          duration: 0.2,
-          ease: "power1.out",
-        },
-        "< "
-      );
+
       tl.fromTo(
         ".videoVimeo",
         {
@@ -142,8 +120,29 @@ const Home = () => {
           visibility: "visible",
           duration: 1,
           ease: "power1.inOut",
+        }
+      );
+      tl.fromTo(
+        ".gradientBlack",
+        {
+          zIndex: 10,
         },
-        "<=-0.5"
+        {
+          zIndex: 1,
+          duration: 0.5,
+          ease: "power1.out",
+        }
+      );
+      tl.fromTo(
+        ".gradientBlur",
+        {
+          opacity: 1,
+        },
+        {
+          opacity: 0,
+          duration: 0.2,
+          ease: "power1.out",
+        }
       );
     }
   }, [videoCargado, play]);
@@ -196,7 +195,7 @@ const Home = () => {
             </div>
 
             <div
-              className={`videoVimeo max-w-[1300px] floatcenter w-full h-full py-4 flex flex-col justify-center items-center`}
+              className={`videoVimeo max-w-[1300px] z-[9] 2xl:h-[930px] floatcenter w-full py-4 flex flex-col justify-center items-center`}
             >
               <Video
                 setPlay={setOnPlay}
