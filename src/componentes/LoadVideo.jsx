@@ -16,7 +16,7 @@ const loadVideo = ({
       autoPlay
       loop={loop ? true : false}
       muted
-      onEnded={end}
+      onEnded={end ? end : null}
       onLoadedData={onLoadedData ? onLoadedData : null}
     />
   );

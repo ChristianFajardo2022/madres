@@ -42,25 +42,25 @@ const Home = () => {
   };
   const avanzar = () => {
     setLoading(false);
-    console.log(loading);
   };
 
   useEffect(() => {
-    if (inicioComercial) {
+    if (!loading) {
       const tl = gsap.timeline();
       tl.to(".titleInicio", {
         opacity: 1,
         display: "block",
         ease: "power1.inOut",
+        delay: 0.5,
       });
       tl.to(".inicioComercial", {
         opacity: 1,
         display: "block",
         ease: "power1.inOut",
-        delay: 2,
+        delay: 0.8,
       });
     }
-  }, [inicioComercial]);
+  }, [loading]);
 
   useEffect(() => {
     if (play) {
@@ -77,7 +77,7 @@ const Home = () => {
         {
           opacity: 1,
           backgroundImage:
-            "radial-gradient(circle, rgb(0 0 0 / 37%) 0%, rgb(0, 0, 0) 100%)",
+            "radial-gradient(circle, rgb(0 0 0 / 60%) 0%, rgb(0, 0, 0) 60%)",
           duration: 0.8,
           ease: "power1.in",
         }
@@ -129,7 +129,7 @@ const Home = () => {
         },
         {
           zIndex: 1,
-          duration: 0.5,
+          duration: 0.1,
           ease: "power1.out",
         }
       );
@@ -140,10 +140,11 @@ const Home = () => {
         },
         {
           opacity: 0,
-          duration: 0.2,
+          duration: 0.1,
           ease: "power1.out",
         }
-      );
+      ),
+        "<-=0.1";
     }
   }, [videoCargado, play]);
 
@@ -155,7 +156,7 @@ const Home = () => {
         <LoadVideo
           customStyle={"hidden"}
           videoLoad={videoLoad}
-          url={"/begin.mp4"}
+          url={"/begin2.mp4"}
           onLoadedData={avanzar}
         />
         {loading ? (
@@ -164,18 +165,7 @@ const Home = () => {
           </>
         ) : (
           <div className="w-full h-full ">
-            <LoadVideo
-              videoLoad={videoLoad}
-              url={"/begin.mp4"}
-              end={end}
-              loop={false}
-            />
-            <LoadVideo
-              customStyle={"hidden opacity-0 block"}
-              videoLoad={videoLoad2}
-              url={"/Loop.mp4"}
-              loop={true}
-            />
+            <LoadVideo videoLoad={videoLoad} url={"/begin2.mp4"} loop={false} />
 
             <div className="gradientBlur z-20 backdrop-blur-[8px] pointer-events-none w-full opacity-0 h-full floatcenter bg-white bg-opacity-5"></div>
             <div className="gradientBlack z-10 pointer-events-none w-full h-full floatcenter opacity-0"></div>
