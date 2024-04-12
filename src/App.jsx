@@ -1,21 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Formulario from './componentes/Formulario';
-import Grabadora from './componentes/Grabadora';
-import Administrador from './componentes/Administrador';
-import './index.css';
+import React from "react";
+import "./index.css";
+import router from "./routes/Rutas";
+import { Helmet } from "react-helmet";
+import { RouterProvider } from "react-router-dom";
 
 const App = () => {
   return (
-    <Router>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={<Grabadora />} />
-          <Route path="/formulario" element={<Formulario />} />
-          <Route path="administrador" element={<Administrador />} />
-        </Routes>
-      </div>
-    </Router>
+    <>
+      <Helmet>
+        <title>Operación mayo</title>
+        <link rel="canonical" href="/" />
+        <meta name="description" content="Homenaje para todos las madres" />
+      </Helmet>
+
+      <>
+        <RouterProvider router={router} />
+      </>
+    </>
   );
 };
 

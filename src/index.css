@@ -2,10 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Coastal";
+  src: url("/font/Coastal-Round.ttf");
+}
+:root {
+  --yellow: #ffd77a;
+}
+.ajusteFuente {
+  padding-bottom: 5px;
+}
+.Coastal {
+  font-family: "Coastal", sans-serif;
+}
+html {
+  @apply w-screen h-screen;
+}
+h1 {
+  @apply tracking-[0.25em] text-4xl text-[--yellow];
+}
 body {
-  @apply m-0 p-0 box-content;
+  @apply m-0 p-0 box-content Coastal;
   @apply w-full h-full;
 }
 #root {
   @apply w-full h-full;
+}
+img,
+svg {
+  @apply w-full h-full object-cover;
+}
+.videoVimeo {
+  @apply opacity-0 pointer-events-none invisible;
+}
+
+.ObjetoInvisible {
+  @apply opacity-0 invisible pointer-events-none;
+}
+.ObjetoVisible {
+  @apply visible opacity-100 pointer-events-auto;
+}
+.floatcenter {
+  @apply absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%];
+}
+.floatRigth {
+  @apply absolute bottom-6 right-6 translate-y-[-50%] translate-x-[-50%];
+}
+.videoVimeo .iconPlay {
+  @apply transition text-[var(--yellow)] flex items-center justify-center px-0 w-[130px] border-[#ffffff73];
+}
+.videoVimeo .iconPlay.active {
+  @apply w-[50px];
+}
+.videoVimeo .iconPlay .textocustom {
+  @apply flex items-center justify-center;
+}
+.btn {
+  @apply uppercase bg-black border border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white py-1  px-10;
+}
+.transition {
+  @apply transition-all ease-in-out duration-[2000ms];
 }
