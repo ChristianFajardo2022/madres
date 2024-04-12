@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import router from "./routes/Rutas";
 import { Helmet } from "react-helmet";
 import { RouterProvider } from "react-router-dom";
+import LoadingEnd from "./componentes/Loading";
 
 const App = () => {
   return (

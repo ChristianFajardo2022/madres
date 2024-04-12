@@ -5,8 +5,10 @@ import gsap from "gsap";
 import LoadVideo from "../componentes/LoadVideo";
 import Button from "../componentes/Button";
 import Texto from "../componentes/Texto";
+import LoadingEnd from "../componentes/Loading";
 
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [videoCargado, setVideocargado] = useState(false);
   const [inicioComercial, setinicioComercial] = useState(false);
   const [play, setPlay] = useState(false);
@@ -34,9 +36,13 @@ const Home = () => {
     );
     tl.add(() => setinicioComercial(true));
   };
-
+  console.log(loading);
   const onLoadVideo = () => {
     setVideocargado(true);
+  };
+  const avanzar = () => {
+    setLoading(false);
+    console.log(loading);
   };
 
   useEffect(() => {
@@ -147,94 +153,106 @@ const Home = () => {
       <div
         className={`w-full h-full bg-plate-500 flex justify-center items-center bg-black`}
       >
-        <div className="w-full h-full ">
-          <LoadVideo
-            videoLoad={videoLoad}
-            url={"/begin.mp4"}
-            end={end}
-            loop={false}
-          />
-          <LoadVideo
-            customStyle={"hidden opacity-0 block"}
-            videoLoad={videoLoad2}
-            url={"/Loop.mp4"}
-            loop={true}
-          />
-
-          <div className="gradientBlur z-20 backdrop-blur-[8px] pointer-events-none w-full opacity-0 h-full floatcenter bg-white bg-opacity-5"></div>
-          <div className="gradientBlack z-10 pointer-events-none w-full h-full floatcenter opacity-0"></div>
-
-          <div className="cajaTitulos absolute top-3/4 left-1/2 translate-x-[-50%] flex items-center justify-between h-44 flex-col">
-            <h1 className="titleInicio hidden opacity-0 ajusteFuente">
-              Donde todos los hijos <br />
-              tienen algo por decir
-            </h1>
-            <Button
-              custoMStyle={
-                "inicioComercial hidden opacity-0 text-3xl ajusteFuente"
-              }
-              handleClick={() => setPlay(true)}
-              title={"CONOCE ESTA HISTORIA"}
+        <LoadVideo
+          customStyle={"hidden"}
+          videoLoad={videoLoad}
+          url={"/begin.mp4"}
+          onLoadedData={avanzar}
+        />
+        {loading ? (
+          <>
+            <LoadingEnd />
+          </>
+        ) : (
+          <div className="w-full h-full ">
+            <LoadVideo
+              videoLoad={videoLoad}
+              url={"/begin.mp4"}
+              end={end}
+              loop={false}
             />
-          </div>
-
-          <div
-            className={`videoVimeo max-w-[1300px] floatcenter w-full h-full py-4 flex flex-col justify-center items-center`}
-          >
-            <Video
-              setPlay={setOnPlay}
-              play={onplay}
-              VideoReady={onLoadVideo}
-              url={"https://www.youtube.com/watch?v=JpjNBF1W4UA"}
+            <LoadVideo
+              customStyle={"hidden opacity-0 block"}
+              videoLoad={videoLoad2}
+              url={"/Loop.mp4"}
+              loop={true}
             />
-            <div className="cajaIcon m-6 relative w-full flex justify-between">
-              {omitir && (
-                <>
-                  <Button
-                    handleClick={() => {
-                      if (onplay) {
-                        setOnPlay(false);
-                      } else {
-                        setOnPlay(true);
-                      }
-                    }}
-                    custoMStyle={`fade z-10 btn text-xl  transition iconPlay ${
-                      !onplay ? "active" : ""
-                    }`}
-                    title={
-                      <>
+
+            <div className="gradientBlur z-20 backdrop-blur-[8px] pointer-events-none w-full opacity-0 h-full floatcenter bg-white bg-opacity-5"></div>
+            <div className="gradientBlack z-10 pointer-events-none w-full h-full floatcenter opacity-0"></div>
+
+            <div className="cajaTitulos absolute top-3/4 left-1/2 translate-x-[-50%] flex items-center justify-between h-44 flex-col">
+              <h1 className="titleInicio hidden opacity-0 ajusteFuente">
+                Donde todos los hijos <br />
+                tienen algo por decir
+              </h1>
+              <Button
+                custoMStyle={
+                  "inicioComercial hidden opacity-0 text-3xl ajusteFuente"
+                }
+                handleClick={() => setPlay(true)}
+                title={"CONOCE ESTA HISTORIA"}
+              />
+            </div>
+
+            <div
+              className={`videoVimeo max-w-[1300px] floatcenter w-full h-full py-4 flex flex-col justify-center items-center`}
+            >
+              <Video
+                setPlay={setOnPlay}
+                play={onplay}
+                VideoReady={onLoadVideo}
+                url={"https://www.youtube.com/watch?v=JpjNBF1W4UA"}
+              />
+              <div className="cajaIcon m-6 relative w-full flex justify-between">
+                {omitir && (
+                  <>
+                    <Button
+                      handleClick={() => {
+                        if (onplay) {
+                          setOnPlay(false);
+                        } else {
+                          setOnPlay(true);
+                        }
+                      }}
+                      custoMStyle={`fade z-10 btn text-xl  transition iconPlay ${
+                        !onplay ? "active" : ""
+                      }`}
+                      title={
                         <>
-                          {onplay && (
-                            <span className="inline-block  ">
-                              <img src="/iconplay.gif" alt="" />
-                            </span>
-                          )}
-                          <Texto
-                            customstyle={`${onplay ? "ml-2" : "ml-[0.4rem]"}`}
-                            title={<>{onplay ? "off" : "on"}</>}
-                          />
+                          <>
+                            {onplay && (
+                              <span className="inline-block  ">
+                                <img src="/iconplay.gif" alt="" />
+                              </span>
+                            )}
+                            <Texto
+                              customstyle={`${onplay ? "ml-2" : "ml-[0.4rem]"}`}
+                              title={<>{onplay ? "off" : "on"}</>}
+                            />
+                          </>
                         </>
-                      </>
-                    }
-                  />
+                      }
+                    />
 
-                  <Link
-                    to={"/grabar-audio"}
-                    className={`floatcenter fade z-10 btn text-xl  transition`}
-                  >
-                    <Texto title={"ahora, es tu turno"} />
-                  </Link>
-                  <Link
-                    to={"/grabar-audio"}
-                    className={`fade z-10 btn opacity-30 hover:opacity-100 text-xl transition`}
-                  >
-                    <Texto title={"omitir"} />
-                  </Link>
-                </>
-              )}
+                    <Link
+                      to={"/grabar-audio"}
+                      className={`floatcenter fade z-10 btn text-xl  transition`}
+                    >
+                      <Texto title={"ahora, es tu turno"} />
+                    </Link>
+                    <Link
+                      to={"/grabar-audio"}
+                      className={`fade z-10 btn opacity-30 hover:opacity-100 text-xl transition`}
+                    >
+                      <Texto title={"omitir"} />
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
