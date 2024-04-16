@@ -15,7 +15,9 @@ const App = () => {
       </Helmet>
 
       <>
-        <RouterProvider router={router} />
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
       </>
     </>
   );
