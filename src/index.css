@@ -2,15 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
 @font-face {
   font-family: "Coastal";
   src: url("/font/Coastal-Round.ttf");
 }
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
 :root {
   --yellow: #ffd77a;
+  --whiteTransparente: #4d4d4d41;
+  --pink: #ff0073;
+}
+.lineBurger {
+  @apply w-full h-1 bg-[--yellow] rounded-full;
+}
+.lineBurger.active {
+  @apply absolute top-0 rotate-[-45deg];
+}
+.lineBurger.active {
+  @apply absolute top-0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 .ajusteFuente {
-  padding-bottom: 5px;
+  @apply pb-[2%] tracking-[0.25em];
 }
 .Coastal {
   font-family: "Coastal", sans-serif;
@@ -31,6 +60,9 @@ body {
 img,
 svg {
   @apply w-full h-full object-cover;
+}
+.maxW {
+  @apply max-w-[1550px];
 }
 .videoVimeo {
   @apply opacity-0 pointer-events-none invisible;
@@ -60,6 +92,161 @@ svg {
 .btn {
   @apply uppercase bg-black border border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white py-1  px-10;
 }
+.btn {
+  @apply transition uppercase bg-black border hover:bg-[var(--yellow)] hover:text-black border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white py-1  px-10;
+}
+.videoVimeo .omitir.btn.active {
+  @apply opacity-100;
+}
 .transition {
-  @apply transition-all ease-in-out duration-[2000ms];
+  @apply transition-all ease-in-out duration-[1000ms];
+}
+.cards {
+  @apply transition;
+}
+.cajaCard {
+  @apply shadowCard transition rounded-3xl border border-white bg-[var(--whiteTransparente)];
+}
+.cajaCard input,
+.cajaCard select {
+  @apply bg-transparent rounded-full border border-[var(--yellow)] w-full px-3 py-2 mb-4;
+}
+
+.cajaCard select option {
+  @apply text-black;
+}
+.btn.btnGrabadora {
+  @apply bg-opacity-0 w-full mb-4;
+}
+.btn.btnGrabadora.noPadding {
+  @apply px-0;
+}
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+.cardSingle {
+  @apply h-full transition-all ease-in-out duration-[600ms] pt-8 pr-14 pb-8;
+}
+.CustomPadi span {
+  @apply pb-2;
+}
+.shadowCard {
+  box-shadow: 11px 10px 9px 5px #0000008c;
+}
+.disable {
+  @apply opacity-35 pointer-events-none;
+}
+.activebtn {
+  @apply opacity-100 pointer-events-auto;
+}
+.lineas-container {
+  @apply w-full h-full flex justify-between items-center;
+}
+.linea {
+  @apply rounded-lg w-1 h-[15%] bg-black inline-block;
+}
+.player {
+  @apply w-5/6 my-6 contadorPlayer overflow-hidden h-9 px-4 flex items-center justify-between rounded-full bg-[var(--yellow)];
+}
+.player.record {
+  @apply bg-black bg-opacity-30 border border-[--yellow];
+}
+.record .contadorPlayer {
+  @apply text-[--yellow];
+}
+.record .linea {
+  @apply bg-[--yellow];
+}
+.contadorPlayer {
+  @apply text-black font-normal;
+}
+/* Animación para que las líneas crezcan de manera desordenada */
+
+/* Animación para que las líneas crezcan y bajen de manera desordenada */
+@keyframes growAndShrink {
+  0% {
+    height: 15%; /* Comienza con altura 0 */
+  }
+  50% {
+    height: 25%; /* Alcanza la altura máxima */
+  }
+  100% {
+    height: 15%; /* Regresa a altura 0 */
+  }
+}
+
+/* Aplica la animación a cada línea con una duración y retardo aleatorios */
+.lineaIgrabando {
+  animation: growAndShrink 2s ease-in-out infinite; /* Duración de la animación y repetición infinita */
+  animation-delay: calc(1s * var(--delay)); /* Retardo aleatorio */
+}
+
+/* Asigna una variable CSS para el retardo aleatorio */
+.lineaIgrabando:nth-child(1) {
+  --delay: 0.5; /* Ajusta el retardo según el número de línea */
+}
+
+.lineaIgrabando:nth-child(2) {
+  --delay: 0.3;
+}
+
+/* Añade más líneas y ajusta el retardo según sea necesario */
+.errors {
+  @apply text-red-400 text-center text-sm;
+}
+/* Estilos para el checkbox */
+.checkbox-container {
+  @apply w-full;
+}
+.cajaCard .checkbox-container .caja {
+  @apply flex w-full justify-between items-center mb-4;
+}
+.cajaCard .checkbox-container input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.7rem;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+}
+
+/* Estilo del checkbox cuando está marcado */
+.cajaCard .checkbox-container input[type="checkbox"]:checked {
+  background-color: #ff0073; /* Cambiar el color de fondo cuando está marcado */
+}
+.cajaCard .checkbox-container input[type="checkbox"]:checked {
+  background-color: #ff0073; /* Cambiar el color de fondo cuando está marcado */
+}
+
+/* Estilos para el pseudo-elemento del checkbox */
+.cajaCard .checkbox-container input[type="checkbox"]::before {
+  content: "";
+
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 0.7rem;
+  background-color: #ffffff50; /* Color del pseudo-elemento */
+  transition: background-color 0.3s ease; /* Transición suave del color */
+}
+
+/* Estilo del pseudo-elemento cuando el checkbox está marcado */
+.cajaCard .checkbox-container input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  border: 1px solid #ff0073;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 1.1rem;
+  background-color: #ffffff00; /* Color del pseudo-elemento */
 }

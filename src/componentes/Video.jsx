@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 
 import { mobile, full, laptop } from "../helpers/medidasResponsive";
 
-const Video = ({ VideoReady, play, url, setPlay }) => {
+const Video = ({ VideoReady, play, url, setPlay, setEnd }) => {
   return (
     <>
       <ReactPlayer
@@ -12,6 +12,7 @@ const Video = ({ VideoReady, play, url, setPlay }) => {
         onReady={VideoReady}
         playing={play == true ? true : false}
         url={url}
+        onEnded={setEnd ? setEnd : null}
         className="overflow-hidden rounded-3xl"
         width={
           mobile ? "350px" : full ? "1400px" : laptop ? "1000px" : "100%" // Otra condición por defecto si ninguna de las anteriores se cumple

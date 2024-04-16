@@ -1,9 +1,13 @@
 import React from "react";
 import Texto from "./Texto";
 
-const Button = ({ handleClick, custoMStyle, title }) => {
+const Button = ({ type, handleClick, custoMStyle, title }) => {
   return (
-    <button className={`${custoMStyle} btn`} onClick={handleClick}>
+    <button
+      type={`${type ? "submit" : null}`}
+      className={`${custoMStyle} btn hoverBtn`}
+      onClick={handleClick}
+    >
       <Texto title={title} />
     </button>
   );
