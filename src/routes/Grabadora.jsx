@@ -6,7 +6,10 @@ import FormSteps from "../componentes/FormSteps";
 
 function Grabadora() {
   const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({ audio: true });
+    useReactMediaRecorder({
+      audio: true,
+      mimeType: "audio/wav",
+    });
   const navigate = useNavigate();
 
   const handleAudioSave = () => {
