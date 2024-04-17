@@ -1,19 +1,53 @@
 import React from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
+
 import { useNavigate } from "react-router-dom";
 import Texto from "../componentes/Texto";
 import FormSteps from "../componentes/FormSteps";
 
+import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
+
 function Grabadora() {
-  const { status, startRecording, stopRecording, mediaBlobUrl } =
+  /* const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({
       audio: true,
       mimeType: "audio/wav",
-    });
+    }); */
   const navigate = useNavigate();
 
+  const {
+    startRecording,
+    stopRecording,
+    togglePauseResume,
+    recordingBlob,
+    isRecording,
+    isPaused,
+    recordingTime,
+    mediaRecorder,
+  } = useAudioRecorder();
+
   const handleAudioSave = () => {
-    navigate("/formulario", { state: { mediaBlobUrl } });
+    navigate("/formulario", { state: { mediaRecorder } });
+  };
+
+  const ExampleComponent = () => {
+    const recorderControls = useAudioRecorder();
+    const addAudioElement = (blob) => {
+      const url = URL.createObjectURL(blob);
+      const audio = document.createElement("audio");
+      audio.src = url;
+      audio.controls = true;
+      document.body.appendChild(audio);
+    };
+
+    return (
+      <div>
+        <AudioRecorder
+          onRecordingComplete={(blob) => addAudioElement(blob)}
+          recorderControls={recorderControls}
+        />
+        <button onClick={recorderControls.stopRecording}>Stop recording</button>
+      </div>
+    );
   };
 
   return (
@@ -44,12 +78,13 @@ function Grabadora() {
             />
           </div>
           <div className="flex flex-col lg:w-1/2 xs:w-full border border-white h-full rounded-3xl ">
-            <FormSteps
+            <ExampleComponent />
+            {/* <FormSteps
               startRecording={startRecording}
               stopRecording={stopRecording}
               status={status}
               mediaBlobUrl={mediaBlobUrl}
-            />
+            /> */}
           </div>
         </div>
       </div>
