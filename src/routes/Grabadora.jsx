@@ -128,7 +128,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={1}
                 customStyle={
-                  "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[34%]"
+                  "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[31%]"
                 }
                 incremento={"w-12"}
                 imagen={"/imagenes/ojo.png"}
