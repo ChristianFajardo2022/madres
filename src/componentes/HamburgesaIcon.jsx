@@ -6,7 +6,7 @@ const HamburgesaIcon = ({ active, handleClick }) => {
       onClick={handleClick}
       className={`${
         active ? "active" : ""
-      } burgerIcon cursor-pointer z-[101] flex flex-col justify-between absolute lg:right-12 lg:top-12 xs:right-4 xs:top-6 w-7 h-6`}
+      } burgerIcon cursor-pointer z-[101] flex flex-col justify-between absolute lg:right-20 lg:top-20 xs:right-4 xs:top-6 w-7 h-6`}
     >
       <div className="lineBurger lineBurger1 "></div>
       <div className="lineBurger lineBurger2 "></div>

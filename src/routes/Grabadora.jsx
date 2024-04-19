@@ -80,7 +80,7 @@ function Grabadora() {
         {(mobile || tablet) && (
           <img
             className="osoVideo oso absolute left-0 z-[-1]"
-            src="/oso-fondo-mobile.jpg"
+            src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
             alt=""
           />
         )}
@@ -128,7 +128,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={1}
                 customStyle={
-                  "z-1 lg:left-[58%] xs:left-[75%] lg:top-[22%]  xs:top-[34%]"
+                  "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[34%]"
                 }
                 incremento={"w-12"}
                 imagen={"/imagenes/ojo.png"}
@@ -140,7 +140,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={2}
                 customStyle={
-                  "z-2 lg:left-[6%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
+                  "z-2 lg:left-[6%]  xs:left-[36%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
                 }
                 incremento={"w-[3rem]"}
                 rotate={"translate-x-[-100%]"}
@@ -153,7 +153,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={3}
                 customStyle={
-                  "z-3 lg:left-[18%] xs:left-[0%] xs:top-[75%] lg:top-[65%]"
+                  "z-3 lg:left-[18%]  sm:left-[18%] xs:left-[-10%] xs:top-[78%] lg:top-[65%]"
                 }
                 incremento={"w-52"}
                 imagen={"/imagenes/path.png"}
