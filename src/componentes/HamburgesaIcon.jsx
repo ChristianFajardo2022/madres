@@ -1,11 +1,16 @@
 import React from "react";
 
-const HamburgesaIcon = () => {
+const HamburgesaIcon = ({ active, handleClick }) => {
   return (
-    <span className="burgerIcon flex flex-col justify-between absolute right-12 top-12 w-8 h-6">
-      <div style={{ transform: "rotate(45deg)" }} className="lineBurger"></div>
-      <div className="lineBurger active"></div>
-      <div className="lineBurger absolute bottom-0"></div>
+    <span
+      onClick={handleClick}
+      className={`${
+        active ? "active" : ""
+      } burgerIcon cursor-pointer z-[101] flex flex-col justify-between absolute lg:right-12 lg:top-12 xs:right-4 xs:top-6 w-7 h-6`}
+    >
+      <div className="lineBurger lineBurger1 "></div>
+      <div className="lineBurger lineBurger2 "></div>
+      <div className="lineBurger lineBurger3 "></div>
     </span>
   );
 };

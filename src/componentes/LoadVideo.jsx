@@ -7,6 +7,7 @@ const loadVideo = ({
   end,
   loop,
   onLoadedData,
+  handleClick,
 }) => {
   return (
     <video
@@ -18,6 +19,7 @@ const loadVideo = ({
       muted
       onEnded={end ? end : null}
       onLoadedData={onLoadedData ? onLoadedData : null}
+      onClick={handleClick ? handleClick : null}
     />
   );
 };

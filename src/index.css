@@ -1,30 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-
 @font-face {
-  font-family: "Coastal";
-  src: url("/font/Coastal-Round.ttf");
-}
-.inter {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-variation-settings: "slnt" 0;
+  font-family: "Bebas";
+  src: url("/font/BebasKai.ttf");
 }
 
 :root {
-  --yellow: #ffd77a;
+  --yellow: #fff3d7;
   --whiteTransparente: #4d4d4d41;
+  --blackTransparente: #2f2f2f9b;
   --pink: #ff0073;
 }
 .lineBurger {
-  @apply w-full h-1 bg-[--yellow] rounded-full;
+  @apply absolute    w-full h-1 bg-[--yellow] rounded-full transition-all ease-in-out duration-500;
 }
-.lineBurger.active {
-  @apply absolute top-0 rotate-[-45deg];
+.lineBurger1 {
+  @apply top-0;
+}
+.lineBurger2 {
+  @apply top-1/2 translate-y-[-50%];
+}
+.lineBurger3 {
+  @apply bottom-0;
+}
+.active .lineBurger1 {
+  @apply rotate-[45deg] top-2;
+}
+.active .lineBurger2 {
+  @apply absolute top-2 rotate-[-45deg] translate-y-0;
+}
+.active .lineBurger3 {
+  @apply absolute bottom-0 opacity-0 invisible;
 }
 .lineBurger.active {
   @apply absolute top-0;
@@ -39,19 +48,25 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 .ajusteFuente {
-  @apply pb-[2%] tracking-[0.25em];
+  @apply tracking-[0.25em];
 }
-.Coastal {
-  font-family: "Coastal", sans-serif;
+.Bebas {
+  font-family: "Bebas", sans-serif;
 }
 html {
-  @apply w-screen h-screen;
+  @apply w-screen h-screen lg:text-[0.7vw] xs:text-[2vw];
 }
 h1 {
   @apply tracking-[0.25em] text-4xl text-[--yellow];
 }
+h2 {
+  @apply Bebas tracking-[0.25em] text-3xl text-[--yellow];
+}
+p {
+  @apply text-xl;
+}
 body {
-  @apply m-0 p-0 box-content Coastal;
+  @apply m-0 p-0 box-content Bebas;
   @apply w-full h-full;
 }
 #root {
@@ -80,20 +95,18 @@ svg {
 .floatRigth {
   @apply absolute bottom-6 right-6 translate-y-[-50%] translate-x-[-50%];
 }
-.videoVimeo .iconPlay {
-  @apply transition text-[var(--yellow)] flex items-center justify-center px-0 w-[130px] border-[#ffffff73];
+.vimeo.iconPlay {
+  @apply text-[var(--yellow)] flex items-center justify-center xs:px-4 lg:px-6 min-w-1 w-32 h-12 border-[#ffffff73];
 }
-.videoVimeo .iconPlay.active {
-  @apply w-[50px];
+.vimeo.iconPlay.active {
+  @apply w-12 h-12 p-0;
 }
 .videoVimeo .iconPlay .textocustom {
   @apply flex items-center justify-center;
 }
+
 .btn {
-  @apply uppercase bg-black border border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white py-1  px-10;
-}
-.btn {
-  @apply transition uppercase bg-black border hover:bg-[var(--yellow)] hover:text-black border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white py-1  px-10;
+  @apply flex justify-center items-center transition uppercase bg-black border  lg:hover:bg-[var(--yellow)] lg:hover:text-black border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white min-w-32 h-12 py-3  px-10;
 }
 .videoVimeo .omitir.btn.active {
   @apply opacity-100;
@@ -105,7 +118,8 @@ svg {
   @apply transition;
 }
 .cajaCard {
-  @apply shadowCard transition rounded-3xl border border-white bg-[var(--whiteTransparente)];
+  @apply shadowCard transition rounded-3xl border border-white bg-[var(--whiteTransparente)]
+  w-full h-full flex flex-col justify-between items-center p-8;
 }
 .cajaCard input,
 .cajaCard select {
@@ -116,20 +130,24 @@ svg {
   @apply text-black;
 }
 .btn.btnGrabadora {
-  @apply bg-opacity-0 w-full mb-4;
+  @apply bg-opacity-0 w-full;
 }
 .btn.btnGrabadora.noPadding {
-  @apply px-0;
+  @apply px-0 mb-4;
+}
+.titulosForm {
+  @apply text-center mb-8 font-inter font-normal w-full;
 }
 .flexCenter {
   @apply flex justify-center items-center;
 }
+.cardPadre {
+  @apply w-full h-full inline-block relative;
+}
 .cardSingle {
-  @apply h-full transition-all ease-in-out duration-[600ms] pt-8 pr-14 pb-8;
+  @apply w-full h-full transition-all ease-in-out duration-[600ms]  lg:px-8 xs:px-5;
 }
-.CustomPadi span {
-  @apply pb-2;
-}
+
 .shadowCard {
   box-shadow: 11px 10px 9px 5px #0000008c;
 }
@@ -249,4 +267,29 @@ svg {
   height: 1.1rem;
   border-radius: 1.1rem;
   background-color: #ffffff00; /* Color del pseudo-elemento */
+}
+
+.itemnav {
+  @apply relative overflow-hidden transition-all ease-in-out duration-700 h-full lg:w-[15%] xs:w-[32%] bg-black rounded-3xl border border-white;
+}
+.itemnav.active {
+  @apply w-[50%];
+}
+.itemnav.hide {
+  @apply hidden;
+}
+
+.Toltip .line,
+.Toltip .caja {
+  @apply opacity-0;
+}
+.Toltip.active .line,
+.Toltip.active .caja {
+  @apply opacity-100;
+}
+.capa {
+  @apply transition w-full h-full fixed left-0 top-0 z-[1] pointer-events-none;
+}
+.activeCapa {
+  @apply transition w-full h-full fixed left-0 top-0 z-[1] bg-black bg-opacity-70;
 }

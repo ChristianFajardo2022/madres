@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 
-import { mobile, full, laptop } from "../helpers/medidasResponsive";
+const Video = ({ VideoReady, play, url, setPlay, setEnd, contenedorWidth }) => {
+  const [ancho, setAncho] = useState(0);
+  const video = useRef(null);
 
-const Video = ({ VideoReady, play, url, setPlay, setEnd }) => {
+  useEffect(() => {
+    if (video.current) {
+      const contenedorWidth = video.current.offsetWidth;
+      setAncho(contenedorWidth);
+    }
+  }, [video]);
+
+  const calcularAltura = (aspectoHorizontal, aspectoVertical, ancho) => {
+    return Math.round((ancho / aspectoHorizontal) * aspectoVertical);
+  };
+
+  const altura = calcularAltura(
+    16,
+    9,
+    contenedorWidth ? contenedorWidth : ancho
+  );
+
   return (
-    <>
+    <div ref={video} className="w-full h-full flexCenter bg-black rounded-3xl">
       <ReactPlayer
         onPause={() => setPlay(false)}
         onPlay={() => setPlay(true)}
@@ -13,14 +31,12 @@ const Video = ({ VideoReady, play, url, setPlay, setEnd }) => {
         playing={play == true ? true : false}
         url={url}
         onEnded={setEnd ? setEnd : null}
-        className="overflow-hidden rounded-3xl"
-        width={
-          mobile ? "350px" : full ? "1400px" : laptop ? "1000px" : "100%" // Otra condición por defecto si ninguna de las anteriores se cumple
-        }
-        height={`100%`}
+        className="react-player overflow-hidden "
+        width={contenedorWidth ? contenedorWidth : ancho}
+        height={`${altura}px`}
         controls
       />
-    </>
+    </div>
   );
 };
 

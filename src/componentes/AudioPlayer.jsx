@@ -8,6 +8,8 @@ const AudioPlayer = ({
   startRecording,
   funcionNext,
   setIrpaso6,
+  audiourl,
+  setAudiourl,
 }) => {
   const audioRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -19,18 +21,24 @@ const AudioPlayer = ({
   const [tiempoTranscurrido, setTiempoTranscurrido] = useState(0);
   const [mostrarBotones, setMostrarBotones] = useState(false);
 
+  const [stop, setStop] = useState(false);
   //console.log(mostrarBotones);
+
+  const stopped = () => {
+    stopRecording();
+    setStop(true);
+  };
 
   useEffect(() => {
     let intervalo;
-    if (status === "recording") {
+    if (status) {
       intervalo = setInterval(() => {
         setTiempoTranscurrido((prev) => prev + 1);
         setCurrentTime((prev) => prev + 1);
       }, 1000);
 
       const timeoutId = setTimeout(() => {
-        stopRecording();
+        stopped();
         setTimeout(() => {
           setInicioGrabacion("reproducir");
         }, 500);
@@ -49,15 +57,13 @@ const AudioPlayer = ({
   const grabadora = () => {
     if (inicioGrabacion == "ready") {
       startRecording();
-      setTimeout(() => {
-        setInicioGrabacion("grabando");
-      }, 500);
+
+      setInicioGrabacion("grabando");
     } else if (inicioGrabacion == "grabando") {
-      stopRecording();
+      stopped();
       setTiempoTranscurrido(0);
-      setTimeout(() => {
-        setInicioGrabacion("reproducir");
-      }, 500);
+
+      setInicioGrabacion("reproducir");
     } else if (inicioGrabacion == "reproducir") {
       reproducirAudio();
       setInicioGrabacion("pausado");
@@ -68,6 +74,11 @@ const AudioPlayer = ({
   };
 
   useEffect(() => {
+    if (mediaBlobUrl) {
+      const url = URL.createObjectURL(mediaBlobUrl);
+      setAudiourl(url);
+    }
+
     if (!audioRef.current) return;
 
     // Siempre usar un nuevo contexto cuando se cambie la URL del blob
@@ -175,7 +186,7 @@ const AudioPlayer = ({
           alt=""
         />
       </span>
-      {status === "recording" && (
+      {!stop && status && (
         <div className="player record">
           <span className="contadorPlayer mr-2">
             {formatTime(tiempoTranscurrido)}
@@ -187,7 +198,7 @@ const AudioPlayer = ({
           </div>
         </div>
       )}
-      {status === "stopped" && (
+      {stop && !status && (
         <>
           <div onClick={grabadora} className="player cursor-pointer">
             <span className="contadorPlayer mr-2">
@@ -203,7 +214,7 @@ const AudioPlayer = ({
               ))}
             </div>
           </div>
-          <audio ref={audioRef} src={mediaBlobUrl} controls={false} />
+          <audio ref={audioRef} src={audiourl} controls={false} />
         </>
       )}
       {mostrarBotones && (
@@ -211,6 +222,7 @@ const AudioPlayer = ({
           <span
             onClick={() => {
               startRecording();
+              setStop(false);
               setIrpaso6(false);
               setMostrarBotones(false);
               setTimeout(() => {

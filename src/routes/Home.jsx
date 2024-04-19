@@ -6,6 +6,8 @@ import LoadVideo from "../componentes/LoadVideo";
 import Button from "../componentes/Button";
 import Texto from "../componentes/Texto";
 import LoadingEnd from "../componentes/Loading";
+import IconPlayVideo from "../componentes/IconPlayVideo";
+import { mobile, tablet } from "../helpers/medidasResponsive";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -18,7 +20,6 @@ const Home = () => {
   const videoLoad = useRef(null);
   const videoLoad2 = useRef(null);
 
-  console.log(loading);
   const onLoadVideo = () => {
     setVideocargado(true);
   };
@@ -37,7 +38,7 @@ const Home = () => {
       });
       tl.to(".inicioComercial", {
         opacity: 1,
-        display: "block",
+        display: "flex",
         ease: "power1.inOut",
         delay: 0.8,
       });
@@ -146,7 +147,7 @@ const Home = () => {
         <LoadVideo
           customStyle={"hidden"}
           videoLoad={videoLoad}
-          url={"/begin2.mp4"}
+          url={mobile || tablet ? "/beginM.mp4" : "/begin.mp4"}
           onLoadedData={avanzar}
         />
         {loading ? (
@@ -155,13 +156,17 @@ const Home = () => {
           </>
         ) : (
           <div className="w-full h-full ">
-            <LoadVideo videoLoad={videoLoad} url={"/begin2.mp4"} loop={false} />
+            <LoadVideo
+              videoLoad={videoLoad}
+              url={mobile || tablet ? "/beginM.mp4" : "/begin.mp4"}
+              loop={false}
+            />
 
             <div className="gradientBlur z-20 backdrop-blur-[8px] pointer-events-none w-full opacity-0 h-full floatcenter bg-white bg-opacity-5"></div>
             <div className="gradientBlack z-10 pointer-events-none w-full h-full floatcenter opacity-0"></div>
 
-            <div className="cajaTitulos absolute top-3/4 left-1/2 translate-x-[-50%] flex items-center justify-between h-44 flex-col">
-              <h1 className="titleInicio hidden opacity-0 ajusteFuente">
+            <div className="cajaTitulos w-full absolute top-3/4 left-1/2 text-center translate-x-[-50%] flex items-center justify-between h-44 flex-col">
+              <h1 className="titleInicio hidden opacity-0 ajusteFuente w-full">
                 Donde todos los hijos <br />
                 tienen algo por decir
               </h1>
@@ -175,45 +180,22 @@ const Home = () => {
             </div>
 
             <div
-              className={`videoVimeo max-w-[1300px] z-[9] 2xl:h-[930px] floatcenter w-full py-4 flex flex-col justify-center items-center`}
+              className={`videoVimeo z-[9] lg:w-[70%] xs:w-full floatcenter  py-4 flex flex-col justify-center items-center`}
             >
               <Video
-                setEnd={() => setEnd(true)}
+                setEnd={() => {
+                  setPlay(false);
+                  setEnd(true);
+                }}
                 setPlay={setOnPlay}
                 play={onplay}
                 VideoReady={onLoadVideo}
                 url={"https://www.youtube.com/watch?v=JpjNBF1W4UA"}
               />
-              <div className="cajaIcon m-6 relative w-full flex justify-between">
+              <div className="cajaIcon m-6 p-4 relative w-full flex justify-between">
                 {omitir && (
                   <>
-                    <Button
-                      handleClick={() => {
-                        if (onplay) {
-                          setOnPlay(false);
-                        } else {
-                          setOnPlay(true);
-                        }
-                      }}
-                      custoMStyle={`fade z-10 btn text-xl  transition iconPlay ${
-                        !onplay ? "active" : ""
-                      }`}
-                      title={
-                        <>
-                          <>
-                            {onplay && (
-                              <span className="inline-block  ">
-                                <img src="/iconplay.gif" alt="" />
-                              </span>
-                            )}
-                            <Texto
-                              customstyle={`${onplay ? "ml-2" : "ml-[0.4rem]"}`}
-                              title={<>{onplay ? "off" : "on"}</>}
-                            />
-                          </>
-                        </>
-                      }
-                    />
+                    <IconPlayVideo onplay={onplay} setOnPlay={setOnPlay} />
 
                     <Link
                       to={"/grabar-audio"}
