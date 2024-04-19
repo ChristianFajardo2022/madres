@@ -10,6 +10,7 @@ const AudioPlayer = ({
   setIrpaso6,
   audiourl,
   setAudiourl,
+  setMensaje,
 }) => {
   const audioRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -27,6 +28,7 @@ const AudioPlayer = ({
   const stopped = () => {
     stopRecording();
     setStop(true);
+    setMensaje("Ahora reproduce tu audio");
   };
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const AudioPlayer = ({
   const grabadora = () => {
     if (inicioGrabacion == "ready") {
       startRecording();
-
+      setMensaje("Grabando...");
       setInicioGrabacion("grabando");
     } else if (inicioGrabacion == "grabando") {
       stopped();
@@ -65,6 +67,7 @@ const AudioPlayer = ({
 
       setInicioGrabacion("reproducir");
     } else if (inicioGrabacion == "reproducir") {
+      setMensaje("Reproduciendo...");
       reproducirAudio();
       setInicioGrabacion("pausado");
     } else if (inicioGrabacion == "pausado") {
@@ -135,6 +138,7 @@ const AudioPlayer = ({
       );
       audioRef.current.addEventListener("ended", () => {
         clearInterval(intervalId);
+        setMensaje("Si te gusto continua si no graba de nuevo");
         setInicioGrabacion("reproducir");
         setMostrarBotones(true);
         setIrpaso6(true);

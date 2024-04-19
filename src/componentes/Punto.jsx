@@ -16,6 +16,7 @@ const Punto = ({
     gsap.to(".punto", {
       opacity: 0.1,
     });
+
     if (index === 1) {
       gsap.to(".line-1 .line, .line-1 .caja", {
         opacity: 1,
@@ -54,7 +55,7 @@ const Punto = ({
     <div
       className={`${
         customStyle ? customStyle : ""
-      } line-${index} z-10 Toltip absolute flexCenter`}
+      } cursor-pointer line-${index} z-10 Toltip absolute flexCenter`}
     >
       <span
         onClick={handleClick}

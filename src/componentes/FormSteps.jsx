@@ -12,10 +12,14 @@ import { mobile, tablet } from "../helpers/medidasResponsive";
 const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   const [paso, setpaso] = useState(1);
   const [anchoContenedor, setAnchoContenedor] = useState(0);
+  const [mensaje, setMensaje] = useState(
+    "Dile en 20 segundos todo lo que sientes"
+  );
   const [anchoHijoEnPixel, setAnchoHijoEnPixel] = useState(0);
   const [valorinicial, setValorInicial] = useState(0);
   const [irpaso6, setIrpaso6] = useState(false);
   const [translate, setTranslate] = useState(0);
+  const input = useRef(null);
   const cards = useRef(null);
   const padre = useRef(null);
   const [selectedDepartment, setSelectedDepartment] = useState("");
@@ -24,35 +28,35 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   const [error, setError] = useState("");
   const [audiourl, setAudiourl] = useState("");
   const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    tipoDeDocumento: "",
-    numero: "",
-    email: "",
-    telefono: "",
+    firstname: "",
+    lastname: "",
+    tipo_identificacion_usuario: "",
+    numero_identificacion_usuario: "",
+    username: "",
+    telephone: "",
     nombreDestino: "",
     apellidoDestino: "",
     pais: "Colombia",
-    departamento: "",
-    ciudad: "",
-    direccion: "",
+    region_id: "",
+    city: "",
+    street: "",
+    promoid: "MMbear",
   });
 
   //console.log(formData);
-  //console.log(paso);
+  console.log(paso);
   // console.log(status);
 
   /*****Mostrar paises en select */
   const handleDepartmentChange = (e) => {
     setFormData({
       ...formData,
-      departamento: e.target.value,
+      region_id: e.target.value,
     });
     const departmentName = e.target.value;
+    console.log(departmentName);
     setSelectedDepartment(departmentName);
-    const department = data.find(
-      (dept) => dept.departamento === departmentName
-    );
+    const department = data.find((dept) => dept.region_id == departmentName);
     if (department) {
       setCities(department.ciudades);
     } else {
@@ -62,21 +66,21 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   useEffect(() => {
     if (cards.current) {
       const contenedorWidth = cards.current.offsetWidth;
-      const contenedorWidthPadre = padre.current.offsetWidth;
+
       setAnchoContenedor(contenedorWidth);
 
       // Calcula el ancho en píxeles para cada hijo
       const hijosDirectos = cards.current.children.length;
       const anchoHijo = contenedorWidth / hijosDirectos;
-      setAnchoHijoEnPixel(mobile || tablet ? anchoHijo : anchoHijo);
-      setTranslate(mobile || tablet ? anchoHijo / 2 : anchoHijo / 2);
+      setAnchoHijoEnPixel(mobile ? anchoHijo : anchoHijo);
+      setTranslate(mobile ? anchoHijo / 1.2 : anchoHijo / 2);
       setValorInicial(anchoHijo);
     }
   }, [cards, padre]);
 
   const nextSlide = (valorFinal, valorinicial, anchoHijoEnPixel) => {
-    const incial = valorinicial * 2;
-    const division = valorinicial / 4;
+    const incial = mobile ? valorinicial * 1.2 : valorinicial * 2;
+    const division = mobile ? valorinicial / 1.2 : valorinicial / 2;
     const valor = valorFinal - incial + division;
 
     setTranslate((prevIndex) =>
@@ -88,7 +92,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   };
 
   const prevSlide = (valorinicial, anchoHijoEnPixel) => {
-    const valor = valorinicial / 4;
+    const valor = mobile ? valorinicial / 1.2 : valorinicial / 2;
     setTranslate((prevIndex) =>
       prevIndex <= valor ? valor : prevIndex - anchoHijoEnPixel
     );
@@ -152,16 +156,28 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
       submitHandler(newFormData);
     }
   };
+  useEffect(() => {
+    const handleTabKey = (event) => {
+      if (event.key === "Tab" || event.key === "Enter") {
+        event.preventDefault();
+      }
+    };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevenir la acción por defecto
+    document.addEventListener("keydown", handleTabKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleTabKey);
+    };
+  }, []);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === "Tab") {
+      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
     }
   };
 
   return (
     <form
-      onKeyDown={handleKeyDown}
       onSubmit={handleSubmit(handleNextStep)}
       className="w-full h-full overflow-hidden"
     >
@@ -171,18 +187,18 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
       >
         {/* navbar menu hamburgesa*/}
 
-        <div className="lg:h-[32rem] w-full relative">
+        <div className="lg:h-[32rem] max-lg:min-h-40 w-full relative">
           {/* Cards formulario */}
           <div
             ref={cards}
             style={{ transform: `translateX(-${translate}px)` }}
-            className=" font-inter cards h-full lg:w-[291vw] xs:w-[600vw] relative text-white flex justify-between items-center"
+            className=" font-inter cards h-full lg:w-[291vw] xs:w-[900vw] relative text-white flex justify-between items-center"
           >
             <div
               className="cardPadre"
               style={{ width: `${anchoHijoEnPixel}px` }}
             >
-              <div className={`cardSingle `}></div>
+              <div className={`cardSingle  `}></div>
             </div>
 
             {/* Mensaje Bienvenida */}
@@ -202,7 +218,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     <span className="w-14 h-auto inline-block relative">
                       <img src="/svg/heart.svg" alt="" />
                     </span>
-                    <p className=" font-normal w-full mt-6 px-6">
+                    <p className=" font-normal w-full mt-6 px-2">
                       Este día de la madre puedes dar un regalo tan lleno de
                       historia como este
                     </p>
@@ -240,31 +256,51 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       <input
                         type="text"
                         placeholder="Nombre"
-                        value={formData.nombre}
-                        {...register("nombre", {
+                        value={formData.firstname}
+                        {...register("firstname", {
                           required: "Nombre es requerido",
                         })}
                         onChange={(e) =>
-                          setFormData({ ...formData, nombre: e.target.value })
+                          setFormData({
+                            ...formData,
+                            firstname: e.target.value,
+                          })
                         }
+                        onKeyDown={(e) => {
+                          if (formData.firstname !== "") {
+                            if (e.key === "Enter" || e.key === "Tab") {
+                              document.querySelector(".lastname").focus();
+                            }
+                          }
+                        }}
                       />
-                      {errors.nombre && (
-                        <p className="errors">{errors.nombre.message}</p>
+                      {errors.firstname && (
+                        <p className="errors">{errors.firstname.message}</p>
                       )}
 
                       <input
+                        ref={input}
                         type="text"
+                        className="lastname"
                         placeholder="Apellido"
-                        value={formData.apellido}
-                        {...register("apellido", {
+                        value={formData.lastname}
+                        {...register("lastname", {
                           required: "Apellido es requerido",
                         })}
                         onChange={(e) =>
-                          setFormData({ ...formData, apellido: e.target.value })
+                          setFormData({ ...formData, lastname: e.target.value })
                         }
+                        onKeyDown={(e) => {
+                          if (
+                            formData.firstname !== "" &&
+                            formData.lastname !== ""
+                          ) {
+                            handleKeyDown(e);
+                          }
+                        }}
                       />
-                      {errors.apellido && (
-                        <p className="errors">{errors.apellido.message}</p>
+                      {errors.lastname && (
+                        <p className="errors">{errors.lastname.message}</p>
                       )}
                     </div>
                   </div>
@@ -274,7 +310,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.nombre !== "" && formData.apellido !== ""
+                      formData.nombre !== "" && formData.lastname !== ""
                         ? "active"
                         : "disable"
                     }`}
@@ -305,24 +341,27 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     </p>
                     <div className="flex flex-col w-full">
                       <select
-                        {...register("tipoDeDocumento", {
+                        {...register("tipo_identificacion_usuario", {
                           required: "Selecciona tu tipo de documento",
                         })}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            tipoDeDocumento: e.target.value,
+                            tipo_identificacion_usuario: e.target.value,
                           })
                         }
                       >
                         <option value="">Tipo de documento</option>
-                        <option value="cedula">Cédula de Identidad</option>
-                        <option value="pasaporte">Pasaporte</option>
-                        <option value="dni">Tarjeta de identidad</option>
+                        <option value="308">Cédula de ciudadanía</option>
+                        <option value="311">Cédula de extranjería</option>
+                        <option value="314">Tarjeta de identidad</option>
+                        <option value="433">
+                          Número de identificación tributaria
+                        </option>
                       </select>
-                      {errors.tipoDeDocumento && (
+                      {errors.tipo_identificacion_usuario && (
                         <p className="errors">
-                          {errors.tipoDeDocumento.message}
+                          {errors.tipo_identificacion_usuario.message}
                         </p>
                       )}
 
@@ -330,7 +369,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                         type="number"
                         placeholder="Numero"
                         style={{ appearance: "textfield" }} // Agrega esta línea
-                        value={formData.numero}
+                        value={formData.numero_identificacion_usuario}
                         {...register("numero", {
                           required: "Número es requerido",
                           minLength: {
@@ -339,9 +378,21 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                           },
                         })}
                         onChange={(e) =>
-                          setFormData({ ...formData, numero: e.target.value })
+                          setFormData({
+                            ...formData,
+                            numero_identificacion_usuario: e.target.value,
+                          })
                         }
-                        inputMode="numeric" // Agrega esta línea
+                        inputMode="numeric"
+                        onKeyDown={(e) => {
+                          if (
+                            formData.tipo_identificacion_usuario !== "" &&
+                            formData.numero_identificacion_usuario !== "" &&
+                            formData.numero_identificacion_usuario.length > 5
+                          ) {
+                            handleKeyDown(e);
+                          }
+                        }}
                       />
                       {errors.numero && (
                         <p className="errors">{errors.numero.message}</p>
@@ -354,9 +405,9 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.tipoDeDocumento !== "" &&
-                      formData.numero !== "" &&
-                      formData.numero.length > 5
+                      formData.tipo_identificacion_usuario !== "" &&
+                      formData.numero_identificacion_usuario !== "" &&
+                      formData.numero_identificacion_usuario.length > 5
                         ? "active"
                         : "disable"
                     }`}
@@ -383,7 +434,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                   <div className="w-full flexCenter flex-col">
                     <p className="font-inter text-center font-normal w-full  ">
                       <span className="capitalize">
-                        {formData.nombre}, <br />
+                        {formData.firstname}, <br />
                       </span>
                       graba un mensaje para esa persona que te cuidó como a un
                       hijo y nosotros se lo haremos llegar dentro de un oso
@@ -395,11 +446,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.nombre !== "" && formData.apellido !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
+                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora `}
                   >
                     <Texto title={"Continuar"} />
                   </span>
@@ -415,18 +462,17 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
             >
               <div
                 className={`cardSingle   ${
-                  paso == 5 ? "opacity-100" : "opacity-40"
+                  paso == 1 ? "opacity-100" : "opacity-40"
                 }`}
               >
                 <div className="cajaCard">
                   <Espaciado />
                   <div className="w-full flexCenter flex-col">
                     <div className="w-full">
-                      <p className="titulosForm">
-                        Dile en 20 segundos todo lo que sientes
-                      </p>
+                      <p className="titulosForm">{mensaje}</p>
 
                       <AudioPlayer
+                        setMensaje={setMensaje}
                         audiourl={audiourl}
                         setAudiourl={setAudiourl}
                         startRecording={startRecording}
@@ -510,6 +556,15 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                             nombreDestino: e.target.value,
                           })
                         }
+                        onKeyDown={(e) => {
+                          if (formData.nombreDestino !== "") {
+                            if (e.key === "Enter" || e.key === "Tab") {
+                              document
+                                .querySelector(".apellidoDestino")
+                                .focus();
+                            }
+                          }
+                        }}
                       />
                       {errors.nombre && (
                         <p className="errors">{errors.nombreDestino.message}</p>
@@ -517,6 +572,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
 
                       <input
                         type="text"
+                        className="apellidoDestino"
                         placeholder="Apellido"
                         value={formData.apellidoDestino}
                         {...register("apellidoDestino", {
@@ -528,6 +584,14 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                             apellidoDestino: e.target.value,
                           })
                         }
+                        onKeyDown={(e) => {
+                          if (
+                            formData.apellidoDestino !== "" &&
+                            formData.nombreDestino !== ""
+                          ) {
+                            handleKeyDown(e);
+                          }
+                        }}
                       />
                       {errors.apellidoDestino && (
                         <p className="errors">
@@ -554,7 +618,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
               </div>
             </div>
 
-            {/* pais y departamento */}
+            {/* pais y region_id */}
 
             <div
               className="cardPadre"
@@ -578,24 +642,30 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       />
 
                       <select
-                        {...register("departamento", {
-                          required: "Selecciona departamento de residencia",
+                        {...register("region_id", {
+                          required: "Selecciona Departamento de residencia",
                         })}
                         value={selectedDepartment}
                         onChange={handleDepartmentChange}
+                        onKeyDown={(e) => {
+                          if (formData.region_id !== "") {
+                            handleKeyDown(e);
+                          }
+                        }}
                       >
-                        <option value="">Seleccione un departamento</option>
+                        <option value="">Seleccione un Departamento</option>
                         {data.map((department) => (
                           <option
                             key={department.id}
-                            value={department.departamento}
+                            value={department.region_id}
                           >
                             {department.departamento}
                           </option>
                         ))}
                       </select>
-                      {errors.departamento && (
-                        <p className="errors">{errors.departamento.message}</p>
+
+                      {errors.region_id && (
+                        <p className="errors">{errors.region_id.message}</p>
                       )}
                     </div>
                   </div>
@@ -605,7 +675,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.pais !== "" && formData.departamento !== ""
+                      formData.pais !== "" && formData.region_id !== ""
                         ? "active"
                         : "disable"
                     }`}
@@ -616,7 +686,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
               </div>
             </div>
 
-            {/* Ciudad y direccion de envio  */}
+            {/* Ciudad y street de envio  */}
 
             <div
               className="cardPadre"
@@ -634,13 +704,13 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     <div className="flex flex-col w-full">
                       <select
                         disabled={!selectedDepartment}
-                        {...register("ciudad", {
+                        {...register("city", {
                           required: "Selecciona ciudad de residencia",
                         })}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            ciudad: e.target.value,
+                            city: e.target.value,
                           })
                         }
                       >
@@ -651,26 +721,31 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                           </option>
                         ))}
                       </select>
-                      {errors.ciudad && (
-                        <p className="errors">{errors.ciudad.message}</p>
+                      {errors.city && (
+                        <p className="errors">{errors.city.message}</p>
                       )}
 
                       <input
                         type="text"
-                        placeholder="Direccion"
-                        value={formData.direccion}
-                        {...register("direccion", {
-                          required: "direccion es requerida",
+                        placeholder="Dirección"
+                        value={formData.street}
+                        {...register("street", {
+                          required: "Dirección es requerida",
                         })}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            direccion: e.target.value,
+                            street: e.target.value,
                           })
                         }
+                        onKeyDown={(e) => {
+                          if (formData.street !== "") {
+                            handleKeyDown(e);
+                          }
+                        }}
                       />
-                      {errors.direccion && (
-                        <p className="errors">{errors.direccion.message}</p>
+                      {errors.street && (
+                        <p className="errors">{errors.street.message}</p>
                       )}
                     </div>
                   </div>
@@ -680,7 +755,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.ciudad !== "" && formData.direccion !== ""
+                      formData.city !== "" && formData.street !== ""
                         ? "active"
                         : "disable"
                     }`}
@@ -691,7 +766,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
               </div>
             </div>
 
-            {/* Datos de email y telefono  */}
+            {/* Datos de Email y telephone  */}
 
             <div
               className="cardPadre"
@@ -711,26 +786,34 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     </p>
                     <div className="flex flex-col w-full">
                       <input
-                        name="username"
-                        type="email"
+                        className="email"
+                        type="username"
                         placeholder="Correo"
-                        value={formData.email}
-                        {...register("email", {
-                          required: "el correo es requerido",
+                        value={formData.username}
+                        {...register("username", {
+                          required: "el Correo es requerido",
                         })}
                         onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
+                          setFormData({ ...formData, username: e.target.value })
                         }
+                        onKeyDown={(e) => {
+                          if (formData.nombreDestino !== "") {
+                            if (e.key === "Enter" || e.key === "Tab") {
+                              document.querySelector(".telefono").focus();
+                            }
+                          }
+                        }}
                       />
-                      {errors.email && (
-                        <p className="errors">{errors.email.message}</p>
+                      {errors.username && (
+                        <p className="errors">{errors.username.message}</p>
                       )}
 
                       <input
                         type="tel"
+                        className="telefono"
                         placeholder="Teléfono"
-                        value={formData.telefono}
-                        {...register("telefono", {
+                        value={formData.telephone}
+                        {...register("telephone", {
                           required: "El teléfono es requerido",
                           minLength: 10,
                         })}
@@ -740,11 +823,19 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                             /[^0-9]/g,
                             ""
                           );
-                          setFormData({ ...formData, telefono: onlyNums });
+                          setFormData({ ...formData, telephone: onlyNums });
+                        }}
+                        onKeyDown={(e) => {
+                          if (
+                            formData.telephone !== "" &&
+                            formData.username !== ""
+                          ) {
+                            handleKeyDown(e);
+                          }
                         }}
                       />
-                      {errors.telefono && (
-                        <p className="errors">{errors.telefono.message}</p>
+                      {errors.telephone && (
+                        <p className="errors">{errors.telephone.message}</p>
                       )}
                     </div>
                   </div>
@@ -754,7 +845,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.email !== "" && formData.telefono !== ""
+                      formData.username !== "" && formData.telephone !== ""
                         ? "active"
                         : "disable"
                     }`}
@@ -783,12 +874,8 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     <p className="titulosForm font-inter">
                       Un oso con tu mensaje dentro está a punto de llegar
                     </p>
-                    <div className="cajaTExto">
-                      Gracias para continuar con la compra seras redireccionado
-                      alCarrito.com
-                    </div>
 
-                    {/* <div className="checkbox-container">
+                    <div className="checkbox-container">
                       <div className="caja">
                         <input
                           className="check checkbox-custom"
@@ -838,7 +925,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                       {errors.autorizar && (
                         <p className="errors">Debe autorizar el uso de datos</p>
                       )}
-                    </div> */}
+                    </div>
                   </div>
                   <Espaciado />
                 </div>
@@ -873,13 +960,13 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                   paso === 6
                     ? "activebtn"
                     : paso === 2 &&
-                      formData.nombre !== "" &&
-                      formData.apellido !== ""
+                      formData.firstname !== "" &&
+                      formData.lastname !== ""
                     ? "activebtn"
                     : paso === 3 &&
-                      formData.tipoDeDocumento !== "" &&
-                      formData.numero !== "" &&
-                      formData.numero.length > 5
+                      formData.tipo_identificacion_usuario !== "" &&
+                      formData.numero_identificacion_usuario !== "" &&
+                      formData.numero_identificacion_usuario.length > 5
                     ? "activebtn"
                     : paso === 7 &&
                       formData.nombreDestino !== "" &&
@@ -887,15 +974,15 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     ? "activebtn"
                     : paso === 8 &&
                       formData.pais !== "" &&
-                      formData.departamento !== ""
+                      formData.region_id !== ""
                     ? "activebtn"
                     : paso === 9 &&
-                      formData.ciudad !== "" &&
-                      formData.direccion !== ""
+                      formData.city !== "" &&
+                      formData.street !== ""
                     ? "activebtn"
                     : paso === 10 &&
-                      formData.email !== "" &&
-                      formData.telefono !== ""
+                      formData.username !== "" &&
+                      formData.telephone !== ""
                     ? "activebtn"
                     : "disable"
                 }`}

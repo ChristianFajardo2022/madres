@@ -128,7 +128,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={1}
                 customStyle={
-                  "lg:left-[56%]  xs:left-[65%] lg:top-[19%]  xs:top-[33%]"
+                  "z-1 lg:left-[60%]  xs:left-[65%] lg:top-[17%]  xs:top-[33%]"
                 }
                 incremento={"w-12"}
                 imagen={"/imagenes/ojo.png"}
@@ -140,7 +140,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={2}
                 customStyle={
-                  "lg:left-[6%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
+                  "z-2 lg:left-[6%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
                 }
                 incremento={"w-[3rem]"}
                 rotate={"translate-x-[-100%]"}
@@ -153,7 +153,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={3}
                 customStyle={
-                  "lg:left-[18%] xs:left-[0%] xs:top-[75%] lg:top-[65%]"
+                  "z-3 lg:left-[18%] xs:left-[0%] xs:top-[75%] lg:top-[65%]"
                 }
                 incremento={"w-52"}
                 imagen={"/imagenes/path.png"}
