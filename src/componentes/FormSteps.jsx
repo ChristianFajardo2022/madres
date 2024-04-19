@@ -183,7 +183,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
     >
       <div
         ref={padre}
-        className="slidecards w-full h-full lg:relative items-center flex flex-col  justify-evenly  "
+        className="slidecards w-full h-full lg:relative items-center flex flex-col  justify-evenly max-lg:pb-4  "
       >
         {/* navbar menu hamburgesa*/}
 
@@ -192,7 +192,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
           <div
             ref={cards}
             style={{ transform: `translateX(-${translate}px)` }}
-            className=" font-inter cards h-full lg:w-[291vw] xs:w-[900vw] relative text-white flex justify-between items-center"
+            className=" font-inter cards h-full lg:w-[291vw] xs:w-[900vw] sm:w-[600vw] relative text-white flex justify-between items-center"
           >
             <div
               className="cardPadre"
@@ -218,7 +218,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     <span className="w-14 h-auto inline-block relative">
                       <img src="/svg/heart.svg" alt="" />
                     </span>
-                    <p className=" font-normal w-full mt-6 px-2">
+                    <p className=" font-normal w-full lg:mt-6 xs:mt-2 px-2">
                       Este día de la madre puedes dar un regalo tan lleno de
                       historia como este
                     </p>
@@ -462,7 +462,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
             >
               <div
                 className={`cardSingle   ${
-                  paso == 1 ? "opacity-100" : "opacity-40"
+                  paso == 5 ? "opacity-100" : "opacity-40"
                 }`}
               >
                 <div className="cajaCard">
@@ -994,7 +994,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
         </div>
         {/* Barra de progreso*/}
 
-        <div className="overflow-hidden rounded-3xl xs:w-2/5 lg:w-1/3 h-[8px] relative max-lg:my-12">
+        <div className="overflow-hidden rounded-3xl xs:w-2/5 lg:w-1/3 h-[8px] relative max-lg:my-2">
           <div className="maskChild absolute top-0 left-0 inline-block w-full h-full bg-[--yellow] opacity-35"></div>
 
           <div

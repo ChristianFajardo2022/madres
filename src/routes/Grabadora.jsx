@@ -98,7 +98,7 @@ function Grabadora() {
           <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-1/2">
             {/*           <p className="py-4">{status}</p> */}
             <Texto
-              customstyle={"absolute top-0"}
+              customstyle={"absolute top-6"}
               title={
                 <>
                   <p className="lg:text-4xl xs:text-lg">
@@ -128,7 +128,7 @@ function Grabadora() {
                 Ocultarpuntos={Ocultarpuntos}
                 index={1}
                 customStyle={
-                  "z-1 lg:left-[60%]  xs:left-[65%] lg:top-[17%]  xs:top-[33%]"
+                  "z-1 lg:left-[58%] xs:left-[75%] lg:top-[22%]  xs:top-[34%]"
                 }
                 incremento={"w-12"}
                 imagen={"/imagenes/ojo.png"}

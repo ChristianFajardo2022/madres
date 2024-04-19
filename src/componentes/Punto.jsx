@@ -59,7 +59,7 @@ const Punto = ({
     >
       <span
         onClick={handleClick}
-        className={`punto  xs:w-8 xs:h-8 lg:w-6 lg:h-6 inline-block bg-[--yellow] rounded-full`}
+        className={`punto relative xs:w-6 xs:h-6 lg:w-6 lg:h-6 inline-block bg-[--yellow] rounded-full`}
       ></span>
       <div
         onClick={Ocultarpuntos}
