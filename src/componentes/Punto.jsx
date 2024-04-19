@@ -55,11 +55,11 @@ const Punto = ({
     <div
       className={`${
         customStyle ? customStyle : ""
-      } cursor-pointer line-${index} z-10 Toltip absolute flexCenter`}
+      }  line-${index} z-10 Toltip absolute flexCenter`}
     >
       <span
         onClick={handleClick}
-        className={`punto relative xs:w-6 xs:h-6 lg:w-6 lg:h-6 inline-block bg-[--yellow] rounded-full`}
+        className={`cursor-pointer punto relative xs:w-6 xs:h-6 lg:w-6 lg:h-6 inline-block bg-[--yellow] rounded-full`}
       ></span>
       <div
         onClick={Ocultarpuntos}
@@ -69,7 +69,7 @@ const Punto = ({
       ></div>
       <div
         onClick={Ocultarpuntos}
-        className={`caja max-lg:fixed max-lg:translate-x-[-50%] max-lg:translate-y-[-50%] max-lg:top-1/2 max-lg:left-1/2 max-lg:w-1/2 font-inter text-center lg:max-w-96 w-fit min-h-48 p-6 flexCenter flex-col bg-[--blackTransparente] rounded-3xl border border-[--yellow] text-[--yellow]`}
+        className={`caja max-lg:fixed max-lg:translate-x-[-50%] max-lg:translate-y-[-50%] max-lg:top-1/2 max-lg:left-1/2 xs:w-3/4 sm:w-1/2 lg:w-full font-inter text-center lg:max-w-96 w-fit min-h-48 p-6 flexCenter flex-col bg-[--blackTransparente] rounded-3xl border border-[--yellow] text-[--yellow]`}
       >
         <span className=" w-5/4">
           <img src={imagen} alt="" />
