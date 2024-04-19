@@ -54,7 +54,7 @@ input[type="number"] {
   font-family: "Bebas", sans-serif;
 }
 html {
-  @apply w-screen h-screen lg:text-[0.7vw] xs:text-[3vw];
+  @apply w-full h-full lg:text-[0.7vw] xs:text-[3vw];
 }
 h1 {
   @apply tracking-[0.25em] text-4xl text-[--yellow];
