@@ -44,7 +44,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   });
 
   //console.log(formData);
-  console.log(paso);
+  //console.log(paso);
   // console.log(status);
 
   /*****Mostrar paises en select */

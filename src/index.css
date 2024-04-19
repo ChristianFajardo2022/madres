@@ -223,6 +223,7 @@ svg {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  min-width: 0.7em !important;
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 0.7rem;
