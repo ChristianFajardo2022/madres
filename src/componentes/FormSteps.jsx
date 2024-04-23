@@ -9,11 +9,18 @@ import axios from "axios";
 import Espaciado from "./Espaciado";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 
-const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
+const FormSteps = ({
+  startRecording,
+  stopRecording,
+  status,
+  mediaBlobUrl,
+  setBotonAudio,
+}) => {
   const [paso, setpaso] = useState(1);
+  const [readyToBuy, setReadyToBuy] = useState(false);
   const [anchoContenedor, setAnchoContenedor] = useState(0);
   const [mensaje, setMensaje] = useState(
-    "Dile en 20 segundos todo lo que sientes"
+    "graba un mensaje de 20 segundos. <br /> Ella lo escuchará al oprimir el botón del pecho del oso"
   );
   const [anchoHijoEnPixel, setAnchoHijoEnPixel] = useState(0);
   const [valorinicial, setValorInicial] = useState(0);
@@ -29,17 +36,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   const [audiourl, setAudiourl] = useState("");
   const [formData, setFormData] = useState({
     firstname: "",
-    lastname: "",
-    tipo_identificacion_usuario: "",
-    numero_identificacion_usuario: "",
-    username: "",
-    telephone: "",
-    nombreDestino: "",
-    apellidoDestino: "",
-    pais: "Colombia",
-    region_id: "",
-    city: "",
-    street: "",
+    idname: "",
     promoid: "MMbear",
   });
 
@@ -112,16 +109,18 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
 
   /***********Funcion de envio de datos */
   const submitHandler = async (e) => {
-    if (!audiourl) {
+    console.log(e);
+
+    /* if (!audiourl) {
       setError("Por favor, graba un audio antes de enviar el formulario.");
       alert("Por favor, graba un audio antes de enviar el formulario.");
       return;
     }
 
     setIsLoading(true);
-    setError("");
+    setError(""); */
 
-    try {
+    /* try {
       const audioBlob = await fetch(audiourl).then((r) => r.blob());
       const data = new FormData();
       data.append("formData", JSON.stringify(formData));
@@ -144,17 +143,13 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
       console.error("Error al enviar los datos y audio", error);
       setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
       setIsLoading(false);
-    }
+    } */
   };
 
   const handleNextStep = async (data) => {
     const newFormData = { ...formData, ...data };
 
-    if (paso < 11) {
-      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
-    } else {
-      submitHandler(newFormData);
-    }
+    submitHandler(newFormData);
   };
   useEffect(() => {
     const handleTabKey = (event) => {
@@ -173,6 +168,10 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" || e.key === "Tab") {
       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
+      setMensaje(
+        `${formData.firstname}, graba un mensaje de 20 segundos. <br /> 
+        Ella lo escuchará al oprimir el botón del pecho del oso`
+      );
     }
   };
 
@@ -187,12 +186,12 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
       >
         {/* navbar menu hamburgesa*/}
 
-        <div className="lg:h-[32rem] max-lg:min-h-40 w-full relative">
+        <div className="lg:h-[36rem] max-lg:min-h-[25rem] w-full relative">
           {/* Cards formulario */}
           <div
             ref={cards}
             style={{ transform: `translateX(-${translate}px)` }}
-            className=" font-inter cards h-full lg:w-[291vw] xs:w-[900vw] sm:w-[600vw] relative text-white flex justify-between items-center"
+            className=" font-inter cards h-full lg:w-[122vw] xs:w-[375vw] sm:w-[200vw] relative text-white flex justify-between items-center"
           >
             <div
               className="cardPadre"
@@ -215,12 +214,16 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                 <div className="cajaCard">
                   <Espaciado />
                   <div className="w-full flexCenter flex-col">
-                    <span className="w-14 h-auto inline-block relative">
-                      <img src="/svg/heart.svg" alt="" />
+                    <span className="w-full h-auto inline-block relative">
+                      <img
+                        src="/logo-operacion-mayo.svg"
+                        alt="Operación mayo"
+                      />
                     </span>
-                    <p className=" font-normal w-full lg:mt-6 xs:mt-2 px-2">
-                      Este día de la madre puedes dar un regalo tan lleno de
-                      historia como este
+                    <p className=" font-normal w-full mt-6">
+                      Hacer llegar este oso a las manos de su abuela, fue la
+                      misión más importante del soldado ramírez. Tú también
+                      puedes decir feliz día mamá con un oso como este.
                     </p>
                   </div>
 
@@ -228,7 +231,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
-                    className="cursor-pointer text-center btn hoverBtn btnGrabadora"
+                    className=" cursor-pointer text-center btn hoverBtn btnGrabadora"
                   >
                     <Texto title={"Empezar"} />
                   </span>
@@ -236,7 +239,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
               </div>
             </div>
 
-            {/* Formulario de nombre y apellido */}
+            {/* Formulario de nombre   */}
 
             <div
               className="cardPadre"
@@ -251,7 +254,9 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                   <Espaciado />
 
                   <div className="w-full">
-                    <p className="titulosForm">¿Cómo te llamas?</p>
+                    <p className="titulosForm">
+                      ¿Cómo te llamas y cual es tu email?
+                    </p>
                     <div className="flex flex-col w-full">
                       <input
                         type="text"
@@ -268,185 +273,50 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                         }
                         onKeyDown={(e) => {
                           if (formData.firstname !== "") {
-                            if (e.key === "Enter" || e.key === "Tab") {
-                              document.querySelector(".lastname").focus();
+                            if (e.key === "Tab" || e.key === "Enter") {
+                              document.querySelector(".email").focus();
                             }
                           }
                         }}
                       />
-                      {errors.firstname && (
-                        <p className="errors">{errors.firstname.message}</p>
-                      )}
-
                       <input
-                        ref={input}
-                        type="text"
-                        className="lastname"
-                        placeholder="Apellido"
-                        value={formData.lastname}
-                        {...register("lastname", {
-                          required: "Apellido es requerido",
-                        })}
-                        onChange={(e) =>
-                          setFormData({ ...formData, lastname: e.target.value })
-                        }
-                        onKeyDown={(e) => {
-                          if (
-                            formData.firstname !== "" &&
-                            formData.lastname !== ""
-                          ) {
-                            handleKeyDown(e);
-                          }
-                        }}
-                      />
-                      {errors.lastname && (
-                        <p className="errors">{errors.lastname.message}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.nombre !== "" && formData.lastname !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Formulario de Tipo de documento y numero */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 3 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-
-                  <div className="w-full">
-                    <p className="titulosForm">
-                      ¿Cuál es tu tipo y número de documento?
-                    </p>
-                    <div className="flex flex-col w-full">
-                      <select
-                        {...register("tipo_identificacion_usuario", {
-                          required: "Selecciona tu tipo de documento",
+                        type="email"
+                        className="email"
+                        placeholder="Correo"
+                        value={formData.username}
+                        {...register("username", {
+                          required: "El email es requerido",
                         })}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
-                            tipo_identificacion_usuario: e.target.value,
+                            username: e.target.value,
                           })
                         }
-                      >
-                        <option value="">Tipo de documento</option>
-                        <option value="308">Cédula de ciudadanía</option>
-                        <option value="311">Cédula de extranjería</option>
-                        <option value="314">Tarjeta de identidad</option>
-                        <option value="433">
-                          Número de identificación tributaria
-                        </option>
-                      </select>
-                      {errors.tipo_identificacion_usuario && (
-                        <p className="errors">
-                          {errors.tipo_identificacion_usuario.message}
-                        </p>
-                      )}
-
-                      <input
-                        type="number"
-                        placeholder="Numero"
-                        style={{ appearance: "textfield" }} // Agrega esta línea
-                        value={formData.numero_identificacion_usuario}
-                        {...register("numero", {
-                          required: "Número es requerido",
-                          minLength: {
-                            value: 5,
-                            message: "Mínimo 5 caracteres",
-                          },
-                        })}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            numero_identificacion_usuario: e.target.value,
-                          })
-                        }
-                        inputMode="numeric"
                         onKeyDown={(e) => {
-                          if (
-                            formData.tipo_identificacion_usuario !== "" &&
-                            formData.numero_identificacion_usuario !== "" &&
-                            formData.numero_identificacion_usuario.length > 5
-                          ) {
+                          if (formData.username !== "") {
                             handleKeyDown(e);
                           }
                         }}
                       />
-                      {errors.numero && (
-                        <p className="errors">{errors.numero.message}</p>
-                      )}
                     </div>
                   </div>
 
                   <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
+                    onClick={() => {
+                      nextSlide(
+                        anchoContenedor,
+                        valorinicial,
+                        anchoHijoEnPixel
+                      );
+                      setMensaje(
+                        `${formData.firstname}, graba un mensaje de 20 segundos. <br /> 
+                        Ella lo escuchará al oprimir el botón del pecho del oso`
+                      );
+                    }}
                     className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.tipo_identificacion_usuario !== "" &&
-                      formData.numero_identificacion_usuario !== "" &&
-                      formData.numero_identificacion_usuario.length > 5
-                        ? "active"
-                        : "disable"
+                      formData.firstname !== "" ? "active" : "disable"
                     }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Mensaje de grabar el mensaje */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 4 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full flexCenter flex-col">
-                    <p className="font-inter text-center font-normal w-full  ">
-                      <span className="capitalize">
-                        {formData.firstname}, <br />
-                      </span>
-                      graba un mensaje para esa persona que te cuidó como a un
-                      hijo y nosotros se lo haremos llegar dentro de un oso
-                      igual a este
-                    </p>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora `}
                   >
                     <Texto title={"Continuar"} />
                   </span>
@@ -462,14 +332,17 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
             >
               <div
                 className={`cardSingle   ${
-                  paso == 5 ? "opacity-100" : "opacity-40"
+                  paso == 3 ? "opacity-100" : "opacity-40"
                 }`}
               >
                 <div className="cajaCard">
                   <Espaciado />
                   <div className="w-full flexCenter flex-col">
                     <div className="w-full">
-                      <p className="titulosForm">{mensaje}</p>
+                      <p
+                        className="titulosForm"
+                        dangerouslySetInnerHTML={{ __html: mensaje }}
+                      />
 
                       <AudioPlayer
                         setMensaje={setMensaje}
@@ -480,13 +353,15 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                         stopRecording={stopRecording}
                         status={status}
                         mediaBlobUrl={mediaBlobUrl}
-                        funcionNext={() =>
+                        funcionNext={() => {
                           nextSlide(
                             anchoContenedor,
                             valorinicial,
                             anchoHijoEnPixel
-                          )
-                        }
+                          );
+                          setReadyToBuy(true);
+                          setBotonAudio(false);
+                        }}
                       />
                     </div>
                   </div>
@@ -495,7 +370,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
               </div>
             </div>
 
-            {/* Mensaje de confirmación de audio */}
+            {/* Mensaje de confirmación y boton de compra */}
 
             <div
               className="cardPadre"
@@ -503,431 +378,24 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
             >
               <div
                 className={`cardSingle   ${
-                  paso == 6 ? "opacity-100" : "opacity-40"
+                  paso == 4 ? "opacity-100" : "opacity-40"
                 }`}
               >
                 <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full flexCenter flex-col">
-                    <p className="font-inter text-center font-normal w-full">
-                      Perfecto, en Inter Rapidísimo nos encargaremos de que tu
-                      mensaje sea recibido.
+                  <div className="w-full h-full flexCenter flex-col">
+                    <p className="font-inter text-center font-normal w-full mb-6">
+                      Estás a punto de hacer tu misión más importante
                     </p>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className="cursor-pointer text-center btn hoverBtn btnGrabadora"
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* A quien envia */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 7 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full">
-                    <p className="titulosForm">¿A quién se lo enviaremos?</p>
-                    <div className="flex flex-col w-full">
-                      <input
-                        type="text"
-                        placeholder="Nombre"
-                        value={formData.nombreDestino}
-                        {...register("nombreDestino", {
-                          required: "Nombre es requerido",
-                        })}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            nombreDestino: e.target.value,
-                          })
-                        }
-                        onKeyDown={(e) => {
-                          if (formData.nombreDestino !== "") {
-                            if (e.key === "Enter" || e.key === "Tab") {
-                              document
-                                .querySelector(".apellidoDestino")
-                                .focus();
-                            }
-                          }
-                        }}
-                      />
-                      {errors.nombre && (
-                        <p className="errors">{errors.nombreDestino.message}</p>
-                      )}
-
-                      <input
-                        type="text"
-                        className="apellidoDestino"
-                        placeholder="Apellido"
-                        value={formData.apellidoDestino}
-                        {...register("apellidoDestino", {
-                          required: "Apellido es requerido",
-                        })}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            apellidoDestino: e.target.value,
-                          })
-                        }
-                        onKeyDown={(e) => {
-                          if (
-                            formData.apellidoDestino !== "" &&
-                            formData.nombreDestino !== ""
-                          ) {
-                            handleKeyDown(e);
-                          }
-                        }}
-                      />
-                      {errors.apellidoDestino && (
-                        <p className="errors">
-                          {errors.apellidoDestino.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.nombreDestino !== "" &&
-                      formData.apellidoDestino !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* pais y region_id */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 8 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full">
-                    <p className="titulosForm">¿Dónde vive?</p>
-                    <div className="flex flex-col w-full">
-                      <input
-                        type="text"
-                        placeholder="Nombre"
-                        readOnly
-                        value={formData.pais}
-                      />
-
-                      <select
-                        {...register("region_id", {
-                          required: "Selecciona Departamento de residencia",
-                        })}
-                        value={selectedDepartment}
-                        onChange={handleDepartmentChange}
-                        onKeyDown={(e) => {
-                          if (formData.region_id !== "") {
-                            handleKeyDown(e);
-                          }
-                        }}
-                      >
-                        <option value="">Seleccione un Departamento</option>
-                        {data.map((department) => (
-                          <option
-                            key={department.id}
-                            value={department.region_id}
-                          >
-                            {department.departamento}
-                          </option>
-                        ))}
-                      </select>
-
-                      {errors.region_id && (
-                        <p className="errors">{errors.region_id.message}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.pais !== "" && formData.region_id !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Ciudad y street de envio  */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 9 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full">
-                    <p className="titulosForm">¿Dónde vive?</p>
-                    <div className="flex flex-col w-full">
-                      <select
-                        disabled={!selectedDepartment}
-                        {...register("city", {
-                          required: "Selecciona ciudad de residencia",
-                        })}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            city: e.target.value,
-                          })
-                        }
-                      >
-                        <option value={""}>Seleccione una ciudad</option>
-                        {cities.map((city) => (
-                          <option key={city} value={city}>
-                            {city}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.city && (
-                        <p className="errors">{errors.city.message}</p>
-                      )}
-
-                      <input
-                        type="text"
-                        placeholder="Dirección"
-                        value={formData.street}
-                        {...register("street", {
-                          required: "Dirección es requerida",
-                        })}
-                        onChange={(e) =>
-                          setFormData({
-                            ...formData,
-                            street: e.target.value,
-                          })
-                        }
-                        onKeyDown={(e) => {
-                          if (formData.street !== "") {
-                            handleKeyDown(e);
-                          }
-                        }}
-                      />
-                      {errors.street && (
-                        <p className="errors">{errors.street.message}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.city !== "" && formData.street !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Datos de Email y telephone  */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 10 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-                  <div className="w-full">
-                    <p className="titulosForm">
-                      Dános tus datos para que estés enterado del estatus de tu
-                      envío
+                    <p className="font-inter text-center font-normal w-full mb-4">
+                      bienvenido a la
                     </p>
-                    <div className="flex flex-col w-full">
-                      <input
-                        className="email"
-                        type="username"
-                        placeholder="Correo"
-                        value={formData.username}
-                        {...register("username", {
-                          required: "el Correo es requerido",
-                        })}
-                        onChange={(e) =>
-                          setFormData({ ...formData, username: e.target.value })
-                        }
-                        onKeyDown={(e) => {
-                          if (formData.nombreDestino !== "") {
-                            if (e.key === "Enter" || e.key === "Tab") {
-                              document.querySelector(".telefono").focus();
-                            }
-                          }
-                        }}
+                    <span className="w-full h-auto inline-block relative">
+                      <img
+                        src="/logo-operacion-mayo.svg"
+                        alt="Operación mayo"
                       />
-                      {errors.username && (
-                        <p className="errors">{errors.username.message}</p>
-                      )}
-
-                      <input
-                        type="tel"
-                        className="telefono"
-                        placeholder="Teléfono"
-                        value={formData.telephone}
-                        {...register("telephone", {
-                          required: "El teléfono es requerido",
-                          minLength: 10,
-                        })}
-                        onChange={(e) => {
-                          // Permitir solo números
-                          const onlyNums = e.target.value.replace(
-                            /[^0-9]/g,
-                            ""
-                          );
-                          setFormData({ ...formData, telephone: onlyNums });
-                        }}
-                        onKeyDown={(e) => {
-                          if (
-                            formData.telephone !== "" &&
-                            formData.username !== ""
-                          ) {
-                            handleKeyDown(e);
-                          }
-                        }}
-                      />
-                      {errors.telephone && (
-                        <p className="errors">{errors.telephone.message}</p>
-                      )}
-                    </div>
+                    </span>
                   </div>
-
-                  <span
-                    onClick={() =>
-                      nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
-                    }
-                    className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                      formData.username !== "" && formData.telephone !== ""
-                        ? "active"
-                        : "disable"
-                    }`}
-                  >
-                    <Texto title={"Continuar"} />
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Autorizacion de datos */}
-
-            <div
-              className="cardPadre"
-              style={{ width: `${anchoHijoEnPixel}px` }}
-            >
-              <div
-                className={`cardSingle ${
-                  paso == 11 ? "opacity-100" : "opacity-40"
-                }`}
-              >
-                <div className="cajaCard">
-                  <Espaciado />
-
-                  <div className="w-full flexCenter flex-col">
-                    <p className="titulosForm font-inter">
-                      Un oso con tu mensaje dentro está a punto de llegar
-                    </p>
-
-                    <div className="checkbox-container">
-                      <div className="caja">
-                        <input
-                          className="check checkbox-custom"
-                          type="checkbox"
-                          id="terminos"
-                          {...register("terminos", { required: true })}
-                        />
-                        <label className="w-5/6" htmlFor="terminos">
-                          <a
-                            target="_blank"
-                            className="max-lg:text-[0.65rem]"
-                            href="https://interrapidisimo.com/wp-content/uploads/Proteccion-Datos-Personales-2024.pdf"
-                          >
-                            <span>Acepto </span>{" "}
-                            <span className="border-b pb-[2px]">
-                              términos y condiciones
-                            </span>{" "}
-                          </a>
-                        </label>
-                      </div>
-
-                      {errors.terminos && (
-                        <p className="errors">Debe Aceptar terminos</p>
-                      )}
-                    </div>
-                    <div className="checkbox-container  ">
-                      <div className="caja">
-                        <input
-                          className="checkbox-custom"
-                          type="checkbox"
-                          id="autorizar"
-                          {...register("autorizar", { required: true })}
-                        />
-                        <label className="w-5/6" htmlFor="autorizar">
-                          <a
-                            target="_blank"
-                            className="max-lg:text-[0.65rem]"
-                            href="https://interrapidisimo.com/wp-content/uploads/Proteccion-Datos-Personales-2024.pdf"
-                          >
-                            <span> Autorizo tratamiento</span>{" "}
-                            <span className="border-b pb-[2px]">
-                              de datos personales
-                            </span>{" "}
-                          </a>
-                        </label>
-                      </div>
-                      {errors.autorizar && (
-                        <p className="errors">Debe autorizar el uso de datos</p>
-                      )}
-                    </div>
-                  </div>
-                  <Espaciado />
                 </div>
               </div>
             </div>
@@ -948,25 +416,15 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
                 <img src="/svg/next.svg" alt="" />
               </span>
             )}
-            {paso < 11 && (
+            {paso < 4 && (
               <span
                 onClick={() =>
                   nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                 }
                 className={`cursor-pointer absolute right-[-0.5rem] inline-block w-6 h-auto ${
-                  paso === 1 ||
-                  paso === 4 ||
-                  (paso === 5 && irpaso6) ||
-                  paso === 6
+                  paso === 1 || paso === 4 || (paso === 3 && irpaso6)
                     ? "activebtn"
-                    : paso === 2 &&
-                      formData.firstname !== "" &&
-                      formData.lastname !== ""
-                    ? "activebtn"
-                    : paso === 3 &&
-                      formData.tipo_identificacion_usuario !== "" &&
-                      formData.numero_identificacion_usuario !== "" &&
-                      formData.numero_identificacion_usuario.length > 5
+                    : paso === 2 && formData.firstname !== ""
                     ? "activebtn"
                     : paso === 7 &&
                       formData.nombreDestino !== "" &&
@@ -998,26 +456,26 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
           <div className="maskChild absolute top-0 left-0 inline-block w-full h-full bg-[--yellow] opacity-35"></div>
 
           <div
-            style={{ width: `${paso <= 1 ? 0 : (paso / 11) * 100}%` }}
+            style={{ width: `${paso <= 1 ? 0 : (paso / 4) * 100}%` }}
             className=" rounded-e-3xl transition-all ease-out duration-1000 absolute z-50 top-0 left-0 inline-block h-full w-10 bg-[--yellow] "
           ></div>
         </div>
 
         {/* Boton de compra */}
-        <div
+        {/* <div
           style={{ width: `${anchoHijoEnPixel}px` }}
-          className="btnCompra flexCenter px-8 "
+          className="btnCompra flexCenter px-8"
         >
           <Button
             type={true}
             title={"comprar"}
             custoMStyle={`${
-              paso >= 11
+              readyToBuy
                 ? "opacity-100 pointer-events-all"
                 : "opacity-30 pointer-events-none"
             } text-3xl w-full`}
           />
-        </div>
+        </div> */}
       </div>
     </form>
   );

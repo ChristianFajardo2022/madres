@@ -138,7 +138,9 @@ const AudioPlayer = ({
       );
       audioRef.current.addEventListener("ended", () => {
         clearInterval(intervalId);
-        setMensaje("Si te gusto continua si no graba de nuevo");
+        setMensaje(
+          "Repite tu mensaje las veces que quieras hasta que te encante"
+        );
         setInicioGrabacion("reproducir");
         setMostrarBotones(true);
         setIrpaso6(true);
@@ -234,9 +236,10 @@ const AudioPlayer = ({
               }, 500);
             }}
             className={
-              "cursor-pointer text-center btn hoverBtn btnGrabadora noPadding"
+              "animateHover Bebas cursor-pointer text-black min-w-32  h-14 py-3 mb-4 px-10 rounded-full w-full h- text-center flexCenter bg-white hoverBtn btnGrabadora noPadding"
             }
           >
+            <span className="animateHoverElement w-5 h-5 rounded-full bg-red-700 inline-block mr-2"></span>
             <Texto title={"Volver a grabar"} />
           </span>
 

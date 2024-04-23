@@ -20,7 +20,6 @@ import Navbar from "../componentes/Navbar";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
-  const [botonAudio, setBotonAudio] = useState(true);
 
   const videoLoad = useRef(null);
   const { isRecording, startRecording, stopRecording, recordingBlob } =
@@ -96,7 +95,7 @@ function Grabadora() {
         )}
 
         <div className="lg:p-8 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
-          <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
+          <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-1/2">
             {/*           <p className="py-4">{status}</p> */}
             <Texto
               customstyle={"absolute top-6"}
@@ -123,54 +122,49 @@ function Grabadora() {
                 </>
               }
             />
-            {/*  {botonAudio ? (
-              <>
-                <div className="z-10 lg:relative w-full h-full">
-                  <div onClick={Ocultarpuntos} className="capa "></div>
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={1}
-                    customStyle={
-                      "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[31%]"
-                    }
-                    incremento={"w-12"}
-                    imagen={"/imagenes/ojo.png"}
-                    texto={
-                      "El botón, su ojo improvisado era el vínculo que unía al soldado con su hogar."
-                    }
-                  />
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={2}
-                    customStyle={
-                      "z-2 lg:left-[6%]  xs:left-[36%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
-                    }
-                    incremento={"w-[3rem]"}
-                    rotate={"translate-x-[-100%]"}
-                    imagen={"/imagenes/heart.png"}
-                    texto={
-                      "Esta cicatriz es el testimonio del amor que EL soldado RAMÍREZ guardó dentro."
-                    }
-                  />
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={3}
-                    customStyle={
-                      "z-3 lg:left-[18%]  sm:left-[18%] xs:left-[-10%] xs:top-[78%] lg:top-[65%]"
-                    }
-                    incremento={"w-52"}
-                    imagen={"/imagenes/path.png"}
-                    texto={
-                      "perdió parte de su relleno para cumplir la misión más noble que podía tener. DECIRLE FELIZ DÍA A MAMÁ"
-                    }
-                  />
-                </div>
-              </>
-            ) : null} */}
+            <div className="z-10 lg:relative w-full h-full">
+              <div onClick={Ocultarpuntos} className="capa "></div>
+              <Punto
+                Ocultarpuntos={Ocultarpuntos}
+                index={1}
+                customStyle={
+                  "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[31%]"
+                }
+                incremento={"w-12"}
+                imagen={"/imagenes/ojo.png"}
+                texto={
+                  "Su ojo se cayó, pero gracias al botón que le puso la Abuela Isabel, fue capaz de ver toda una aventura hasta llegar a las manos de su única dueña."
+                }
+              />
+              <Punto
+                Ocultarpuntos={Ocultarpuntos}
+                index={2}
+                customStyle={
+                  "z-2 lg:left-[6%]  xs:left-[36%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
+                }
+                incremento={"w-[3rem]"}
+                rotate={"translate-x-[-100%]"}
+                imagen={"/imagenes/heart.png"}
+                texto={
+                  "Tiene una cicatriz en el pecho, causada cuando el soldado Ramírez metió en su corazón el mejor regalo que una madre puede recibir."
+                }
+              />
+              <Punto
+                Ocultarpuntos={Ocultarpuntos}
+                index={3}
+                customStyle={
+                  "z-3 lg:left-[18%]  sm:left-[18%] xs:left-[-10%] xs:top-[78%] lg:top-[65%]"
+                }
+                incremento={"w-52"}
+                imagen={"/imagenes/path.png"}
+                texto={
+                  "Perdió parte de su relleno, pero este remiendo demuestra que estaba destinado a cumplir esta misión.                  "
+                }
+              />
+            </div>
           </div>
-          <div className="cajaCards z-10 flex flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-[55%] rounded-3xl ">
+          <div className="cajaCards z-10 flex flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-1/2 rounded-3xl ">
             <FormSteps
-              setBotonAudio={setBotonAudio}
               startRecording={startRecording}
               stopRecording={stopRecording}
               status={isRecording}

@@ -3,13 +3,13 @@ import Texto from "./Texto";
 
 const Button = ({ type, handleClick, custoMStyle, title }) => {
   return (
-    <span
+    <button
       type={`${type ? "submit" : null}`}
-      className={`${custoMStyle} btn hoverBtn cursor-pointer`}
+      className={`${custoMStyle} btn  cursor-pointer`}
       onClick={handleClick}
     >
       {title}
-    </span>
+    </button>
   );
 };
 

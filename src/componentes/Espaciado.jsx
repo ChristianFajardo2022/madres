@@ -1,7 +1,7 @@
 import React from "react";
 
 const Espaciado = () => {
-  return <span className={`h-8   inline-block w-full`}></span>;
+  return <span className={`lg:h-4 xs:h-0   inline-block w-full`}></span>;
 };
 
 export default Espaciado;

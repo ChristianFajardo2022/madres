@@ -55,7 +55,7 @@ const Navbar = () => {
   const handleClick = () => {
     if (active) {
       setActive(false);
-      setOnPlay(false);
+      //setOnPlay(false);
       setTimeout(() => {
         setActiveIndex(0);
       }, 200);
@@ -183,7 +183,7 @@ const Navbar = () => {
                     <Video
                       setEnd={() => setOnPlay(false)}
                       setPlay={activeIndex === item.id ? setOnPlay : null}
-                      play={activeIndex === item.id ? onplay : null}
+                      //play={activeIndex === item.id ? onplay : null}
                       contenedorWidth={ancho}
                       url={item.url}
                     />

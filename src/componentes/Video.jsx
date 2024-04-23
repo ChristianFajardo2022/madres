@@ -28,7 +28,7 @@ const Video = ({ VideoReady, play, url, setPlay, setEnd, contenedorWidth }) => {
         onPause={() => setPlay(false)}
         onPlay={() => setPlay(true)}
         onReady={VideoReady}
-        playing={play == true ? true : false}
+        playing={play ? true : false}
         url={url}
         onEnded={setEnd ? setEnd : null}
         className="react-player overflow-hidden "

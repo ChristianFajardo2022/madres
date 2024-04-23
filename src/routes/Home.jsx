@@ -17,8 +17,8 @@ const Home = () => {
   const [onplay, setOnPlay] = useState(false);
   const [end, setEnd] = useState(false);
   const [omitir, setOmitir] = useState(false);
-  const videoLoad = useRef(null);
-  const videoLoad2 = useRef(null);
+  const imgLoad = useRef(null);
+  const imgLoad2 = useRef(null);
 
   const onLoadVideo = () => {
     setVideocargado(true);
@@ -30,18 +30,33 @@ const Home = () => {
   useEffect(() => {
     if (!loading) {
       const tl = gsap.timeline();
-      tl.to(".titleInicio", {
-        opacity: 1,
-        display: "block",
-        ease: "power1.inOut",
-        delay: 0.5,
+      tl.to(".bg-Img", {
+        scale: 1.2,
+        yoyo: true,
+        repeat: -1,
+        duration: 20,
+        ease: "power1.out",
       });
-      tl.to(".inicioComercial", {
-        opacity: 1,
-        display: "flex",
-        ease: "power1.inOut",
-        delay: 0.8,
-      });
+      tl.to(
+        ".titleInicio",
+        {
+          opacity: 1,
+          display: "block",
+          ease: "power1.inOut",
+          delay: 0.5,
+        },
+        "<"
+      );
+      tl.to(
+        ".inicioComercial",
+        {
+          opacity: 1,
+          display: "flex",
+          ease: "power1.inOut",
+          delay: 0.8,
+        },
+        "<"
+      );
     }
   }, [loading]);
   useEffect(() => {
@@ -69,7 +84,7 @@ const Home = () => {
         {
           opacity: 1,
           backgroundImage:
-            "radial-gradient(circle, rgb(0 0 0 / 60%) 0%, rgb(0, 0, 0) 60%)",
+            "radial-gradient(circle, rgb(0 0 0 / 70%) 0%, rgb(0, 0, 0 / 80%) 100%)",
           duration: 0.8,
           ease: "power1.in",
         }
@@ -100,21 +115,6 @@ const Home = () => {
       );
 
       tl.fromTo(
-        ".videoVimeo",
-        {
-          opacity: 0,
-          pointerEvents: "none",
-          visibility: "hidden",
-        },
-        {
-          opacity: 1,
-          pointerEvents: "all",
-          visibility: "visible",
-          duration: 1,
-          ease: "power1.inOut",
-        }
-      );
-      tl.fromTo(
         ".gradientBlack",
         {
           zIndex: 10,
@@ -132,8 +132,23 @@ const Home = () => {
         },
         {
           opacity: 0,
-          duration: 0.1,
+          duration: 0.2,
           ease: "power1.out",
+        }
+      );
+      tl.fromTo(
+        ".videoVimeo",
+        {
+          opacity: 0,
+          pointerEvents: "none",
+          visibility: "hidden",
+        },
+        {
+          opacity: 1,
+          pointerEvents: "all",
+          visibility: "visible",
+          duration: 2,
+          ease: "power1.inOut",
         }
       );
     }
@@ -142,13 +157,14 @@ const Home = () => {
   return (
     <>
       <div
-        className={`w-full h-full bg-plate-500 flex justify-center items-center bg-black`}
+        className={`w-full h-full bg-plate-500 flex justify-center items-center bg-black overflow-hidden`}
       >
-        <LoadVideo
-          customStyle={"hidden"}
-          videoLoad={videoLoad}
-          url={mobile || tablet ? "/beginM.mp4" : "/begin.mp4"}
-          onLoadedData={avanzar}
+        <img
+          ref={imgLoad}
+          onLoad={avanzar}
+          src="/imagenes/operacion-mayo.webp"
+          className="hidden"
+          alt=""
         />
         {loading ? (
           <>
@@ -156,27 +172,31 @@ const Home = () => {
           </>
         ) : (
           <div className="w-full h-full ">
-            <LoadVideo
-              videoLoad={videoLoad}
-              url={mobile || tablet ? "/beginM.mp4" : "/begin.mp4"}
-              loop={false}
+            <img
+              ref={imgLoad}
+              src="/imagenes/operacion-mayo.webp"
+              className="bg-Img block"
+              alt=""
             />
 
             <div className="gradientBlur z-20 backdrop-blur-[8px] pointer-events-none w-full opacity-0 h-full floatcenter bg-white bg-opacity-5"></div>
             <div className="gradientBlack z-10 pointer-events-none w-full h-full floatcenter opacity-0"></div>
 
-            <div className="cajaTitulos w-full absolute top-3/4 left-1/2 text-center translate-x-[-50%] flex items-center justify-between h-44 flex-col">
-              <h1 className="titleInicio hidden opacity-0 ajusteFuente w-full">
+            <div className="cajaTitulos w-full absolute floatcenter flex items-center justify-center h-44">
+              {/* <h1 className="titleInicio hidden opacity-0 ajusteFuente w-full">
                 Donde todos los hijos <br />
                 tienen algo por decir
-              </h1>
-              <Button
-                custoMStyle={
-                  "inicioComercial hidden opacity-0 text-2xl ajusteFuente"
-                }
-                handleClick={() => setPlay(true)}
-                title={"CONOCE ESTA HISTORIA"}
-              />
+              </h1> */}
+
+              <span
+                onClick={() => setPlay(true)}
+                className=" cursor-pointer inicioComercial hidden opacity-0 w-20 mr-8 h-auto"
+              >
+                <img src="/IconoPlay.svg" alt="" />
+              </span>
+              <span className="text-white titleInicio text-6xl">
+                Reproducir
+              </span>
             </div>
 
             <div
@@ -192,10 +212,10 @@ const Home = () => {
                 VideoReady={onLoadVideo}
                 url={"https://www.youtube.com/watch?v=JpjNBF1W4UA"}
               />
-              <div className="cajaIcon m-6 p-4 relative w-full flex justify-between">
+              <div className="cajaIcon m-6 p-4 relative w-full flex justify-end">
                 {omitir && (
                   <>
-                    <IconPlayVideo onplay={onplay} setOnPlay={setOnPlay} />
+                    {/* <IconPlayVideo onplay={onplay} setOnPlay={setOnPlay} /> */}
 
                     <Link
                       to={"/grabar-audio"}
