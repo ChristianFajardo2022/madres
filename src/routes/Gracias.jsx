@@ -17,6 +17,7 @@ const Gracias = () => {
   const [loading, setLoading] = useState(true);
   // Estado para guardar los datos del usuario
   const [userData, setUserData] = useState(null);
+  const [status, setStatus] = useState("null");
   // Estado para manejar errores de la solicitud
   const [error, setError] = useState(null);
   const videoLoad = useRef(null);
@@ -46,7 +47,6 @@ const Gracias = () => {
         .then((data) => {
           if (data.success) {
             setUserData(data.data);
-            console.log(userData);
           } else {
             setError("Error fetching data: " + data.message);
           }
@@ -59,6 +59,13 @@ const Gracias = () => {
 
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (userData) {
+      setStatus(userData[0].estado_transaccion);
+      //console.log(status);
+    }
+  }, [userData]);
 
   // Renderizar los datos del usuario o mostrar un error
 
@@ -148,7 +155,7 @@ const Gracias = () => {
                     {userData ? (
                       <div>
                         <h1 className=" w-1/2 m-auto mb-6 text-center">
-                          Gracias
+                          Gracias compra realizada con exito
                         </h1>
                         {userData.map((user, index) => (
                           <div
@@ -165,6 +172,13 @@ const Gracias = () => {
                             {/* Añade más campos si es necesario */}
                           </div>
                         ))}
+                        <h2 className="w-1/2 m-auto my-6 text-center">
+                          realizar una nueva grabacion
+                        </h2>
+                        <Link className="btn w-1/2 m-auto" to="/grabar-audio">
+                          {" "}
+                          ir ahora
+                        </Link>
                       </div>
                     ) : (
                       <p>Cargando datos del usuario...</p>
