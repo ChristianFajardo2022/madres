@@ -164,7 +164,7 @@ svg {
   @apply rounded-lg w-1 h-[15%] bg-black inline-block;
 }
 .player {
-  @apply w-5/6 my-6 contadorPlayer overflow-hidden h-9 px-4 flex items-center justify-between rounded-full bg-[var(--yellow)];
+  @apply w-full my-6 contadorPlayer overflow-hidden h-9 px-4 flex items-center justify-between rounded-full bg-[var(--yellow)];
 }
 .player.record {
   @apply bg-black bg-opacity-30 border border-[--yellow];

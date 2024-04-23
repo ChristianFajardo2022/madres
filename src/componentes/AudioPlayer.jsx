@@ -11,6 +11,9 @@ const AudioPlayer = ({
   audiourl,
   setAudiourl,
   setMensaje,
+  setBotonAudio,
+  setReproducir,
+  reproducir,
 }) => {
   const audioRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -30,7 +33,13 @@ const AudioPlayer = ({
     setStop(true);
     setMensaje("Ahora reproduce tu audio");
   };
-
+  useEffect(() => {
+    if (reproducir) {
+      setMensaje("Reproduciendo...");
+      reproducirAudio();
+      setInicioGrabacion("pausado");
+    }
+  }, [reproducir]);
   useEffect(() => {
     let intervalo;
     if (status) {
@@ -66,6 +75,7 @@ const AudioPlayer = ({
       setTiempoTranscurrido(0);
 
       setInicioGrabacion("reproducir");
+      setBotonAudio(true);
     } else if (inicioGrabacion == "reproducir") {
       setMensaje("Reproduciendo...");
       reproducirAudio();
@@ -144,6 +154,7 @@ const AudioPlayer = ({
         setInicioGrabacion("reproducir");
         setMostrarBotones(true);
         setIrpaso6(true);
+        setReproducir(false);
       });
     }
   };

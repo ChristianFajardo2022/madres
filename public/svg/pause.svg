@@ -2,8 +2,8 @@
 <svg id="uuid-e65247f5-feba-4b03-81ba-1349dd2b37b8" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
   <g id="uuid-ae9fdf9a-dde7-4855-9a9e-38806fc527a2" data-name="Capa 1">
     <g>
-      <rect x="0" width="9" height="25" rx="4" ry="4" style="stroke-width: 0px;"/>
-      <rect x="16" width="9" height="25" rx="4" ry="4" style="stroke-width: 0px;"/>
+      <rect x="0" width="9" height="25" rx="4" ry="4" style="fill:#fff;stroke-width: 0px;"/>
+      <rect x="16" width="9" height="25" rx="4" ry="4" style="fill:#fff;stroke-width: 0px;"/>
     </g>
   </g>
 </svg>

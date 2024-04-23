@@ -20,7 +20,8 @@ import Navbar from "../componentes/Navbar";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
-  const [botonAudio, setBotonAudio] = useState(true);
+  const [botonAudio, setBotonAudio] = useState(false);
+  const [reproducir, setReproducir] = useState(false);
 
   const videoLoad = useRef(null);
   const { isRecording, startRecording, stopRecording, recordingBlob } =
@@ -68,8 +69,17 @@ function Grabadora() {
   };
 
   useEffect(() => {
-    avanzar();
-  }, []);
+    if (botonAudio) {
+      gsap.to(".corazonOso", {
+        scale: 1.1,
+        ease: "bounce.in",
+        repeat: -1,
+        yoyo: true,
+      });
+    }
+  }, [botonAudio]);
+
+  console.log(reproducir);
 
   return (
     <div className="w-full h-full relative">
@@ -88,6 +98,7 @@ function Grabadora() {
 
         {(full || laptop || minilaptop) && (
           <LoadVideo
+            onLoadedData={avanzar}
             customStyle={"osoVideo absolute left-0 z-[-1]"}
             videoLoad={videoLoad}
             url={"/videoBear.mp4"}
@@ -123,6 +134,16 @@ function Grabadora() {
                 </>
               }
             />
+            <span
+              onClick={() => setReproducir(true)}
+              className={`corazonOso ${
+                botonAudio
+                  ? "cursor-pointer pointer-events-all"
+                  : "pointer-events-none"
+              } w-40  absolute left-1/2 top-[51%] translate-x-[-50%]`}
+            >
+              <img src="/imagenPruebaCorazon.png" alt="" />
+            </span>
             {/*  {botonAudio ? (
               <>
                 <div className="z-10 lg:relative w-full h-full">
@@ -175,6 +196,8 @@ function Grabadora() {
               stopRecording={stopRecording}
               status={isRecording}
               mediaBlobUrl={recordingBlob}
+              setReproducir={setReproducir}
+              reproducir={reproducir}
             />
           </div>
         </div>
