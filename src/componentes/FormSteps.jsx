@@ -40,9 +40,12 @@ const FormSteps = ({
   const [error, setError] = useState("");
   const [audiourl, setAudiourl] = useState("");
   const [formData, setFormData] = useState({
+    email: "",
     firstname: "",
     username: "",
     promoid: "MMbear",
+    estado_transaccion: "",
+    id_transaccion: "",
   });
 
   //console.log(formData);
@@ -68,8 +71,9 @@ const FormSteps = ({
   useEffect(() => {
     // Cargar el estado isLoading desde el localStorage al montar el componente
     const localOnboarding = localStorage.getItem("onboarding");
+
     if (localOnboarding !== null) {
-      setOnboarding(localOnboarding === "false");
+      setOnboarding(localOnboarding === "true");
     }
   }, []); // El segundo argumento [] indica que este efecto se ejecuta solo una vez al montar el componente
 
@@ -80,7 +84,7 @@ const FormSteps = ({
       region_id: e.target.value,
     });
     const departmentName = e.target.value;
-    console.log(departmentName);
+
     setSelectedDepartment(departmentName);
     const department = data.find((dept) => dept.region_id == departmentName);
     if (department) {
@@ -175,8 +179,13 @@ const FormSteps = ({
       alert("¡Formulario enviado con éxito!");
       //setIsLoading(false);
       // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
-      const queryString = Object.keys(formData)
-        .map((key) => key + "=" + encodeURIComponent(formData[key]))
+      const dataSend = {
+        firstname: formData.firstname,
+        username: formData.username,
+        promoid: formData.promoid,
+      };
+      const queryString = Object.keys(dataSend)
+        .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
         .join("&");
       window.location.href = `https://www.alcarrito.com/checkout/#shipping?${queryString}`;
     } catch (error) {
@@ -212,6 +221,26 @@ const FormSteps = ({
         `${formData.firstname}, graba un mensaje de 20 segundos. <br /> 
         Ella lo escuchará al oprimir el botón del pecho del oso`
       );
+      updateUsername();
+    }
+  };
+
+  // Función para generar un número aleatorio de 6 dígitos
+  const generateRandomNumber = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
+
+  // Función para actualizar el username
+  const updateUsername = () => {
+    if (formData.firstname) {
+      const randomNumber = generateRandomNumber();
+      const newUsername = `${formData.firstname}${randomNumber}`;
+      setFormData({
+        ...formData,
+        username: newUsername,
+      });
+    } else {
+      console.error("Firstname is required to generate username");
     }
   };
 
@@ -333,18 +362,18 @@ const FormSteps = ({
                             type="email"
                             className="email"
                             placeholder="Correo"
-                            value={formData.username}
-                            {...register("username", {
+                            value={formData.email}
+                            {...register("email", {
                               required: "El email es requerido",
                             })}
                             onChange={(e) =>
                               setFormData({
                                 ...formData,
-                                username: e.target.value,
+                                email: e.target.value,
                               })
                             }
                             onKeyDown={(e) => {
-                              if (formData.username !== "") {
+                              if (formData.email !== "") {
                                 handleKeyDown(e);
                               }
                             }}
@@ -354,6 +383,7 @@ const FormSteps = ({
 
                       <span
                         onClick={() => {
+                          updateUsername();
                           nextSlide(
                             anchoContenedor,
                             valorinicial,
@@ -365,7 +395,9 @@ const FormSteps = ({
                           );
                         }}
                         className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
-                          formData.firstname !== "" ? "active" : "disable"
+                          formData.firstname !== "" && formData.email !== ""
+                            ? "active"
+                            : "disable"
                         }`}
                       >
                         <Texto title={"Continuar"} />

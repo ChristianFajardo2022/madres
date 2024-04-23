@@ -5,9 +5,19 @@ const Onboarding = ({ setOnboarding }) => {
   const [paso, setPaso] = useState(0);
 
   useEffect(() => {
-    gsap.to(".onboar1", { opacity: 1, ease: "power1.inOut", duration: 1 });
+    gsap.to(".onboar1", {
+      opacity: 1,
+      ease: "power1.inOut",
+      duration: 0.5,
+      delay: 0.5,
+    });
 
-    gsap.to(".onboar2", { opacity: 1, ease: "power1.inOut", duration: 1 });
+    gsap.to(".onboar2", {
+      opacity: 1,
+      ease: "power1.inOut",
+      duration: 0.5,
+      delay: 0.5,
+    });
   }, [paso]);
   return (
     <div className="text-white slidecards w-full h-full lg:relative items-center justify-center flex flex-col">

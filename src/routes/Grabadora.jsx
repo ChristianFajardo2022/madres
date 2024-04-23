@@ -79,7 +79,7 @@ function Grabadora() {
     }
   }, [botonAudio]);
 
-  console.log(reproducir);
+  //console.log(reproducir);
 
   return (
     <div className="w-full h-full relative">

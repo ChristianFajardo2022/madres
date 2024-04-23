@@ -7,6 +7,7 @@ import Grabadora from "./Grabadora";
 import Formulario from "./Formulario";
 import Administrador from "./Administrador";
 import ErrorPage from "../404";
+import Gracias from "./Gracias";
 
 function ScrollToTopOnRouteChange() {
   const { pathname } = useLocation();
@@ -65,6 +66,16 @@ const router = createBrowserRouter([
       <>
         <ScrollToTopOnRouteChange />
         <Administrador />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/gracias",
+    element: (
+      <>
+        <ScrollToTopOnRouteChange />
+        <Gracias />
       </>
     ),
     errorElement: <ErrorPage />,
