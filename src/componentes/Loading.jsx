@@ -25,7 +25,7 @@ const LoadingEnd = ({ elemtCargado }) => {
 
   return (
     <div className="loading w-full h-full bg-[--yellow] flex items-center fixed z-[150] justify-center">
-      <span className="w-80 h-80">
+      <span className="lg:w-80 lg:h-78 xs:w-72 xs:h-72">
         <IconoLoader texto={percentage} />
       </span>
     </div>
