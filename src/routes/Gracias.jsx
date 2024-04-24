@@ -12,6 +12,7 @@ import {
 } from "../helpers/medidasResponsive";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
+import { url, urlDev } from "../data/url";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -40,9 +41,7 @@ const Gracias = () => {
       }
 
       fetch(
-        `http://localhost:3000/get-user-data?customer_id=${encodeURIComponent(
-          customer_id
-        )}`
+        `${url}/get-user-data?customer_id=${encodeURIComponent(customer_id)}`
       )
         .then((response) => response.json())
         .then((data) => {

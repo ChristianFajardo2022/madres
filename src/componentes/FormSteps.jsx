@@ -10,6 +10,7 @@ import Espaciado from "./Espaciado";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import Onboarding from "./Onboarding";
 import gsap from "gsap";
+import { url, urlAlcarrito, urlAlcarritoDev, urlDev } from "../data/url";
 
 const FormSteps = ({
   startRecording,
@@ -165,15 +166,11 @@ const FormSteps = ({
       localStorage.setItem("formData", JSON.stringify(formData));
       //localStorage.setItem("audioBlob", audioBlob);
 
-      const response = await axios.post(
-        "https://audiosmadres.onrender.com/submit-form",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${url}/submit-form"`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Datos y audio enviados con éxito", response.data);
       alert("¡Formulario enviado con éxito!");
@@ -187,7 +184,7 @@ const FormSteps = ({
       const queryString = Object.keys(dataSend)
         .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
         .join("&");
-      window.location.href = `https://www.alcarrito.com/checkout/#shipping?${queryString}`;
+      window.location.href = `${urlAlcarritoDev}/checkout/#shipping?${queryString}`;
     } catch (error) {
       console.error("Error al enviar los datos y audio", error);
       setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
