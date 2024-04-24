@@ -42,10 +42,10 @@ const FormSteps = ({
   const [formData, setFormData] = useState({
     email: "",
     firstname: "",
-    username: "",
+    customer_id: "",
     promoid: "MMbear",
-    estado_transaccion: "",
-    id_transaccion: "",
+    trx_status: "",
+    order_id: "",
   });
 
   //console.log(formData);
@@ -181,7 +181,7 @@ const FormSteps = ({
       // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
       const dataSend = {
         firstname: formData.firstname,
-        username: formData.username,
+        customer_id: formData.customer_id,
         promoid: formData.promoid,
       };
       const queryString = Object.keys(dataSend)
@@ -237,7 +237,7 @@ const FormSteps = ({
       const newUsername = `${formData.firstname}${randomNumber}`;
       setFormData({
         ...formData,
-        username: newUsername,
+        customer_id: newUsername,
       });
     } else {
       console.error("Firstname is required to generate username");

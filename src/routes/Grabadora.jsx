@@ -22,6 +22,7 @@ function Grabadora() {
   const [loading, setLoading] = useState(true);
   const [botonAudio, setBotonAudio] = useState(false);
   const [reproducir, setReproducir] = useState(false);
+  const [elemtCargado, setElemtCargado] = useState(false);
 
   const videoLoad = useRef(null);
   const { isRecording, startRecording, stopRecording, recordingBlob } =
@@ -55,6 +56,12 @@ function Grabadora() {
     });
   };
 
+  // Ejecutar el loading
+  useEffect(() => {
+    if (elemtCargado) {
+      avanzar();
+    }
+  }, [elemtCargado]);
   const avanzar = () => {
     const tl = gsap.timeline();
     tl.delay(1);
@@ -68,6 +75,7 @@ function Grabadora() {
     });
   };
 
+  //Bombeo del corazon del oso
   useEffect(() => {
     if (botonAudio) {
       gsap.to(".corazonOso", {
@@ -79,7 +87,7 @@ function Grabadora() {
     }
   }, [botonAudio]);
 
-  //console.log(reproducir);
+  console.log(elemtCargado);
 
   return (
     <div className="w-full h-full relative">
@@ -87,9 +95,10 @@ function Grabadora() {
         <Navbar />
       </div>
       <div className="w-full h-full  ">
-        {loading && <LoadingEnd />}
+        {loading && <LoadingEnd elemtCargado={elemtCargado} />}
         {(mobile || tablet) && (
           <img
+            onLoad={() => setElemtCargado(true)}
             className="osoVideo oso absolute left-0 z-[-1]"
             src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
             alt=""
@@ -98,7 +107,7 @@ function Grabadora() {
 
         {(full || laptop || minilaptop) && (
           <LoadVideo
-            onLoadedData={avanzar}
+            onLoadedData={() => setElemtCargado(true)}
             customStyle={"osoVideo absolute left-0 z-[-1]"}
             videoLoad={videoLoad}
             url={"/videoBear.mp4"}
@@ -140,7 +149,7 @@ function Grabadora() {
                 botonAudio
                   ? "cursor-pointer pointer-events-all"
                   : "pointer-events-none"
-              } w-40  absolute left-1/2 top-[51%] translate-x-[-50%]`}
+              } lg:w-40 xs:w-24  absolute left-1/2 lg:top-[51%] xs:top-[55%] translate-x-[-50%]`}
             >
               <img src="/imagenPruebaCorazon.png" alt="" />
             </span>

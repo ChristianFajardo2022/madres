@@ -21,26 +21,27 @@ const Gracias = () => {
   // Estado para manejar errores de la solicitud
   const [error, setError] = useState(null);
   const videoLoad = useRef(null);
+  const [elemtCargado, setElemtCargado] = useState(false);
 
   useEffect(() => {
     // Función para obtener los datos del usuario
     function fetchUserData() {
-      // Obtener el username desde localStorage
+      // Obtener el  customer_id desde localStorage
       const storedData = localStorage.getItem("formData");
       if (!storedData) {
         setError("No user data in localStorage.");
         return;
       }
+      const { customer_id } = JSON.parse(storedData);
 
-      const { username } = JSON.parse(storedData);
-      if (!username) {
-        setError("Username not found in local storage.");
+      if (!customer_id) {
+        setError(" customer_id not found in local storage.");
         return;
       }
 
       fetch(
-        `http://localhost:3000/get-user-data?username=${encodeURIComponent(
-          username
+        `http://localhost:3000/get-user-data?customer_id=${encodeURIComponent(
+          customer_id
         )}`
       )
         .then((response) => response.json())
@@ -62,12 +63,18 @@ const Gracias = () => {
 
   useEffect(() => {
     if (userData) {
-      setStatus(userData[0].estado_transaccion);
+      setStatus(userData[0].trx_status);
       //console.log(status);
     }
   }, [userData]);
 
-  // Renderizar los datos del usuario o mostrar un error
+  // Ejecutar el loading
+
+  useEffect(() => {
+    if (elemtCargado) {
+      avanzar();
+    }
+  }, [elemtCargado]);
 
   const avanzar = () => {
     const tl = gsap.timeline();
@@ -88,9 +95,10 @@ const Gracias = () => {
           <Navbar />
         </div>
         <div className="w-full h-full  ">
-          {loading && <LoadingEnd />}
+          {loading && <LoadingEnd elemtCargado={elemtCargado} />}
           {(mobile || tablet) && (
             <img
+              onLoad={() => setElemtCargado(true)}
               className="osoVideo oso absolute left-0 z-[-1]"
               src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
               alt=""
@@ -99,7 +107,7 @@ const Gracias = () => {
 
           {(full || laptop || minilaptop) && (
             <LoadVideo
-              onLoadedData={avanzar}
+              onLoadedData={() => setElemtCargado(true)}
               customStyle={"osoVideo absolute left-0 z-[-1]"}
               videoLoad={videoLoad}
               url={"/videoBear.mp4"}
@@ -164,11 +172,8 @@ const Gracias = () => {
                           >
                             <p>Nombre: {user.firstname}</p>
                             <p>email: {user.email}</p>
-                            <p>
-                              Estado de la transaccion:{" "}
-                              {user.estado_transaccion}
-                            </p>
-                            <p>Id transaccion: {user.id_transaccion}</p>
+                            <p>Estado de la transaccion: {user.trx_status}</p>
+                            <p>Id transaccion: {user.order_id}</p>
                             {/* Añade más campos si es necesario */}
                           </div>
                         ))}

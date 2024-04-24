@@ -11,6 +11,7 @@ import { mobile, tablet } from "../helpers/medidasResponsive";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
+  const [elemtCargado, setElemtCargado] = useState(false);
   const [videoCargado, setVideocargado] = useState(false);
   const [inicioComercial, setinicioComercial] = useState(false);
   const [play, setPlay] = useState(false);
@@ -23,9 +24,25 @@ const Home = () => {
   const onLoadVideo = () => {
     setVideocargado(true);
   };
+
   const avanzar = () => {
-    setLoading(false);
+    const tl = gsap.timeline();
+    tl.delay(1);
+    tl.to(".loading", {
+      opacity: "0",
+      ease: "power1.inOut",
+      duration: 1,
+    });
+    tl.add(() => {
+      setLoading(false);
+    });
   };
+
+  useEffect(() => {
+    if (elemtCargado) {
+      avanzar();
+    }
+  }, [elemtCargado]);
 
   useEffect(() => {
     if (!loading) {
@@ -161,14 +178,14 @@ const Home = () => {
       >
         <img
           ref={imgLoad}
-          onLoad={avanzar}
+          onLoad={() => setElemtCargado(true)}
           src="/imagenes/operacion-mayo.webp"
           className="hidden"
           alt=""
         />
         {loading ? (
           <>
-            <LoadingEnd />
+            <LoadingEnd elemtCargado={elemtCargado} />
           </>
         ) : (
           <div className="w-full h-full ">
