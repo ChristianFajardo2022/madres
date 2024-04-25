@@ -401,10 +401,42 @@ input[type="number"] {
 ::-webkit-scrollbar-thumb {
   background-color: var(--pink); /* Color del pulgar */
 }
+/* Estilo para la barra de desplazamiento en Firefox */
+/* Nota: Esto solo funciona en Firefox 64+ */
+* {
+  scrollbar-color: var(--pink) #000; /* Color del pulgar y del riel */
+  scrollbar-width: thin; /* Ancho de la barra de desplazamiento */
+}
 
 @media (max-aspect-ratio: 8/5) {
   .corazonOso {
     @apply left-[43%];
     width: 14rem !important;
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 6px solid transparent;
+  border-top-color: var(
+    --pink
+  ); /* Cambia el color del borde según lo necesites */
+  border-left-color: var(
+    --pink
+  ); /* Cambia el color del borde según lo necesites */
+  border-bottom-color: var(
+    --pink
+  ); /* Cambia el color del borde según lo necesites */
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* Definir la animación */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

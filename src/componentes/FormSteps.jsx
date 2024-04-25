@@ -149,7 +149,7 @@ const FormSteps = ({
 
   /***********Funcion de envio de datos */
   const submitHandler = async (e) => {
-    console.log(e);
+    nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
 
     if (!audiourl) {
       setError("Por favor, graba un audio antes de enviar el formulario.");
@@ -179,7 +179,7 @@ const FormSteps = ({
       });
 
       console.log("Datos y audio enviados con éxito", response.data);
-      alert("¡Formulario enviado con éxito!");
+
       //setIsLoading(false);
       // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
       const dataSend = {
@@ -249,11 +249,9 @@ const FormSteps = ({
 
   return (
     <>
-      {isLoading && <>cargando...</>}
-
       {onboarding && <Onboarding setOnboarding={setOnboarding} />}
 
-      {!isLoading && !onboarding && (
+      {!onboarding && (
         <form
           onSubmit={handleSubmit(handleNextStep)}
           className="form w-full h-full overflow-hidden"
@@ -473,32 +471,21 @@ const FormSteps = ({
                   >
                     <div className="cajaCard">
                       <Espaciado />
-                      <div className="w-full flexCenter flex-col">
-                        <span className="w-full h-auto inline-block relative">
-                          <img
-                            src="/logo-operacion-mayo.svg"
-                            alt="Operación mayo"
-                          />
-                        </span>
-                        <p className=" font-normal w-full mt-6">
-                          Hacer llegar este oso a las manos de su abuela, fue la
-                          misión más importante del soldado ramírez. Tú también
-                          puedes decir feliz día mamá con un oso como este.
-                        </p>
+                      <div className="flex flex-col h-80 items-center justify-evenly w-full">
+                        {isLoading && (
+                          <>
+                            <p className="text-center font-normal w-full mt-6">
+                              Estas siendo redireccionado al checkout de,
+                            </p>
+                            <span className=" w-3/5 h-auto">
+                              <img src="/Logoalcarrito.webp" alt="" />
+                            </span>
+                            <div className="spinner"></div>
+                          </>
+                        )}
                       </div>
 
-                      <span
-                        onClick={() =>
-                          nextSlide(
-                            anchoContenedor,
-                            valorinicial,
-                            anchoHijoEnPixel
-                          )
-                        }
-                        className=" cursor-pointer text-center btn hoverBtn btnGrabadora"
-                      >
-                        <Texto title={"Empezar"} />
-                      </span>
+                      <Espaciado />
                     </div>
                   </div>
                 </div>
@@ -514,7 +501,7 @@ const FormSteps = ({
                 {paso > 1 && (
                   <span
                     onClick={() => prevSlide(valorinicial, anchoHijoEnPixel)}
-                    className="cursor-pointer absolute left-[-0.5rem] rotate-180 inline-block w-6 h-auto"
+                    className="cursor-pointer absolute left-0  rotate-180 inline-block w-6 h-auto"
                   >
                     <img src="/svg/next.svg" alt="" />
                   </span>
@@ -524,7 +511,7 @@ const FormSteps = ({
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
-                    className={`cursor-pointer absolute right-[-0.5rem] inline-block w-6 h-auto ${
+                    className={`cursor-pointer absolute  right-0 translate-x-[100%] inline-block w-6 h-auto ${
                       paso === 2 || paso === 4 || (paso === 3 && irpaso6)
                         ? "activebtn"
                         : paso === 1 &&
