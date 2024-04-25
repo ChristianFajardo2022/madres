@@ -249,7 +249,6 @@ function Grabadora() {
         id="compartir"
         className="w-full h-full bg-black relative flexCenter text-[--yellow]"
       >
-        <p>Compartir</p>
         <CompartirContenido
           texto={"este sera algo inolvidable"}
           url={"operacionmayo.com"}

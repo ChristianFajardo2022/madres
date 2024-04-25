@@ -36,29 +36,31 @@ function CompartirContenido({ texto, url }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col w-2/4 text-6xl">
       {navigator.share && (
-        <button onClick={compartirConWebShareAPI}>Compartir</button>
+        <button className="my-12" onClick={compartirConWebShareAPI}>
+          Compartir
+        </button>
       )}
 
-      <>
-        <button onClick={copiarUrl}>Copiar enlace</button>
+      <div className="flex justify-evenly w-full">
+        <button onClick={copiarUrl}>Copiar</button>
+        <WhatsappShareButton title={texto} url={url}>
+          <span className="w-20 h-20 inline-block">
+            <img src="/svg/whatapp.svg" alt="" />
+          </span>
+        </WhatsappShareButton>
         <TwitterShareButton title={texto} url={url}>
-          <span>
-            <img src="svg/x.svg" alt="" />
+          <span className="w-20 h-20 inline-block">
+            <img src="/svg/x.svg" alt="" />
           </span>
         </TwitterShareButton>
         <FacebookShareButton quote={texto} url={url}>
-          <span>
-            <img src="svg/facebook.svg" alt="" />
+          <span className="w-20 h-20 inline-block">
+            <img src="/svg/facebook.svg" alt="" />
           </span>
         </FacebookShareButton>
-        <WhatsappShareButton title={texto} url={url}>
-          <span>
-            <img src="svg/whatsapp.svg" alt="" />
-          </span>
-        </WhatsappShareButton>
-      </>
+      </div>
     </div>
   );
 }
