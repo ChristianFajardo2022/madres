@@ -66,6 +66,12 @@ const FormSteps = ({
         delay: 0.5,
       }
     );
+    if (onboarding == false) {
+      gsap.to(".cajaCards.Onboarding", {
+        className: "cajaCards",
+        duration: 1,
+      });
+    }
   }, [onboarding]);
 
   // Cuando vuelves a la página
@@ -166,7 +172,7 @@ const FormSteps = ({
       localStorage.setItem("formData", JSON.stringify(formData));
       //localStorage.setItem("audioBlob", audioBlob);
 
-      const response = await axios.post(`${url}/submit-form"`, data, {
+      const response = await axios.post(`${url}/submit-form`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -184,7 +190,7 @@ const FormSteps = ({
       const queryString = Object.keys(dataSend)
         .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
         .join("&");
-      window.location.href = `${urlAlcarritoDev}/checkout/#shipping?${queryString}`;
+      window.location.href = `${urlAlcarritoDev}?${queryString}`;
     } catch (error) {
       console.error("Error al enviar los datos y audio", error);
       setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
@@ -252,10 +258,7 @@ const FormSteps = ({
           onSubmit={handleSubmit(handleNextStep)}
           className="form w-full h-full overflow-hidden"
         >
-          <div
-            ref={padre}
-            className="slidecards w-full h-full lg:relative items-center flex flex-col  justify-evenly max-lg:pb-4  "
-          >
+          <div ref={padre} className="slidecards">
             {/* navbar menu hamburgesa*/}
 
             <div className="lg:h-[36rem] max-lg:min-h-[25rem] w-full relative">
@@ -263,7 +266,7 @@ const FormSteps = ({
               <div
                 ref={cards}
                 style={{ transform: `translateX(-${translate}px)` }}
-                className=" font-inter cards h-full lg:w-[122vw] xs:w-[375vw] sm:w-[200vw] relative text-white flex justify-between items-center"
+                className="cards"
               >
                 <div
                   className="cardPadre"
@@ -285,55 +288,12 @@ const FormSteps = ({
                   >
                     <div className="cajaCard">
                       <Espaciado />
-                      <div className="w-full flexCenter flex-col">
-                        <span className="w-full h-auto inline-block relative">
-                          <img
-                            src="/logo-operacion-mayo.svg"
-                            alt="Operación mayo"
-                          />
-                        </span>
-                        <p className=" font-normal w-full mt-6">
-                          Hacer llegar este oso a las manos de su abuela, fue la
-                          misión más importante del soldado ramírez. Tú también
-                          puedes decir feliz día mamá con un oso como este.
-                        </p>
-                      </div>
-
-                      <span
-                        onClick={() =>
-                          nextSlide(
-                            anchoContenedor,
-                            valorinicial,
-                            anchoHijoEnPixel
-                          )
-                        }
-                        className=" cursor-pointer text-center btn hoverBtn btnGrabadora"
-                      >
-                        <Texto title={"Empezar"} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Formulario de nombre   */}
-
-                <div
-                  className="cardPadre"
-                  style={{ width: `${anchoHijoEnPixel}px` }}
-                >
-                  <div
-                    className={`cardSingle ${
-                      paso == 2 ? "opacity-100" : "opacity-40"
-                    }`}
-                  >
-                    <div className="cajaCard">
-                      <Espaciado />
 
                       <div className="w-full">
-                        <p className="titulosForm">
-                          ¿Cómo te llamas y cual es tu email?
-                        </p>
                         <div className="flex flex-col w-full">
+                          <p className="titulosForm">
+                            ¿Cómo te llamas y cual es tu email?
+                          </p>
                           <input
                             type="text"
                             placeholder="Nombre"
@@ -355,6 +315,12 @@ const FormSteps = ({
                               }
                             }}
                           />
+                        </div>
+                        <div className="flex flex-col w-full">
+                          <p className="titulosForm">
+                            ¿Cómo te llamas y cual es tu email?
+                          </p>
+
                           <input
                             type="email"
                             className="email"
@@ -403,15 +369,15 @@ const FormSteps = ({
                   </div>
                 </div>
 
-                {/* Funcion grabar audio */}
+                {/* Formulario de nombre   */}
 
                 <div
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
                   <div
-                    className={`cardSingle   ${
-                      paso == 3 ? "opacity-100" : "opacity-40"
+                    className={`cardSingle ${
+                      paso == 2 ? "opacity-100" : "opacity-40"
                     }`}
                   >
                     <div className="cajaCard">
@@ -451,15 +417,15 @@ const FormSteps = ({
                   </div>
                 </div>
 
-                {/* Mensaje de confirmación y boton de compra */}
+                {/* Funcion grabar audio */}
 
                 <div
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
                   <div
-                    className={`cardSingle  ${
-                      paso == 4 ? "opacity-100" : "opacity-40"
+                    className={`cardSingle   ${
+                      paso == 3 ? "opacity-100" : "opacity-40"
                     }`}
                   >
                     <div className="cajaCard">
@@ -493,6 +459,49 @@ const FormSteps = ({
                     </div>
                   </div>
                 </div>
+
+                {/* Mensaje de confirmación y boton de compra */}
+
+                <div
+                  className="cardPadre"
+                  style={{ width: `${anchoHijoEnPixel}px` }}
+                >
+                  <div
+                    className={`cardSingle  ${
+                      paso == 4 ? "opacity-100" : "opacity-40"
+                    }`}
+                  >
+                    <div className="cajaCard">
+                      <Espaciado />
+                      <div className="w-full flexCenter flex-col">
+                        <span className="w-full h-auto inline-block relative">
+                          <img
+                            src="/logo-operacion-mayo.svg"
+                            alt="Operación mayo"
+                          />
+                        </span>
+                        <p className=" font-normal w-full mt-6">
+                          Hacer llegar este oso a las manos de su abuela, fue la
+                          misión más importante del soldado ramírez. Tú también
+                          puedes decir feliz día mamá con un oso como este.
+                        </p>
+                      </div>
+
+                      <span
+                        onClick={() =>
+                          nextSlide(
+                            anchoContenedor,
+                            valorinicial,
+                            anchoHijoEnPixel
+                          )
+                        }
+                        className=" cursor-pointer text-center btn hoverBtn btnGrabadora"
+                      >
+                        <Texto title={"Empezar"} />
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Botones de siguiente y atras*/}
@@ -516,9 +525,11 @@ const FormSteps = ({
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer absolute right-[-0.5rem] inline-block w-6 h-auto ${
-                      paso === 1 || paso === 4 || (paso === 3 && irpaso6)
+                      paso === 2 || paso === 4 || (paso === 3 && irpaso6)
                         ? "activebtn"
-                        : paso === 2 && formData.firstname !== ""
+                        : paso === 1 &&
+                          formData.firstname !== "" &&
+                          formData.email !== ""
                         ? "activebtn"
                         : "disable"
                     }`}

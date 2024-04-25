@@ -14,6 +14,53 @@
   --blackTransparente: #2f2f2f9b;
   --pink: #ff0073;
 }
+
+html {
+  @apply w-full h-full lg:text-[0.7vw] xs:text-[3vw] sm:text-[2vw] scroll-smooth;
+}
+body {
+  @apply m-0 p-0 box-content Bebas;
+  @apply w-full h-full;
+}
+#root {
+  @apply w-full h-full;
+}
+img,
+svg {
+  @apply w-full h-full object-cover;
+}
+.Bebas {
+  font-family: "Bebas", sans-serif;
+}
+.ajusteFuente {
+  @apply tracking-[0.25em];
+}
+.maxW {
+  @apply max-w-[1550px];
+}
+h1 {
+  @apply tracking-[0.25em] text-4xl text-[--yellow];
+}
+h2 {
+  @apply Bebas tracking-[0.25em] text-3xl text-[--yellow];
+}
+p {
+  @apply text-xl;
+}
+
+.flexCenter {
+  @apply flex justify-center items-center;
+}
+.floatcenter {
+  @apply absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%];
+}
+.floatRigth {
+  @apply absolute bottom-6 right-6 translate-y-[-50%] translate-x-[-50%];
+}
+.transition {
+  @apply transition-all ease-in-out duration-[1000ms];
+}
+/*Hamburgesa*/
 .lineBurger {
   @apply absolute    w-full h-1 bg-[--yellow] rounded-full transition-all ease-in-out duration-500;
 }
@@ -47,38 +94,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-.ajusteFuente {
-  @apply tracking-[0.25em];
-}
-.Bebas {
-  font-family: "Bebas", sans-serif;
-}
-html {
-  @apply w-full h-full lg:text-[0.7vw] xs:text-[3vw] sm:text-[2vw];
-}
-h1 {
-  @apply tracking-[0.25em] text-4xl text-[--yellow];
-}
-h2 {
-  @apply Bebas tracking-[0.25em] text-3xl text-[--yellow];
-}
-p {
-  @apply text-xl;
-}
-body {
-  @apply m-0 p-0 box-content Bebas;
-  @apply w-full h-full;
-}
-#root {
-  @apply w-full h-full;
-}
-img,
-svg {
-  @apply w-full h-full object-cover;
-}
-.maxW {
-  @apply max-w-[1550px];
-}
+
 .videoVimeo {
   @apply opacity-0 pointer-events-none invisible;
 }
@@ -89,12 +105,7 @@ svg {
 .ObjetoVisible {
   @apply visible opacity-100 pointer-events-auto;
 }
-.floatcenter {
-  @apply absolute top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%];
-}
-.floatRigth {
-  @apply absolute bottom-6 right-6 translate-y-[-50%] translate-x-[-50%];
-}
+
 .vimeo.iconPlay {
   @apply text-[var(--yellow)] flex items-center justify-center xs:px-4 lg:px-6 min-w-1 w-32 h-12 border-[#ffffff73];
 }
@@ -104,18 +115,23 @@ svg {
 .videoVimeo .iconPlay .textocustom {
   @apply flex items-center justify-center;
 }
-
-.btn {
-  @apply Bebas flex justify-center items-center transition uppercase bg-black border  lg:hover:bg-[var(--yellow)] lg:hover:text-black border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white min-w-32 h-14 py-2  px-10;
+.cajaCards {
+  @apply transition z-10 flex flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-[55%] rounded-3xl;
 }
-.videoVimeo .omitir.btn.active {
-  @apply opacity-100;
+.cajaCards.Onboarding {
+  @apply bg-white bg-opacity-15 backdrop-blur-xl;
 }
-.transition {
-  @apply transition-all ease-in-out duration-[1000ms];
+.slidecards {
+  @apply w-full h-full lg:relative items-center flex flex-col  justify-evenly max-lg:pb-4;
 }
 .cards {
-  @apply transition;
+  @apply transition font-inter h-full lg:w-[122vw] xs:w-[375vw] sm:w-[200vw] relative text-white flex justify-between items-center;
+}
+.cardPadre {
+  @apply w-full h-full inline-block relative;
+}
+.cardSingle {
+  @apply w-full h-full transition-all ease-in-out duration-[600ms] px-8;
 }
 .cajaCard {
   @apply shadowCard transition rounded-3xl border border-white bg-[var(--whiteTransparente)]
@@ -129,23 +145,9 @@ svg {
 .cajaCard select option {
   @apply text-black;
 }
-.btn.btnGrabadora {
-  @apply bg-opacity-0 w-full;
-}
-.btn.btnGrabadora.noPadding {
-  @apply px-0 mb-4;
-}
+
 .titulosForm {
-  @apply text-center mb-8 font-inter font-normal w-full;
-}
-.flexCenter {
-  @apply flex justify-center items-center;
-}
-.cardPadre {
-  @apply w-full h-full inline-block relative;
-}
-.cardSingle {
-  @apply w-full h-full transition-all ease-in-out duration-[600ms] px-8;
+  @apply text-center my-4 font-inter font-normal w-full;
 }
 
 .shadowCard {
@@ -154,9 +156,7 @@ svg {
 .disable {
   @apply opacity-35 pointer-events-none;
 }
-.activebtn {
-  @apply opacity-100 pointer-events-auto;
-}
+
 .lineas-container {
   @apply w-full h-full flex justify-between items-center;
 }
@@ -178,7 +178,6 @@ svg {
 .contadorPlayer {
   @apply text-black font-normal;
 }
-/* Animación para que las líneas crezcan de manera desordenada */
 
 /* Animación para que las líneas crezcan y bajen de manera desordenada */
 @keyframes growAndShrink {
@@ -274,7 +273,7 @@ svg {
   @apply relative overflow-hidden transition-all ease-in-out duration-700 h-full lg:w-[15%] xs:w-[32%] bg-black rounded-3xl border border-white;
 }
 .itemnav.active {
-  @apply w-[50%];
+  @apply w-[60%];
 }
 .itemnav.hide {
   @apply hidden;
@@ -325,6 +324,33 @@ svg {
   animation: promoteRedCircle 1s infinite forwards;
 }
 
+.btn {
+  @apply Bebas flex justify-center items-center transition uppercase bg-black border  lg:hover:bg-[var(--yellow)] lg:hover:text-black border-[var(--yellow)] rounded-full bg-opacity-30 tracking-[0.25em] text-white min-w-32 h-14 py-2  px-10;
+}
+
+.hoverBtn {
+  @apply text-xl;
+}
+
+.bgvid {
+  @apply w-full h-full object-cover fixed top-0 left-0 mix-blend-screen z-50 pointer-events-none;
+}
+.cajaTitulos.btn {
+  @apply px-20;
+}
+.videoVimeo .omitir.btn.active {
+  @apply opacity-100;
+}
+.btn.btnGrabadora {
+  @apply bg-opacity-0 w-full;
+}
+.btn.btnGrabadora.noPadding {
+  @apply px-0 mb-4;
+}
+.activebtn {
+  @apply opacity-100 pointer-events-auto;
+}
+
 @keyframes puntos {
   0% {
     opacity: 0;
@@ -352,6 +378,33 @@ svg {
   }
 }
 
-.hoverBtn {
-  @apply text-xl;
+.navLink {
+  @apply transition-all ease-in-out duration-200 h-[20%] flex items-center;
+}
+.navLink a {
+  @apply w-full h-full flex items-center pl-16 font-inter font-normal text-2xl;
+}
+.navLink:hover {
+  @apply bg-[#4d4d4d] bg-opacity-70 border-l-4 border-[--yellow];
+}
+/* Estilo para la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 5px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo para el riel de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Color de fondo del riel */
+}
+
+/* Estilo para el pulgar (la parte móvil) de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background-color: var(--pink); /* Color del pulgar */
+}
+
+@media (max-aspect-ratio: 8/5) {
+  .corazonOso {
+    @apply left-[43%];
+    width: 14rem !important;
+  }
 }

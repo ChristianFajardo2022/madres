@@ -192,7 +192,7 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
           <div
             ref={cards}
             style={{ transform: `translateX(-${translate}px)` }}
-            className=" font-inter cards h-full lg:w-[291vw] xs:w-[900vw] sm:w-[600vw] relative text-white flex justify-between items-center"
+            className=" cards"
           >
             <div
               className="cardPadre"

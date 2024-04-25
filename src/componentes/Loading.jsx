@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import IconoLoader from "../../public/svg/iconoLoader";
+import IconoLoader from "./IconoLoader";
 
 const LoadingEnd = ({ elemtCargado }) => {
   const [percentage, setPercentage] = useState(0);
@@ -24,8 +24,8 @@ const LoadingEnd = ({ elemtCargado }) => {
   }, [elemtCargado]); // Agregamos elemtCargado como dependencia
 
   return (
-    <div className="loading w-full h-full bg-[--yellow] flex items-center fixed z-[150] justify-center">
-      <span className="lg:w-80 lg:h-78 xs:w-72 xs:h-72">
+    <div className="loading w-full h-full bg-[#0c0c0c] flex items-center fixed z-[15000] justify-center">
+      <span className="lg:w-80 lg:h-80 xs:w-72 xs:h-72">
         <IconoLoader texto={percentage} />
       </span>
     </div>

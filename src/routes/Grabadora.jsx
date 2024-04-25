@@ -17,6 +17,9 @@ import {
 } from "../helpers/medidasResponsive";
 import Punto from "../componentes/Punto";
 import Navbar from "../componentes/Navbar";
+import Explora from "../componentes/Explora";
+import CorazonPalpitante from "../componentes/CorazonPalpitante";
+import CompartirContenido from "../componentes/CompartirContenido";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
@@ -56,6 +59,13 @@ function Grabadora() {
     });
   };
 
+  //Compartir nativo de navegador
+
+  const share = (object) => {
+    if (navigator.share) {
+    }
+  };
+
   // Ejecutar el loading
   useEffect(() => {
     if (elemtCargado) {
@@ -83,77 +93,96 @@ function Grabadora() {
         ease: "bounce.in",
         repeat: -1,
         yoyo: true,
+        duration: 1,
+      });
+      gsap.to(".corazonOso .path1", {
+        opacity: 1,
+        ease: "bounce.in",
+        repeat: -1,
+        yoyo: true,
+        duration: 1,
+      });
+      gsap.to(".corazonOso .path2", {
+        opacity: 1,
+        ease: "bounce.in",
+        repeat: -1,
+        yoyo: true,
+        duration: 1,
+        delay: 0.2,
+      });
+      gsap.to(".corazonOso .path3", {
+        opacity: 1,
+        ease: "bounce.in",
+        repeat: -1,
+        yoyo: true,
+        duration: 1,
+        delay: 0.3,
       });
     }
   }, [botonAudio]);
 
-  console.log(elemtCargado);
-
   return (
-    <div className="w-full h-full relative">
-      <div className="z-50 hamburger text-white inter">
+    <>
+      <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
         <Navbar />
       </div>
-      <div className="w-full h-full  ">
-        {loading && <LoadingEnd elemtCargado={elemtCargado} />}
-        {(mobile || tablet) && (
-          <img
-            onLoad={() => setElemtCargado(true)}
-            className="osoVideo oso absolute left-0 z-[-1]"
-            src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
-            alt=""
-          />
-        )}
-
-        {(full || laptop || minilaptop) && (
-          <LoadVideo
-            onLoadedData={() => setElemtCargado(true)}
-            customStyle={"osoVideo absolute left-0 z-[-1]"}
-            videoLoad={videoLoad}
-            url={"/videoBear.mp4"}
-            loop={true}
-          />
-        )}
-
-        <div className="lg:p-8 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
-          <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
-            {/*           <p className="py-4">{status}</p> */}
-            <Texto
-              customstyle={"absolute top-6"}
-              title={
-                <>
-                  <p className="lg:text-4xl xs:text-lg">
-                    <span className="text-[var(--yellow)]">
-                      osos disponibles: 827
-                    </span>
-                  </p>
-                </>
-              }
+      <div id="graba" className="w-full h-full relative">
+        <div className="w-full h-full  ">
+          {loading && <LoadingEnd elemtCargado={elemtCargado} />}
+          {(mobile || tablet) && (
+            <img
+              onLoad={() => setElemtCargado(true)}
+              className="osoVideo oso absolute left-0 z-[-1]"
+              src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
+              alt=""
             />
-            <Texto
-              customstyle={"absolute bottom-0"}
-              title={
-                <>
-                  <p className="lg:text-4xl xs:text-lg">
-                    <span className="text-[var(--yellow)]">ANTES: $80.000</span>
-                  </p>
-                  <p className="lg:text-6xl xs:text-4xl">
-                    <span className="text-[var(--yellow)]">AHORA: $0</span>
-                  </p>
-                </>
-              }
+          )}
+
+          {(full || laptop || minilaptop) && (
+            <LoadVideo
+              onLoadedData={() => setElemtCargado(true)}
+              customStyle={"osoVideo absolute left-0 z-[-1]"}
+              videoLoad={videoLoad}
+              url={"/videoBear.mp4"}
+              loop={true}
             />
-            <span
-              onClick={() => setReproducir(true)}
-              className={`corazonOso ${
-                botonAudio
-                  ? "cursor-pointer pointer-events-all"
-                  : "pointer-events-none"
-              } lg:w-40 xs:w-24  absolute left-1/2 lg:top-[51%] xs:top-[55%] translate-x-[-50%]`}
-            >
-              <img src="/imagenPruebaCorazon.png" alt="" />
-            </span>
-            {/*  {botonAudio ? (
+          )}
+
+          <div className="lg:p-14 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
+            <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
+              {/*           <p className="py-4">{status}</p> */}
+              <Texto
+                customstyle={"absolute top-6"}
+                title={
+                  <>
+                    <p className="lg:text-4xl xs:text-lg">
+                      <span className="text-[var(--yellow)]">
+                        osos disponibles: 827
+                      </span>
+                    </p>
+                  </>
+                }
+              />
+              <Texto
+                customstyle={"absolute bottom-0"}
+                title={
+                  <>
+                    <p className="lg:text-6xl xs:text-4xl">
+                      <span className="text-[var(--yellow)]">AHORA: $0</span>
+                    </p>
+                    <p className="lg:text-4xl xs:text-lg">
+                      <span className="text-[var(--yellow)] w-full text-center line-through inline-block">
+                        $80.000
+                      </span>
+                    </p>
+                  </>
+                }
+              />
+              <CorazonPalpitante
+                handleClick={() => setReproducir(true)}
+                botonAudio={botonAudio}
+              />
+              {/*  {botonAudio ? (
               <>
                 <div className="z-10 lg:relative w-full h-full">
                   <div onClick={Ocultarpuntos} className="capa "></div>
@@ -197,21 +226,36 @@ function Grabadora() {
                 </div>
               </>
             ) : null} */}
-          </div>
-          <div className="cajaCards z-10 flex flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-[55%] rounded-3xl ">
-            <FormSteps
-              setBotonAudio={setBotonAudio}
-              startRecording={startRecording}
-              stopRecording={stopRecording}
-              status={isRecording}
-              mediaBlobUrl={recordingBlob}
-              setReproducir={setReproducir}
-              reproducir={reproducir}
-            />
+            </div>
+            <div className="cajaCards Onboarding">
+              <FormSteps
+                setBotonAudio={setBotonAudio}
+                startRecording={startRecording}
+                stopRecording={stopRecording}
+                status={isRecording}
+                mediaBlobUrl={recordingBlob}
+                setReproducir={setReproducir}
+                reproducir={reproducir}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div id="explora" className="w-full h-full bg-black relative">
+        <Explora />
+      </div>
+
+      <div
+        id="compartir"
+        className="w-full h-full bg-black relative flexCenter text-[--yellow]"
+      >
+        <p>Compartir</p>
+        <CompartirContenido
+          texto={"este sera algo inolvidable"}
+          url={"operacionmayo.com"}
+        />
+      </div>
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import React, { useEffect, useState } from "react";
-
+import Lottie from "lottie-react";
+import animationdata from "../lotties/test.json";
 const Onboarding = ({ setOnboarding }) => {
   const [paso, setPaso] = useState(0);
 
@@ -24,6 +25,7 @@ const Onboarding = ({ setOnboarding }) => {
       {paso == 0 && (
         <div className="onboar1 opacity-0">
           Titulo del Onboarding...
+          {/* <Lottie animationData={animationdata} /> */}
           <button onClick={() => setPaso(1)}>Siguiente</button>
         </div>
       )}

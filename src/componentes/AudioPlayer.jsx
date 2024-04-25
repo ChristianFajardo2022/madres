@@ -246,11 +246,9 @@ const AudioPlayer = ({
                 setInicioGrabacion("grabando");
               }, 500);
             }}
-            className={
-              "animateHover Bebas cursor-pointer text-black min-w-32  h-14 py-3 mb-4 px-10 rounded-full w-full h- text-center flexCenter bg-white hoverBtn btnGrabadora noPadding"
-            }
+            className={"btn animateHover mb-4 hoverBtn btnGrabadora"}
           >
-            <span className="animateHoverElement w-5 h-5 rounded-full bg-red-700 inline-block mr-2"></span>
+            <span className="animateHoverElement w-5 h-5 rounded-full bg-[--pink] border border-[--yellow] inline-block mr-2"></span>
             <Texto title={"Volver a grabar"} />
           </span>
 
