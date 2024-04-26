@@ -3,7 +3,7 @@ import HamburgesaIcon from "./HamburgesaIcon";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ gracias }) => {
   const [active, setActive] = useState(false);
   const [seccion, setSeccion] = useState("explora");
   const [seccioNumber, setseccioNumber] = useState(1);
@@ -20,13 +20,20 @@ const Navbar = () => {
           (document.documentElement.scrollHeight - window.innerHeight)) *
         100;
 
-      // Determinar la sección en función del porcentaje de desplazamiento
-      if (scrollPercentage >= 66) {
-        setseccioNumber(3);
-      } else if (scrollPercentage >= 33) {
-        setseccioNumber(2);
+      if (gracias) {
+        if (scrollPercentage >= 50) {
+          setseccioNumber(2);
+        } else {
+          setseccioNumber(1);
+        }
       } else {
-        setseccioNumber(1);
+        if (scrollPercentage >= 66) {
+          setseccioNumber(3);
+        } else if (scrollPercentage >= 33) {
+          setseccioNumber(2);
+        } else {
+          setseccioNumber(1);
+        }
       }
     };
 
@@ -87,41 +94,67 @@ const Navbar = () => {
           <a href="#compartir">Compartir</a>
         </li>
       </nav>
-      {seccioNumber == 2 && (
-        <a
-          href={`#graba`}
-          onClick={() => setseccioNumber(1)}
-          className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
-        >
-          <img src="/svg/arrow.svg" alt="" />
-        </a>
-      )}
-      {seccioNumber == 3 && (
-        <a
-          href={`#explora`}
-          onClick={() => setseccioNumber(2)}
-          className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
-        >
-          <img src="/svg/arrow.svg" alt="" />
-        </a>
-      )}
-      {seccioNumber == 1 && (
-        <a
-          href={`#explora`}
-          onClick={() => setseccioNumber(2)}
-          className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
-        >
-          <img src="/svg/arrow.svg" alt="" />
-        </a>
-      )}
-      {seccioNumber == 2 && (
-        <a
-          href={`#compartir`}
-          onClick={() => setseccioNumber(3)}
-          className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
-        >
-          <img src="/svg/arrow.svg" alt="" />
-        </a>
+      {gracias ? (
+        <>
+          {seccioNumber == 2 && (
+            <a
+              href={`#graba`}
+              onClick={() => setseccioNumber(1)}
+              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+
+          {seccioNumber == 1 && (
+            <a
+              href={`#explora`}
+              onClick={() => setseccioNumber(2)}
+              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+        </>
+      ) : (
+        <>
+          {seccioNumber == 2 && (
+            <a
+              href={`#graba`}
+              onClick={() => setseccioNumber(1)}
+              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+          {seccioNumber == 3 && (
+            <a
+              href={`#explora`}
+              onClick={() => setseccioNumber(2)}
+              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+          {seccioNumber == 1 && (
+            <a
+              href={`#explora`}
+              onClick={() => setseccioNumber(2)}
+              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+          {seccioNumber == 2 && (
+            <a
+              href={`#compartir`}
+              onClick={() => setseccioNumber(3)}
+              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+            >
+              <img src="/svg/arrow.svg" alt="" />
+            </a>
+          )}
+        </>
       )}
     </>
   );

@@ -127,6 +127,7 @@ function Grabadora() {
         <Navbar />
       </div>
       <div id="graba" className="w-full h-full relative">
+        <div className="w-full gradiente h-screen absolute z-[1]"></div>
         <div className="w-full h-full  ">
           {loading && <LoadingEnd elemtCargado={elemtCargado} />}
           {(mobile || tablet) && (

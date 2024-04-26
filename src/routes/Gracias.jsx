@@ -13,6 +13,7 @@ import {
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 import { url, urlDev } from "../data/url";
+import Explora from "../componentes/Explora";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ const Gracias = () => {
   useEffect(() => {
     if (userData) {
       setStatus(userData[0].trx_status);
-      //console.log(status);
+      console.log(status);
     }
   }, [userData]);
 
@@ -89,101 +90,130 @@ const Gracias = () => {
   };
   return (
     <>
-      <div className="w-full h-full relative">
-        <div className="z-50 hamburger text-white inter">
-          <Navbar />
+      <div className="w-full relative h-[200vh]">
+        {loading && <LoadingEnd elemtCargado={elemtCargado} />}
+        <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
+          <Navbar gracias={true} />
         </div>
-        <div className="w-full h-full  ">
-          {loading && <LoadingEnd elemtCargado={elemtCargado} />}
-          {(mobile || tablet) && (
-            <img
-              onLoad={() => setElemtCargado(true)}
-              className="osoVideo oso absolute left-0 z-[-1]"
-              src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
-              alt=""
-            />
-          )}
-
-          {(full || laptop || minilaptop) && (
-            <LoadVideo
-              onLoadedData={() => setElemtCargado(true)}
-              customStyle={"osoVideo absolute left-0 z-[-1]"}
-              videoLoad={videoLoad}
-              url={"/videoBear.mp4"}
-              loop={true}
-            />
-          )}
+        <div id="graba" className="w-full h-screen ">
+          <img
+            onLoad={() => setElemtCargado(true)}
+            className="osoVideo oso absolute left-0 z-[-1]"
+            src={
+              tablet ? "/imagenes/bg-gracias.webp" : "/imagenes/bg-gracias.webp"
+            }
+            alt=""
+          />
 
           <div className="lg:p-8 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
-              {/*           <p className="py-4">{status}</p> */}
-              <Texto
-                customstyle={"absolute top-6"}
-                title={
+            <div className=" w-full relative h-full flex flex-col items-center justify-between">
+              <h1 className="w-fit min-w-[28rem] flexCenter top-0 flex-col">
+                <span className="flex flex-col justify-between h-[0.4rem] w-full ">
+                  <span className="h-[1px] w-full bg-[--yellow]"></span>
+                  <span className="h-[1px] w-full bg-[--yellow]"></span>
+                </span>
+
+                <span className="flex items-center justify-between w-full">
+                  <span className="w-4 h-4 inline-block">
+                    <img src="/svg/estrella.svg" alt="" />
+                  </span>
+                  <span className="my-2 ml-4 mr-3 text-6xl uppercase">
+                    {status === "" && "OPERACIÓN MAYO"}
+                    {status === "approved" && "GRACIAS POR TU ENTREGA"}
+                    {status === "pending" && "GRACIAS POR TU ENTREGA"}
+                    {status === "canceled" && "misión fallida"}
+                    {status === "rejected" && "misión fallida"}
+                  </span>
+                  <span className="w-4 h-4 inline-block">
+                    <img src="/svg/estrella.svg" alt="" />
+                  </span>
+                </span>
+                <span className="flex flex-col justify-between h-[0.4rem] w-full ">
+                  <span className="h-[1px] w-full bg-[--yellow]"></span>
+                  <span className="h-[1px] w-full bg-[--yellow]"></span>
+                </span>
+              </h1>
+
+              <div className="flex flex-col items-center px-[3rem] w-full">
+                {error || status == "" ? (
                   <>
-                    <p className="lg:text-4xl xs:text-lg">
-                      <span className="text-[var(--yellow)]">
-                        osos disponibles: 827
-                      </span>
-                    </p>
-                  </>
-                }
-              />
-              <Texto
-                customstyle={"absolute bottom-0"}
-                title={
-                  <>
-                    <p className="lg:text-4xl xs:text-lg">
-                      <span className="text-[var(--yellow)]">
-                        ANTES: $80.000
-                      </span>
-                    </p>
-                    <p className="lg:text-6xl xs:text-4xl">
-                      <span className="text-[var(--yellow)]">AHORA: $0</span>
-                    </p>
-                  </>
-                }
-              />
-            </div>
-            <div className="cajaCards z-10 flexCenter flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-[55%] rounded-3xl ">
-              <div>
-                {error ? (
-                  <>
-                    <h1 className="w-1/2 m-auto mb-6 text-center">
-                      Compre ahora su oso y envieselo a su madre
-                    </h1>
-                    <Link className="btn w-1/2 m-auto" to="/grabar-audio">
-                      {" "}
-                      ir ahora
-                    </Link>
+                    <h2 className="w-1/2 m-auto mb-6 text-center">
+                      Texto cuando no hay orden activa
+                    </h2>
+                    <div className="flex justify-between w-full">
+                      <Link className="btn" to="/grabar-audio">
+                        {" "}
+                        ir ahora
+                      </Link>
+
+                      <a className="btn" href="#explora">
+                        detrás de cámaras
+                      </a>
+                    </div>
                   </>
                 ) : (
                   <>
                     {userData ? (
-                      <div>
-                        <h1 className=" w-1/2 m-auto mb-6 text-center">
-                          Gracias compra realizada con exito
-                        </h1>
+                      <>
                         {userData.map((user, index) => (
                           <div
-                            className="w-1/2 m-auto text-[--yellow]"
+                            className="w-fit text-[--yellow] font-inter font-semibold mb-6"
                             key={index}
                           >
-                            <p>Nombre: {user.firstname}</p>
-                            <p>email: {user.email}</p>
-                            <p>Estado de la transaccion: {user.trx_status}</p>
-                            <p>Id transaccion: {user.order_id}</p>
+                            <p className="text-6xl mb-6 text-white capitalize">
+                              {user.firstname}
+                            </p>
+
+                            <div className="cajatransaccion flex items-center">
+                              <span className="w-12 h-12 inline-block mr-4">
+                                <img
+                                  src={
+                                    status === "approved"
+                                      ? "/svg/aprobado.svg"
+                                      : status === "pending"
+                                      ? "/svg/proceso.svg"
+                                      : status === "canceled"
+                                      ? "/svg/cancelado.svg"
+                                      : status === "rejected"
+                                      ? "/svg/rechazado.svg"
+                                      : ""
+                                  }
+                                  alt=""
+                                />
+                              </span>
+                              <div className="cajatransaccionDatos">
+                                <p className="text-3xl">
+                                  {status === "approved" && "Envío aprobado"}
+                                  {status === "pending" && "Envío en proceso"}
+                                  {status === "canceled" && "Envío cancelado"}
+                                  {status === "rejected" && "Envío rechazado"}
+                                </p>
+                                <p className="text-3xl">
+                                  <span className="text-white">
+                                    Id-compra:{" "}
+                                  </span>
+                                  {status === "approved" && user.order_id}
+                                  {status === "pending" && user.order_id}
+                                  {status === "canceled" && ""}
+                                  {status === "rejected" && ""}
+                                </p>
+                              </div>
+                            </div>
                             {/* Añade más campos si es necesario */}
                           </div>
                         ))}
-                        <h2 className="w-1/2 m-auto my-6 text-center">
-                          realizar una nueva grabacion
-                        </h2>
-                        <Link className="btn w-1/2 m-auto" to="/grabar-audio">
-                          {" "}
-                          ir ahora
-                        </Link>
-                      </div>
+
+                        <div className="flex justify-between w-full">
+                          <Link className="btn" to="/grabar-audio">
+                            {" "}
+                            ir ahora
+                          </Link>
+
+                          <a className="btn" href="#explora">
+                            detrás de cámaras
+                          </a>
+                        </div>
+                      </>
                     ) : (
                       <p>Cargando datos del usuario...</p>
                     )}
@@ -192,6 +222,9 @@ const Gracias = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div id="explora" className="w-full h-screen  relative">
+          <Explora />
         </div>
       </div>
     </>

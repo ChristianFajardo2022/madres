@@ -440,3 +440,19 @@ input[type="number"] {
     transform: rotate(360deg);
   }
 }
+
+.gradiente {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 0) 17%
+  );
+}
+
+.textNimate {
+  @apply translate-y-[15%] opacity-0;
+}
+.lottie,
+.marco {
+  @apply opacity-0;
+}
