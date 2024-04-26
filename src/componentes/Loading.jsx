@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import IconoLoader from "./IconoLoader";
+import IconoLoaderSoldado from "./IconoLoaderSoldado";
 
-const LoadingEnd = ({ elemtCargado }) => {
+const LoadingEnd = ({ elemtCargado, soldado }) => {
   const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
@@ -25,8 +26,12 @@ const LoadingEnd = ({ elemtCargado }) => {
 
   return (
     <div className="loading w-full h-full bg-[#0c0c0c] flex items-center fixed z-[15000] justify-center">
-      <span className="lg:w-80 lg:h-80 xs:w-72 xs:h-72">
-        <IconoLoader texto={percentage} />
+      <span className="lg:w-96 lg:h-96 xs:w-72 xs:h-72">
+        {soldado ? (
+          <IconoLoaderSoldado texto={percentage} />
+        ) : (
+          <IconoLoader texto={percentage} />
+        )}
       </span>
     </div>
   );

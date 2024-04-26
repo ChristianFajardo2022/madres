@@ -25,8 +25,6 @@ const Video = ({ VideoReady, play, url, setPlay, setEnd, contenedorWidth }) => {
   return (
     <div ref={video} className="w-full h-full flexCenter bg-black rounded-3xl">
       <ReactPlayer
-        onPause={() => setPlay(false)}
-        onPlay={() => setPlay(true)}
         onReady={VideoReady}
         playing={play ? true : false}
         url={url}

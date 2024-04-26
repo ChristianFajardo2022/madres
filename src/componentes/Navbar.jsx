@@ -3,7 +3,7 @@ import HamburgesaIcon from "./HamburgesaIcon";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ gracias }) => {
+const Navbar = ({ gracias, handlePlayVideo }) => {
   const [active, setActive] = useState(false);
   const [seccion, setSeccion] = useState("explora");
   const [seccioNumber, setseccioNumber] = useState(1);
@@ -50,7 +50,7 @@ const Navbar = ({ gracias }) => {
     if (active) {
       gsap.to(".menuLink", {
         opacity: 1,
-        height: "24rem",
+        display: "flex",
         paddingTop: "3rem",
         ease: "power1.inOut",
         duration: 0.5,
@@ -61,8 +61,7 @@ const Navbar = ({ gracias }) => {
     } else {
       gsap.to(".menuLink", {
         opacity: 0,
-
-        height: "0rem",
+        display: "none",
         paddingTop: "0rem",
         ease: "power1.inOut",
         duration: 0.5,
@@ -76,21 +75,20 @@ const Navbar = ({ gracias }) => {
   return (
     <>
       <HamburgesaIcon handleClick={handleClick} active={active} />
-      <div
-        onClick={handleClick}
-        className="cerrarMenu z-10 w-full h-full fixed top-0 left-0"
-      ></div>
-      <nav className="menuLink opacity-0 h-0 flex flex-col justify-center shadowCard absolute z-50 bg-[var(--whiteTransparente)] right-14 top-8 w-80 rounded-3xl list-none">
-        <li className="navLink">
-          <Link to={"/"}>Operación mayo</Link>
+
+      <nav className="menuLink uppercase h-full flex flex-col items-center justify-center shadowCard fixed z-50 bg-black bg-opacity-70 backdrop-blur-lg right-0 top-0 w-full   list-none">
+        <li onClick={handleClick} className="navLink">
+          <a href="#" onClick={handlePlayVideo}>
+            Operación mayo
+          </a>
         </li>
-        <li className="navLink">
+        <li onClick={handleClick} className="navLink">
           <a href="#graba">Grabar mensaje</a>
         </li>
-        <li className="navLink">
+        <li onClick={handleClick} className="navLink">
           <a href="#explora">Explorar historias</a>
         </li>
-        <li className="navLink">
+        <li onClick={handleClick} className="navLink">
           <a href="#compartir">Compartir</a>
         </li>
       </nav>

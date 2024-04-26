@@ -20,14 +20,20 @@ import Navbar from "../componentes/Navbar";
 import Explora from "../componentes/Explora";
 import CorazonPalpitante from "../componentes/CorazonPalpitante";
 import CompartirContenido from "../componentes/CompartirContenido";
+import Prospero from "../componentes/Prospero";
+import Video from "../componentes/Video";
+import Comercial from "../componentes/Comercial";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
+  const [playVideo, setPlayVideo] = useState(false);
   const [botonAudio, setBotonAudio] = useState(false);
   const [reproducir, setReproducir] = useState(false);
   const [elemtCargado, setElemtCargado] = useState(false);
+  const [stock, setStock] = useState(249);
 
   const videoLoad = useRef(null);
+
   const { isRecording, startRecording, stopRecording, recordingBlob } =
     useAudioRecorder();
   /* const { status, startRecording, stopRecording, mediaBlobUrl } =
@@ -120,12 +126,27 @@ function Grabadora() {
       });
     }
   }, [botonAudio]);
+  /*****Play al video */
+
+  const handlePlayVideo = () => {
+    if (playVideo) {
+      setPlayVideo(false);
+    } else {
+      setPlayVideo(true);
+    }
+  };
 
   return (
     <>
       <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
-        <Navbar />
+        <Navbar handlePlayVideo={handlePlayVideo} />
       </div>
+      <Prospero
+        customStyle={
+          "lg:left-20 xs:left-4 translate-x-[-50%] 2xl:top-10 xl:top-20"
+        }
+      />
+      <Comercial playVideo={playVideo} setPlayVideo={setPlayVideo} />
       <div id="graba" className="w-full h-full relative">
         <div className="w-full gradiente h-screen absolute z-[1]"></div>
         <div className="w-full h-full  ">
@@ -149,31 +170,34 @@ function Grabadora() {
             />
           )}
 
-          <div className="lg:p-14 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className="cajaOso z-20 flex flex-col relative justify-center items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
+          <div className=" w-full h-full flex max-lg:flex-col relative justify-between items-center">
+            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 pb-6 items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
               {/*           <p className="py-4">{status}</p> */}
               <Texto
-                customstyle={"absolute top-6"}
+                customstyle={"textoStock w-full text-center"}
                 title={
                   <>
-                    <p className="lg:text-4xl xs:text-lg">
+                    <p className="lg:text-4xl xs:text-4xl">
                       <span className="text-[var(--yellow)]">
-                        osos disponibles: 827
+                        {stock <= 250 && `Aún quedan: ${stock} osos gratis`}
+                        {stock >= 250 && `Osos gratis disponibles: ${stock}`}
                       </span>
                     </p>
                   </>
                 }
               />
               <Texto
-                customstyle={"absolute bottom-0"}
+                customstyle={"textoStock w-full text-center"}
                 title={
                   <>
                     <p className="lg:text-6xl xs:text-4xl">
-                      <span className="text-[var(--yellow)]">AHORA: $0</span>
+                      <span className="text-[var(--yellow)]">
+                        AHORA: GRATIS
+                      </span>
                     </p>
                     <p className="lg:text-4xl xs:text-lg">
                       <span className="text-[var(--yellow)] w-full text-center line-through inline-block">
-                        $80.000
+                        despues $80.000
                       </span>
                     </p>
                   </>

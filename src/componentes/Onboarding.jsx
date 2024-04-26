@@ -36,7 +36,7 @@ const Onboarding = ({ setOnboarding }) => {
   }, [paso]);
   return (
     <div className="text-white slidecards w-full h-full lg:relative items-center justify-center flex flex-col">
-      <div className="onboar1 opacity-0 flex justify-between h-3/4 flex-col items-center">
+      <div className="onboar1 opacity-0 flex justify-between h-[65%] flex-col items-center">
         {paso == 0 && (
           <>
             <span className="w-full inline-block mb-12">
@@ -94,7 +94,7 @@ const Onboarding = ({ setOnboarding }) => {
               <span className="marco absolute top-1/2 left-1/2 translate-y-[-40%] translate-x-[-50%] w-[60%] h-auto">
                 <img className="" src="/svg/marco2.svg" alt="" />
               </span>
-              <h2 className="textNimate  floatcenter text-center tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block 2xl:text-3xl  lg:text-5xl">
+              <h2 className="textNimate floatcenter text-center tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block xl:text-3xl">
                 Gracias por hacer <br />
                 parte de esta entrega
               </h2>
@@ -106,7 +106,7 @@ const Onboarding = ({ setOnboarding }) => {
               className="z-50 btn 2xl:text-2xl sm:text-3xl"
               onClick={() => setOnboarding(false)}
             >
-              Siguiente
+              Iniciar
             </button>
           </>
         )}

@@ -66,12 +66,6 @@ const FormSteps = ({
         delay: 0.5,
       }
     );
-    if (onboarding == false) {
-      gsap.to(".cajaCards.Onboarding", {
-        className: "cajaCards",
-        duration: 1,
-      });
-    }
   }, [onboarding]);
 
   // Cuando vuelves a la página
@@ -254,7 +248,7 @@ const FormSteps = ({
       {!onboarding && (
         <form
           onSubmit={handleSubmit(handleNextStep)}
-          className="form w-full h-full overflow-hidden"
+          className="form w-full h-full"
         >
           <div ref={padre} className="slidecards">
             {/* navbar menu hamburgesa*/}
@@ -266,6 +260,7 @@ const FormSteps = ({
                 style={{ transform: `translateX(-${translate}px)` }}
                 className="cards"
               >
+                {/* Caja vacia */}
                 <div
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
@@ -279,12 +274,12 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div
-                    className={`cardSingle  ${
-                      paso == 1 ? "opacity-100" : "opacity-40"
-                    }`}
-                  >
-                    <div className="cajaCard">
+                  <div className={`cardSingle `}>
+                    <div
+                      className={`cajaCard ${
+                        paso == 1 ? "opacity-100" : " Effectblur"
+                      }  ${paso > 1 && "none"}`}
+                    >
                       <Espaciado />
 
                       <div className="w-full">
@@ -373,12 +368,12 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div
-                    className={`cardSingle ${
-                      paso == 2 ? "opacity-100" : "opacity-40"
-                    }`}
-                  >
-                    <div className="cajaCard">
+                  <div className={`cardSingle ${paso > 2 && "opacity-0"}`}>
+                    <div
+                      className={`cajaCard ${
+                        paso == 2 ? "opacity-100" : " Effectblur"
+                      }  ${paso > 2 && "none"}`}
+                    >
                       <Espaciado />
                       <div className="w-full flexCenter flex-col">
                         <div className="w-full">
@@ -421,12 +416,12 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div
-                    className={`cardSingle   ${
-                      paso == 3 ? "opacity-100" : "opacity-40"
-                    }`}
-                  >
-                    <div className="cajaCard">
+                  <div className={`cardSingle  ${paso > 3 && "opacity-0"}`}>
+                    <div
+                      className={`cajaCard ${
+                        paso == 3 ? "opacity-100" : " Effectblur"
+                      }  ${paso > 3 && "none"}`}
+                    >
                       <Espaciado />
                       <div className="w-full flexCenter flex-col">
                         <p className="font-inter text-center font-normal w-full mb-6">
@@ -464,13 +459,14 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div
-                    className={`cardSingle  ${
-                      paso == 4 ? "opacity-100" : "opacity-40"
-                    }`}
-                  >
-                    <div className="cajaCard">
+                  <div className={`cardSingle  ${paso > 4 && "opacity-0"}`}>
+                    <div
+                      className={`cajaCard ${
+                        paso == 4 ? "opacity-100" : " Effectblur"
+                      }  ${paso > 4 && "none"}`}
+                    >
                       <Espaciado />
+
                       <div className="flex flex-col h-80 items-center justify-evenly w-full">
                         {isLoading && (
                           <>
@@ -501,7 +497,7 @@ const FormSteps = ({
                 {paso > 1 && (
                   <span
                     onClick={() => prevSlide(valorinicial, anchoHijoEnPixel)}
-                    className="cursor-pointer absolute left-0  rotate-180 inline-block w-6 h-auto"
+                    className="cursor-pointer absolute left-0 translate-x-[-100%] rotate-180 inline-block w-6 h-auto"
                   >
                     <img src="/svg/next.svg" alt="" />
                   </span>
@@ -511,7 +507,7 @@ const FormSteps = ({
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
-                    className={`cursor-pointer absolute  right-0 translate-x-[100%] inline-block w-6 h-auto ${
+                    className={`cursor-pointer absolute  right-0 inline-block w-6 h-auto ${
                       paso === 2 || paso === 4 || (paso === 3 && irpaso6)
                         ? "activebtn"
                         : paso === 1 &&

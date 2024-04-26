@@ -19,7 +19,7 @@ const Gracias = () => {
   const [loading, setLoading] = useState(true);
   // Estado para guardar los datos del usuario
   const [userData, setUserData] = useState(null);
-  const [status, setStatus] = useState("null");
+  const [status, setStatus] = useState(null);
   // Estado para manejar errores de la solicitud
   const [error, setError] = useState(null);
   const videoLoad = useRef(null);
@@ -92,9 +92,7 @@ const Gracias = () => {
     <>
       <div className="w-full relative h-[200vh]">
         {loading && <LoadingEnd elemtCargado={elemtCargado} />}
-        <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
-          <Navbar gracias={true} />
-        </div>
+
         <div id="graba" className="w-full h-screen ">
           <img
             onLoad={() => setElemtCargado(true)}
@@ -118,7 +116,7 @@ const Gracias = () => {
                     <img src="/svg/estrella.svg" alt="" />
                   </span>
                   <span className="my-2 ml-4 mr-3 text-6xl uppercase">
-                    {status === "" && "OPERACIÓN MAYO"}
+                    {(status === "" || !status) && "OPERACIÓN MAYO"}
                     {status === "approved" && "GRACIAS POR TU ENTREGA"}
                     {status === "pending" && "GRACIAS POR TU ENTREGA"}
                     {status === "canceled" && "misión fallida"}
@@ -135,7 +133,7 @@ const Gracias = () => {
               </h1>
 
               <div className="flex flex-col items-center px-[3rem] w-full">
-                {error || status == "" ? (
+                {error || status === "" || !status ? (
                   <>
                     <h2 className="w-1/2 m-auto mb-6 text-center">
                       Texto cuando no hay orden activa
@@ -143,7 +141,7 @@ const Gracias = () => {
                     <div className="flex justify-between w-full">
                       <Link className="btn" to="/grabar-audio">
                         {" "}
-                        ir ahora
+                        Grabar mi audio
                       </Link>
 
                       <a className="btn" href="#explora">
@@ -205,8 +203,7 @@ const Gracias = () => {
 
                         <div className="flex justify-between w-full">
                           <Link className="btn" to="/grabar-audio">
-                            {" "}
-                            ir ahora
+                            Grabar mi audio
                           </Link>
 
                           <a className="btn" href="#explora">

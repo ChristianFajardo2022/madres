@@ -8,6 +8,7 @@ import Texto from "../componentes/Texto";
 import LoadingEnd from "../componentes/Loading";
 import IconPlayVideo from "../componentes/IconPlayVideo";
 import { mobile, tablet } from "../helpers/medidasResponsive";
+import Prospero from "../componentes/Prospero";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,7 @@ const Home = () => {
 
   const avanzar = () => {
     const tl = gsap.timeline();
-    tl.delay(1);
+    tl.delay(2);
     tl.to(".loading", {
       opacity: "0",
       ease: "power1.inOut",
@@ -230,10 +231,13 @@ const Home = () => {
         />
         {loading ? (
           <>
-            <LoadingEnd elemtCargado={elemtCargado} />
+            <LoadingEnd elemtCargado={elemtCargado} soldado={true} />
           </>
         ) : (
           <div className="w-full h-full ">
+            <Prospero
+              customStyle={"left-1/2 translate-x-[-50%] 2xl:top-12 xl:top-20"}
+            />
             <img
               ref={imgLoad}
               src="/imagenes/operacion-mayo.webp"

@@ -9,7 +9,7 @@ const CorazonPalpitante = ({ handleClick, botonAudio }) => {
           botonAudio
             ? "cursor-pointer pointer-events-all"
             : "pointer-events-none"
-        } lg:w-48 xs:w-24 h-48 absolute left-1/2 lg:top-[50%] xs:top-[55%] translate-x-[-50%]`}
+        } lg:w-48 xs:w-24 h-48 absolute left-[52%] lg:top-[49%] xs:top-[55%] translate-x-[-50%]`}
       >
         <img
           className="w-[80%] floatcenter h-auto"

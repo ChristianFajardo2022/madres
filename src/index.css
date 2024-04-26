@@ -9,6 +9,7 @@
 }
 
 :root {
+  --yellowMark: #ffd875;
   --yellow: #fff3d7;
   --whiteTransparente: #4d4d4d41;
   --blackTransparente: #2f2f2f9b;
@@ -16,11 +17,11 @@
 }
 
 html {
-  @apply w-full h-full lg:text-[0.7vw] xs:text-[3vw] sm:text-[2vw] scroll-smooth;
+  @apply w-full h-full xl:text-[0.7vw] xs:text-[3vw] sm:text-[1.5vw] lg:text-[1vw] scroll-smooth;
 }
 body {
   @apply m-0 p-0 box-content Bebas;
-  @apply w-full h-full;
+  @apply w-full h-full overflow-x-hidden;
 }
 #root {
   @apply w-full h-full;
@@ -31,6 +32,9 @@ svg {
 }
 .Bebas {
   font-family: "Bebas", sans-serif;
+}
+.helvetica {
+  font-family: Helvetica, sans-serif;
 }
 .ajusteFuente {
   @apply tracking-[0.25em];
@@ -62,7 +66,7 @@ p {
 }
 /*Hamburgesa*/
 .lineBurger {
-  @apply absolute    w-full h-1 bg-[--yellow] rounded-full transition-all ease-in-out duration-500;
+  @apply absolute w-full h-1 bg-[--yellow] rounded-full transition-all ease-in-out duration-500;
 }
 .lineBurger1 {
   @apply top-0;
@@ -116,11 +120,9 @@ input[type="number"] {
   @apply flex items-center justify-center;
 }
 .cajaCards {
-  @apply transition z-10 flex flex-col lg:w-1/2 xs:w-full lg:border lg:border-white lg:h-full xs:h-[55%] rounded-3xl;
+  @apply transition z-10 flex flex-col lg:w-1/2 xs:w-full lg:h-full xs:h-[55%] rounded-3xl;
 }
-.cajaCards.Onboarding {
-  @apply bg-white bg-opacity-15 backdrop-blur-xl;
-}
+
 .slidecards {
   @apply w-full h-full lg:relative items-center flex flex-col  justify-evenly max-lg:pb-4;
 }
@@ -133,8 +135,15 @@ input[type="number"] {
 .cardSingle {
   @apply w-full h-full transition-all ease-in-out duration-[600ms] px-8;
 }
+.cajaCard.Effectblur {
+  @apply blur-sm opacity-80;
+}
+.cajaCard.Effectblur.none {
+  @apply opacity-0;
+}
+
 .cajaCard {
-  @apply shadowCard transition rounded-3xl border border-white bg-[var(--whiteTransparente)]
+  @apply shadowCard transition rounded-3xl border border-white bg-[#ffffff20] backdrop-blur-xl
   w-full h-full flex flex-col justify-between items-center lg:py-8 lg:px-14 xs:py-6 xs:px-6;
 }
 .cajaCard input,
@@ -379,14 +388,47 @@ input[type="number"] {
 }
 
 .navLink {
-  @apply transition-all ease-in-out duration-200 h-[20%] flex items-center;
+  @apply transition-all ease-in-out duration-200 h-[15%] flex items-center;
 }
 .navLink a {
-  @apply w-full h-full flex items-center pl-16 font-inter font-normal text-2xl;
+  @apply Bebas tracking-[0.2em] transition-all ease-in-out duration-500 text-[--yellow] w-full h-full flex items-center font-inter font-normal text-4xl;
 }
-.navLink:hover {
-  @apply bg-[#4d4d4d] bg-opacity-70 border-l-4 border-[--yellow];
+.navLink a:hover {
+  @apply text-[--yellowMark];
+
+  transform: scale(1.1);
 }
+
+.navLink:hover a::before,
+.navLink:hover a::after {
+  opacity: 1;
+  transform: rotate(-90deg);
+}
+.navLink a::before {
+  transition: all ease-in-out 0.5s;
+  opacity: 0;
+  content: "";
+  margin: 1rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("/svg/estrella-hover.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.navLink a::after {
+  transition: all ease-in-out 0.5s;
+  opacity: 0;
+  content: "";
+  margin: 1rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("/svg/estrella-hover.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 /* Estilo para la barra de desplazamiento */
 ::-webkit-scrollbar {
   width: 5px; /* Ancho de la barra de desplazamiento */
@@ -410,9 +452,19 @@ input[type="number"] {
 
 @media (max-aspect-ratio: 8/5) {
   .corazonOso {
-    @apply left-[43%];
-    width: 14rem !important;
+    @apply left-[46%];
+
+    width: 15rem !important;
   }
+  .prospero {
+    top: 5rem !important;
+  }
+  .textoStock {
+    transform: translateX(-3%) !important;
+  }
+}
+.textoStock {
+  @apply 2xl:translate-x-[3%];
 }
 
 .spinner {
@@ -455,4 +507,19 @@ input[type="number"] {
 .lottie,
 .marco {
   @apply opacity-0;
+}
+
+.soldier path {
+  animation: draw 1.5s forwards;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+@keyframes draw {
+  from {
+    stroke-dasharray: 0, 100;
+  }
+  to {
+    stroke-dasharray: 100, 0;
+  }
 }
