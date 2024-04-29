@@ -237,7 +237,7 @@ const Home = () => {
           <div className="w-full h-full ">
             <Prospero
               customStyle={
-                "prospero left-1/2 translate-x-[-50%] 2xl:top-12 xl:top-20"
+                "prospero left-1/2 translate-x-[-50%] 2xl:top-12 top-20"
               }
             />
             <img
