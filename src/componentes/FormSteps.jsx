@@ -248,7 +248,7 @@ const FormSteps = ({
       {!onboarding && (
         <form
           onSubmit={handleSubmit(handleNextStep)}
-          className="form w-full h-full"
+          className="form w-full h-full max-lg:overflow-hidden"
         >
           <div ref={padre} className="slidecards">
             {/* navbar menu hamburgesa*/}
@@ -285,7 +285,7 @@ const FormSteps = ({
                       <div className="w-full">
                         <div className="flex flex-col w-full">
                           <p className="titulosForm">
-                            ¿Cómo te llamas y cual es tu email?
+                            Primero, ¿Cuál es tu nombre?
                           </p>
                           <input
                             type="text"
@@ -310,9 +310,7 @@ const FormSteps = ({
                           />
                         </div>
                         <div className="flex flex-col w-full">
-                          <p className="titulosForm">
-                            ¿Cómo te llamas y cual es tu email?
-                          </p>
+                          <p className="titulosForm">¿Tu email?</p>
 
                           <input
                             type="email"
@@ -346,8 +344,8 @@ const FormSteps = ({
                             anchoHijoEnPixel
                           );
                           setMensaje(
-                            `${formData.firstname}, graba un mensaje de 20 segundos. <br /> 
-                  Ella lo escuchará al oprimir el botón del pecho del oso`
+                            `${formData.firstname}, graba en máximo 20 segundos el mensaje
+                  que quieres hacerle llegar a esa persona especial`
                           );
                         }}
                         className={`cursor-pointer text-center btn hoverBtn btnGrabadora ${
@@ -425,10 +423,10 @@ const FormSteps = ({
                       <Espaciado />
                       <div className="w-full flexCenter flex-col">
                         <p className="font-inter text-center font-normal w-full mb-6">
-                          Estás a punto de hacer tu misión más importante
+                          Estás a punto de hacer tu misión más importante.
                         </p>
                         <p className="font-inter text-center font-normal w-full mb-4">
-                          bienvenido a la
+                          Bienvenido a:
                         </p>
                         <span className="w-full h-auto inline-block relative">
                           <img
@@ -497,7 +495,7 @@ const FormSteps = ({
                 {paso > 1 && (
                   <span
                     onClick={() => prevSlide(valorinicial, anchoHijoEnPixel)}
-                    className="cursor-pointer absolute left-0 translate-x-[-100%] rotate-180 inline-block w-6 h-auto"
+                    className="cursor-pointer absolute left-0 lg:translate-x-[-100%] rotate-180 inline-block w-6 h-auto"
                   >
                     <img src="/svg/next.svg" alt="" />
                   </span>

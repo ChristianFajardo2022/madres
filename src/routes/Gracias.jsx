@@ -14,6 +14,7 @@ import gsap from "gsap";
 import { Link } from "react-router-dom";
 import { url, urlDev } from "../data/url";
 import Explora from "../componentes/Explora";
+import CompartirContenido from "../componentes/CompartirContenido";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -222,6 +223,15 @@ const Gracias = () => {
         </div>
         <div id="explora" className="w-full h-screen  relative">
           <Explora />
+        </div>
+        <div
+          id="compartir"
+          className="w-full h-full bg-black relative flexCenter text-[--yellow]"
+        >
+          <CompartirContenido
+            texto={"este sera algo inolvidable"}
+            url={"operacionmayo.com"}
+          />
         </div>
       </div>
     </>

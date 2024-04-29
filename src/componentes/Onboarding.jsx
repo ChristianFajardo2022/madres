@@ -17,7 +17,7 @@ const Onboarding = ({ setOnboarding }) => {
 
     gsap.to(".textNimate", {
       opacity: 1,
-      y: "0%",
+
       stagger: 0.5,
       ease: "power1.inOut",
       duration: 0.5,
@@ -35,11 +35,11 @@ const Onboarding = ({ setOnboarding }) => {
     });
   }, [paso]);
   return (
-    <div className="text-white slidecards w-full h-full lg:relative items-center justify-center flex flex-col">
-      <div className="onboar1 opacity-0 flex justify-between h-[65%] flex-col items-center">
+    <div className="text-white slidecards w-full h-full  relative items-center justify-center flex flex-col">
+      <div className="onboar1 lg:w-full xs:w-full sm:w-3/4 opacity-0 flex lg:justify-between xs:justify-evenly lg:h-[65%] xs:h-full flex-col items-center ">
         {paso == 0 && (
           <>
-            <span className="w-full inline-block mb-12">
+            <span className="lg:w-1/2 xs:w-3/5 inline-block lg:mb-12">
               <img src="/logo-operacion-mayo.svg" alt="" />
             </span>
             <div
@@ -48,19 +48,19 @@ const Onboarding = ({ setOnboarding }) => {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "right",
               }}
-              className="cajaLottie flex items-center w-full justify-between "
+              className="cajaLottie flex items-center max-lg:w-4/5 justify-between"
             >
               <span className="lottie inline-block w-1/2 mr-10 h-auto">
                 <Lottie animationData={animationdata} />
               </span>
-              <h1 className="textNimate   tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block 2xl:text-[2.2rem] 2xl:leading-[2.5rem] lg:text-5xl">
+              <h1 className="textNimate tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block 2xl:text-[2.2rem] 2xl:leading-[2.5rem] lg:text-5xl xs:text-2xl">
                 Un homenaje <br /> a todos los que <br /> entendieron <br />
                 la entrega de <br />
                 ser mamá
               </h1>
             </div>
             <button
-              className="btn 2xl:text-2xl sm:text-3xl"
+              className="btn 2xl:text-2xl sm:text-3xl xs:text-2xl"
               onClick={() => setPaso(1)}
             >
               Siguiente
@@ -69,19 +69,19 @@ const Onboarding = ({ setOnboarding }) => {
         )}
         {paso == 1 && (
           <>
-            <h2 className="textNimate   text-center tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block 2xl:text-[2.2rem] 2xl:leading-[2.5rem] lg:text-5xl">
+            <h2 className="textNimate   text-center tracking-[-1px] font-inter font-semibold text-[--yellow] sm:w-1/2 xs:w-[80%] inline-block 2xl:text-[2.2rem] 2xl:leading-[2.5rem] lg:text-5xl xs:text-2xl">
               A las abuelas, papás, hermanos, tíos o a quién haya asumido este
               rol en tu vida,
             </h2>
-            <span className="relative lottie inline-block w-1/2 mr-10 h-auto">
+            <span className="relative lottie inline-block sm:w-1/2 xs:w-[65%]  h-auto">
               <Lottie animationData={paso2} />
-              <span className="w-full textNimate absolute bottom-14 text-center tracking-[-1px] font-inter font-semibold text-[--yellow] inline-block 2xl:text-3xl lg:text-3xl">
+              <span className="w-full textNimate absolute lg:bottom-14 sm:bottom-12 xs:bottom-8 text-center tracking-[-1px] font-inter font-semibold text-[--yellow] inline-block 2xl:text-3xl lg:text-3xl xs:text-xl">
                 Celébrales su día <br />
                 con un oso igual a este
               </span>
             </span>
             <button
-              className="btn 2xl:text-2xl sm:text-3xl"
+              className="btn 2xl:text-2xl sm:text-3xl xs:text-2xl"
               onClick={() => setPaso(2)}
             >
               Siguiente
@@ -90,20 +90,20 @@ const Onboarding = ({ setOnboarding }) => {
         )}
         {paso == 2 && (
           <>
-            <div>
-              <span className="marco absolute top-1/2 left-1/2 translate-y-[-40%] translate-x-[-50%] w-[60%] h-auto">
+            <div className="w-3/4 sm:h-3/4 xs:h-1/2 relative">
+              <span className="marco floatcenter w-full h-auto">
                 <img className="" src="/svg/marco2.svg" alt="" />
               </span>
-              <h2 className="textNimate floatcenter text-center tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block xl:text-3xl">
+              <h2 className="textNimate floatcenter text-center tracking-[-1px] font-inter font-semibold text-[--yellow] w-1/2 inline-block xl:text-3xl xs:text-xl">
                 Gracias por hacer <br />
                 parte de esta entrega
               </h2>
-              <span className="floatcenter lottie inline-block w-[70%] mr-10 h-auto">
+              <span className="floatcenter lottie inline-block w-full h-auto">
                 <Lottie animationData={hands} />
               </span>
             </div>
             <button
-              className="z-50 btn 2xl:text-2xl sm:text-3xl"
+              className="z-50 btn 2xl:text-2xl sm:text-3xl xs:text-2xl"
               onClick={() => setOnboarding(false)}
             >
               Iniciar

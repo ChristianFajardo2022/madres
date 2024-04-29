@@ -236,11 +236,19 @@ const Home = () => {
         ) : (
           <div className="w-full h-full ">
             <Prospero
-              customStyle={"left-1/2 translate-x-[-50%] 2xl:top-12 xl:top-20"}
+              customStyle={
+                "prospero left-1/2 translate-x-[-50%] 2xl:top-12 xl:top-20"
+              }
             />
             <img
               ref={imgLoad}
-              src="/imagenes/operacion-mayo.webp"
+              src={`${
+                mobile
+                  ? "/imagenes/operacion-mayoM.webp"
+                  : tablet
+                  ? "/imagenes/operacion-mayoT.webp"
+                  : "/imagenes/operacion-mayo.webp"
+              }`}
               className="bg-Img block"
               alt=""
             />
@@ -250,7 +258,13 @@ const Home = () => {
                 operacion mayo
               </span>
               <img
-                src="/logoHome.png"
+                src={`${
+                  mobile
+                    ? "/imagenes/logoHomeM.webp"
+                    : tablet
+                    ? "/imagenes/logoHomeT.webp"
+                    : "/imagenes/logoHome.webp"
+                }`}
                 className="logoOperacion absolute top-0 opacity-0 "
                 alt=""
               />
@@ -269,7 +283,7 @@ const Home = () => {
               onClick={() => setPlay(true)}
               className="cajaTitulos group opacity-0 pointer-events-none cursor-pointer btn fixed top-2/3 left-1/2 translate-x-[-50%] flex items-center justify-center"
             >
-              <span className="Bebas transition group-hover:text-black text-[--yellow]  titleInicio text-3xl mr-4">
+              <span className="Bebas transition group-hover:text-black text-[--yellow]  titleInicio text-3xl sm:mr-4 xs:mr-1">
                 Reproducir
               </span>
               <span className="inicioComercial inline-block w-full max-w-10 max-h-10 h-full">

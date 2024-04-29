@@ -143,7 +143,7 @@ function Grabadora() {
       </div>
       <Prospero
         customStyle={
-          "lg:left-20 xs:left-4 translate-x-[-50%] 2xl:top-10 xl:top-20"
+          "lg:left-20 xs:left-4 translate-x-[-50%] 2xl:top-10 xl:top-20 xs:top-6"
         }
       />
       <Comercial playVideo={playVideo} setPlayVideo={setPlayVideo} />
@@ -154,7 +154,7 @@ function Grabadora() {
           {(mobile || tablet) && (
             <img
               onLoad={() => setElemtCargado(true)}
-              className="osoVideo oso absolute left-0 z-[-1]"
+              className="osoVideo oso absolute left-0 z-[-1] "
               src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
               alt=""
             />
@@ -171,13 +171,13 @@ function Grabadora() {
           )}
 
           <div className=" w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 pb-6 items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-[45%]">
+            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 xs:pt-6 lg:pb-6 items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-1/2">
               {/*           <p className="py-4">{status}</p> */}
               <Texto
                 customstyle={"textoStock w-full text-center"}
                 title={
                   <>
-                    <p className="lg:text-4xl xs:text-4xl">
+                    <p className="lg:text-4xl xs:text-3xl">
                       <span className="text-[var(--yellow)]">
                         {stock <= 250 && `Aún quedan: ${stock} osos gratis`}
                         {stock >= 250 && `Osos gratis disponibles: ${stock}`}
@@ -190,7 +190,7 @@ function Grabadora() {
                 customstyle={"textoStock w-full text-center"}
                 title={
                   <>
-                    <p className="lg:text-6xl xs:text-4xl">
+                    <p className="lg:text-6xl xs:text-3xl">
                       <span className="text-[var(--yellow)]">
                         AHORA: GRATIS
                       </span>
@@ -207,50 +207,6 @@ function Grabadora() {
                 handleClick={() => setReproducir(true)}
                 botonAudio={botonAudio}
               />
-              {/*  {botonAudio ? (
-              <>
-                <div className="z-10 lg:relative w-full h-full">
-                  <div onClick={Ocultarpuntos} className="capa "></div>
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={1}
-                    customStyle={
-                      "z-1 lg:left-[59%] sm:left-[59%] xs:left-[75%] lg:top-[20%]  xs:top-[31%]"
-                    }
-                    incremento={"w-12"}
-                    imagen={"/imagenes/ojo.png"}
-                    texto={
-                      "El botón, su ojo improvisado era el vínculo que unía al soldado con su hogar."
-                    }
-                  />
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={2}
-                    customStyle={
-                      "z-2 lg:left-[6%]  xs:left-[36%] xs:left-[30%] lg:top-[38%] xs:top-[55%] flex-row-reverse"
-                    }
-                    incremento={"w-[3rem]"}
-                    rotate={"translate-x-[-100%]"}
-                    imagen={"/imagenes/heart.png"}
-                    texto={
-                      "Esta cicatriz es el testimonio del amor que EL soldado RAMÍREZ guardó dentro."
-                    }
-                  />
-                  <Punto
-                    Ocultarpuntos={Ocultarpuntos}
-                    index={3}
-                    customStyle={
-                      "z-3 lg:left-[18%]  sm:left-[18%] xs:left-[-10%] xs:top-[78%] lg:top-[65%]"
-                    }
-                    incremento={"w-52"}
-                    imagen={"/imagenes/path.png"}
-                    texto={
-                      "perdió parte de su relleno para cumplir la misión más noble que podía tener. DECIRLE FELIZ DÍA A MAMÁ"
-                    }
-                  />
-                </div>
-              </>
-            ) : null} */}
             </div>
             <div className="cajaCards Onboarding">
               <FormSteps

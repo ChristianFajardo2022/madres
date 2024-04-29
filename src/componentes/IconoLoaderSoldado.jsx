@@ -22,7 +22,7 @@ const IconoLoaderSoldado = ({ texto }) => {
   return (
     <>
       <span className=" inline-block w-full h-full">
-        <p className="absolute helvetica font-bold z-10 left-1/2 translate-x-[-50%] top-[42%] text-7xl text-[--yellow]">
+        <p className="absolute helvetica font-bold z-10 left-1/2 translate-x-[-50%] lg:top-[43%] xs:top-[45%] sm:top-[46%] lg:text-7xl xs:text-5xl text-[--yellow]">
           {texto}%
         </p>
         <img

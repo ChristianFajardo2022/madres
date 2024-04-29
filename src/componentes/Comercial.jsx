@@ -52,7 +52,7 @@ const Comercial = ({ playVideo, setPlayVideo }) => {
     <div className="comercial pointer-events-none invisible opacity-0 fixed w-full h-full top-0 left-0 bg-black z-[2000]">
       <span
         onClick={() => setClose(true)}
-        className=" cursor-pointer inline-block absolute w-6 h-6 right-12 top-12"
+        className="z-50 cursor-pointer inline-block absolute w-5 h-5 right-12 top-12"
       >
         <img src="/svg/close.svg" alt="" />
       </span>
