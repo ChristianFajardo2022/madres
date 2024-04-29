@@ -73,7 +73,7 @@ function CompartirContenido({ texto, url }) {
         </>
       )}
 
-      <div className="flex justify-evenly items-center w-4/6 z-10 max-lg:flex-wrap">
+      <div className="flex lg:justify-evenly xs:justify-between items-center lg:w-3/4 xs:w-96 z-10 max-lg:flex-wrap">
         <button
           className="btn hoverBtn max-lg:w-full max-lg:mb-16"
           onClick={copiarUrl}
