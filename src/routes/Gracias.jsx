@@ -99,14 +99,18 @@ const Gracias = () => {
             onLoad={() => setElemtCargado(true)}
             className="osoVideo oso absolute left-0 z-[-1]"
             src={
-              tablet ? "/imagenes/bg-gracias.webp" : "/imagenes/bg-gracias.webp"
+              tablet
+                ? "/imagenes/bg-gracias.webp"
+                : mobile
+                ? "/imagenes/GRACIAS-OSOM.webp"
+                : "/imagenes/bg-gracias.webp"
             }
             alt=""
           />
 
           <div className="lg:p-8 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className=" w-full relative h-full flex flex-col items-center justify-between">
-              <h1 className="w-fit min-w-[28rem] flexCenter top-0 flex-col">
+            <div className=" w-full relative h-full flex flex-col items-center justify-between pb-48">
+              <h1 className="w-fit min-w-[28rem] flexCenter pt-6 flex-col">
                 <span className="flex flex-col justify-between h-[0.4rem] w-full ">
                   <span className="h-[1px] w-full bg-[--yellow]"></span>
                   <span className="h-[1px] w-full bg-[--yellow]"></span>
@@ -116,7 +120,7 @@ const Gracias = () => {
                   <span className="w-4 h-4 inline-block">
                     <img src="/svg/estrella.svg" alt="" />
                   </span>
-                  <span className="my-2 ml-4 mr-3 text-6xl uppercase">
+                  <span className="my-2 ml-4 mr-3 lg:text-6xl xs:text-5xl uppercase">
                     {(status === "" || !status) && "OPERACIÓN MAYO"}
                     {status === "approved" && "GRACIAS POR TU ENTREGA"}
                     {status === "pending" && "GRACIAS POR TU ENTREGA"}
@@ -137,18 +141,8 @@ const Gracias = () => {
                 {error || status === "" || !status ? (
                   <>
                     <h2 className="w-1/2 m-auto mb-6 text-center">
-                      Texto cuando no hay orden activa
+                      Te invitamos a grabar <br /> un mensaje a tu ser especial
                     </h2>
-                    <div className="flex justify-between w-full">
-                      <Link className="btn" to="/grabar-audio">
-                        {" "}
-                        Grabar mi audio
-                      </Link>
-
-                      <a className="btn" href="#explora">
-                        detrás de cámaras
-                      </a>
-                    </div>
                   </>
                 ) : (
                   <>
@@ -201,22 +195,25 @@ const Gracias = () => {
                             {/* Añade más campos si es necesario */}
                           </div>
                         ))}
-
-                        <div className="flex justify-between w-full">
-                          <Link className="btn" to="/grabar-audio">
-                            Grabar mi audio
-                          </Link>
-
-                          <a className="btn" href="#explora">
-                            detrás de cámaras
-                          </a>
-                        </div>
                       </>
                     ) : (
                       <p>Cargando datos del usuario...</p>
                     )}
                   </>
                 )}
+                <div className="flex flex-col items-center justify-between w-full ">
+                  <Link
+                    className="btn graciasBtn active my-6 text-xl"
+                    to="/grabar-audio"
+                  >
+                    {" "}
+                    Grabar mensaje
+                  </Link>
+
+                  <a className="btn graciasBtn text-xl" href="#explora">
+                    detrás de cámaras
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -224,15 +221,15 @@ const Gracias = () => {
         <div id="explora" className="w-full h-screen  relative">
           <Explora />
         </div>
-        <div
-          id="compartir"
-          className="w-full h-full bg-black relative flexCenter text-[--yellow]"
-        >
-          <CompartirContenido
-            texto={"este sera algo inolvidable"}
-            url={"operacionmayo.com"}
-          />
-        </div>
+      </div>
+      <div
+        id="compartir"
+        className="w-full h-full bg-black relative flexCenter text-[--yellow]"
+      >
+        <CompartirContenido
+          texto={"este sera algo inolvidable"}
+          url={"operacionmayo.com"}
+        />
       </div>
     </>
   );

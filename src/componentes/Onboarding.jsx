@@ -103,7 +103,7 @@ const Onboarding = ({ setOnboarding }) => {
               </span>
             </div>
             <button
-              className="z-50 btn 2xl:text-2xl sm:text-3xl xs:text-2xl"
+              className="z-50 btn active 2xl:text-2xl sm:text-3xl xs:text-2xl"
               onClick={() => setOnboarding(false)}
             >
               Iniciar
