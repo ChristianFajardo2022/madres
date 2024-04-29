@@ -90,11 +90,13 @@ function CompartirContenido({ texto, url }) {
             <img src="/svg/x.svg" alt="" />
           </span>
         </TwitterShareButton>
-        <FacebookShareButton quote={texto} url={url}>
-          <span className="w-20 h-20 inline-block">
-            <img src="/svg/facebook.svg" alt="" />
-          </span>
-        </FacebookShareButton>
+
+        <span
+          onClick={compartirConWebShareAPI}
+          className="w-20 h-20 inline-block"
+        >
+          <img src="/svg/facebook.svg" alt="" />
+        </span>
       </div>
     </div>
   );
