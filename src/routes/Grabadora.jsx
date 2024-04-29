@@ -143,7 +143,7 @@ function Grabadora() {
       </div>
       <Prospero
         customStyle={
-          "lg:left-20 xs:left-4 translate-x-[-50%] 2xl:top-10 xl:top-20 xs:top-6"
+          "lg:left-20 xs:left-6 translate-x-[-50%] 2xl:top-10 xl:top-20 xs:top-6"
         }
       />
       <Comercial playVideo={playVideo} setPlayVideo={setPlayVideo} />
