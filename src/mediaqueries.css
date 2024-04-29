@@ -1,0 +1,35 @@
+@media screen and (aspect-ratio: 8/5) {
+  .corazonOso {
+    top: 50% !important;
+    left: 46% !important;
+    width: 15.5rem !important;
+  }
+  .prospero {
+    top: 5rem !important;
+  }
+  .textoStock {
+    transform: translateX(-3%) !important;
+  }
+}
+
+@media screen and (min-aspect-ratio: 9/18) and (max-aspect-ratio: 10/16) {
+  .corazonOso {
+    top: 63% !important;
+  }
+  .osoVideo {
+    object-position: 0 19% !important;
+  }
+}
+
+@media screen and (width: 375px) and (height: 667px) {
+  .prospero {
+    top: 2rem !important;
+  }
+  .corazonOso {
+    top: 67% !important;
+    width: 7rem !important;
+  }
+  .osoVideo {
+    object-position: 0 19% !important;
+  }
+}
