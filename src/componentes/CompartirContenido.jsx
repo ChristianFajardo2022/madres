@@ -37,10 +37,10 @@ function CompartirContenido({ texto, url }) {
   };
 
   return (
-    <div className="flex flex-col lg:w-2/4 sm:w-1/2 xs:w-full text-6xl flexCenter">
+    <div className="flex flex-col lg:w-2/4 sm:w-1/2 xs:w-full h-full text-6xl flexCenter">
       <div className="w-full rotate-180 gradiente h-screen absolute z-[2]"></div>
       <LoadVideo
-        customStyle={"absolute top-0 left-0 z-[1]"}
+        customStyle={"absolute bottom-0 left-0 z-[1]"}
         url={"/videos/backComparte.mp4"}
         loop={true}
       />

@@ -224,7 +224,7 @@ const Gracias = () => {
       </div>
       <div
         id="compartir"
-        className="w-full h-full bg-black relative flexCenter text-[--yellow]"
+        className="w-full h-screen bg-black relative flexCenter text-[--yellow]"
       >
         <CompartirContenido
           texto={"este sera algo inolvidable"}
