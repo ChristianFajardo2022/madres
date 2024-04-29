@@ -268,7 +268,7 @@ const FormSteps = ({
                   <div className={`cardSingle  `}></div>
                 </div>
 
-                {/* Mensaje Bienvenida */}
+                {/* Formulario de nombre   */}
 
                 <div
                   className="cardPadre"
@@ -360,7 +360,7 @@ const FormSteps = ({
                   </div>
                 </div>
 
-                {/* Formulario de nombre   */}
+                {/* Funcion grabar audio */}
 
                 <div
                   className="cardPadre"
@@ -408,7 +408,7 @@ const FormSteps = ({
                   </div>
                 </div>
 
-                {/* Funcion grabar audio */}
+                {/* Mensaje de confirmación y boton de compra */}
 
                 <div
                   className="cardPadre"
@@ -451,7 +451,7 @@ const FormSteps = ({
                   </div>
                 </div>
 
-                {/* Mensaje de confirmación y boton de compra */}
+                {/* Ir al carrito */}
 
                 <div
                   className="cardPadre"
@@ -485,7 +485,6 @@ const FormSteps = ({
                 </div>
               </div>
 
-              {/* Botones de siguiente y atras*/}
               <div
                 style={{
                   width: `${anchoHijoEnPixel + "px"}`,
@@ -506,7 +505,7 @@ const FormSteps = ({
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer absolute  right-0 inline-block w-6 h-auto ${
-                      paso === 2 || paso === 4 || (paso === 3 && irpaso6)
+                      paso === 3 || paso === 4 || (paso === 2 && irpaso6)
                         ? "activebtn"
                         : paso === 1 &&
                           formData.firstname !== "" &&

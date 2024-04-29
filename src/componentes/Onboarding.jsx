@@ -90,7 +90,7 @@ const Onboarding = ({ setOnboarding }) => {
         )}
         {paso == 2 && (
           <>
-            <div className="w-3/4 sm:h-3/4 xs:h-1/2 relative">
+            <div className="lg:w-1/2 xs:w-3/4 sm:h-3/4 xs:h-1/2 relative">
               <span className="marco floatcenter w-full h-auto">
                 <img className="" src="/svg/marco2.svg" alt="" />
               </span>
