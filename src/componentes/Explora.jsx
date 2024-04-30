@@ -120,7 +120,7 @@ const Explora = () => {
                 />
               </div>
 
-              <div className="flex justify-between items-center  h-1/3 w-full">
+              <div className="flex justify-around items-center  h-1/3 w-full">
                 {youtube.map((item) => (
                   <div
                     key={item.id}
