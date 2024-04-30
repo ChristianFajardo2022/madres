@@ -528,3 +528,57 @@ input[type="number"] {
   lg:text-xs xs:text-xl
   lg:w-80 xs:w-48;
 }
+
+.iconSocial {
+  @apply transition;
+}
+.iconSocial path {
+  @apply transition;
+
+  fill: #ffffff00;
+  stroke-width: "2px";
+}
+.iconSocial:hover path {
+  fill: var(--yellow);
+  stroke-width: 0;
+}
+
+.iconSocial2 {
+  @apply transition;
+}
+.iconSocial2 .Xicon .borde1 {
+  @apply transition;
+  fill: #ffffff00;
+}
+.iconSocial2 .Xicon .border3 {
+  @apply transition;
+  fill: var(--yellow);
+}
+.iconSocial2:hover .Xicon .border3 {
+  fill: #002433;
+}
+.iconSocial2:hover .Xicon .borde1 {
+  fill: var(--yellow);
+}
+.iconSocial3 {
+  @apply transition;
+}
+.iconSocial3 .whtIcon .border1 {
+  @apply transition;
+  fill: #ffffff00;
+}
+.iconSocial3 .whtIcon .border2 {
+  @apply transition;
+  fill: #ffffff00;
+}
+.iconSocial3:hover .whtIcon .border1 {
+  fill: var(--yellow);
+}
+
+.iconSocial3 .whtIcon .border3 {
+  @apply transition;
+  fill: var(--yellow);
+}
+.iconSocial3:hover .whtIcon .border3 {
+  fill: #002433;
+}
