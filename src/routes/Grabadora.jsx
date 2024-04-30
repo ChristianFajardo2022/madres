@@ -187,7 +187,7 @@ function Grabadora() {
           )}
 
           <div className=" w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 xs:pt-6 lg:pb-6 items-center lg:w-1/2 xs:w-1/2 lg:h-full xs:h-1/2">
+            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 xs:pt-6 lg:pb-6 items-center lg:w-1/2 xs:w-full lg:h-full xs:h-1/2">
               {/*           <p className="py-4">{status}</p> */}
               <Texto
                 customstyle={"textoStock w-full text-center"}

@@ -1,10 +1,11 @@
 import React from "react";
+import ToltipCorazon from "./ToltipCorazon";
 
 const CorazonPalpitante = ({ handleClick, botonAudio }) => {
   return (
     <>
-      <span className="Oprime opacity-0 pointer-events-none">
-        Oprime el corazón para reproducir tu mensaje
+      <span className="Oprime">
+        <ToltipCorazon />
       </span>
       <span
         onClick={handleClick}

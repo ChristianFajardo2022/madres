@@ -359,7 +359,7 @@ input[type="number"] {
   @apply opacity-100;
 }
 .btn.btnGrabadora {
-  @apply bg-opacity-0 w-full;
+  @apply bg-opacity-0 w-full xs:min-w-[19rem];
 }
 .btn.btnGrabadora.noPadding {
   @apply px-0 mb-4;
@@ -524,8 +524,7 @@ input[type="number"] {
 }
 
 .Oprime {
-  @apply absolute lg:top-1/2 lg:-translate-y-[80%] lg:left-2/3 
-  max-lg:hidden
-  text-white bg-[#606060] bg-opacity-35 border border-[--yellow] 
-  rounded-3xl w-64 px-12 py-6 text-center font-inter text-xl;
+  @apply opacity-0 pointer-events-none absolute top-1/2 lg:-translate-y-[80%] xs:-translate-y-[50%] xs:left-[10%] lg:left-[20%] 
+  lg:text-xs xs:text-xl
+  lg:w-80 xs:w-48;
 }
