@@ -125,6 +125,13 @@ function Grabadora() {
         duration: 1,
         delay: 0.3,
       });
+
+      gsap.to(".Oprime", {
+        opacity: 1,
+        ease: "power1.inOut",
+        duration: 1,
+        delay: 0.4,
+      });
     }
   }, [botonAudio]);
   /*****Play al video */
@@ -240,7 +247,9 @@ function Grabadora() {
         className="w-full h-full bg-black relative flexCenter text-[--yellow]"
       >
         <CompartirContenido
-          texto={"este sera algo inolvidable"}
+          texto={
+            "En operacionmayo.com puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
+          }
           url={"operacionmayo.com"}
         />
       </div>

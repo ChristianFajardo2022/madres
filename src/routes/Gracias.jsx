@@ -236,7 +236,9 @@ const Gracias = () => {
         className="w-full h-screen bg-black relative flexCenter text-[--yellow]"
       >
         <CompartirContenido
-          texto={"este sera algo inolvidable"}
+          texto={
+            "En operacionmayo.com puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
+          }
           url={"operacionmayo.com"}
         />
       </div>

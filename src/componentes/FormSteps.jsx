@@ -11,6 +11,7 @@ import { mobile, tablet } from "../helpers/medidasResponsive";
 import Onboarding from "./Onboarding";
 import gsap from "gsap";
 import { url, urlAlcarrito, urlAlcarritoDev, urlDev } from "../data/url";
+import Frases from "./Frases";
 
 const FormSteps = ({
   startRecording,
@@ -469,7 +470,7 @@ const FormSteps = ({
                         {isLoading && (
                           <>
                             <p className="text-center font-normal w-full mt-6">
-                              Estas siendo redireccionado al checkout de,
+                              <Frases />
                             </p>
                             <span className=" w-3/5 h-auto">
                               <img src="/Logoalcarrito.webp" alt="" />
