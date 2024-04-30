@@ -525,7 +525,7 @@ input[type="number"] {
 
 .Oprime {
   @apply absolute lg:top-1/2 lg:-translate-y-[80%] lg:left-2/3 
-  xs:top-[80%] xs:left-1/2 xs:-translate-x-1/2
+  max-lg:hidden
   text-white bg-[#606060] bg-opacity-35 border border-[--yellow] 
   rounded-3xl w-64 px-12 py-6 text-center font-inter text-xl;
 }
