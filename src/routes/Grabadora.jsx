@@ -23,6 +23,7 @@ import CompartirContenido from "../componentes/CompartirContenido";
 import Prospero from "../componentes/Prospero";
 import Video from "../componentes/Video";
 import Comercial from "../componentes/Comercial";
+import { Helmet } from "react-helmet";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
@@ -138,6 +139,14 @@ function Grabadora() {
 
   return (
     <>
+      <Helmet>
+        <title>Graba tu mensaje - operación mayo</title>
+        <link rel="canonical" href="/grabar-audio" />
+        <meta
+          name="description"
+          content="puedes grabar un mensaje de voz para enviárselo a mamá"
+        />
+      </Helmet>
       <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
         <Navbar handlePlayVideo={handlePlayVideo} />
       </div>
@@ -156,7 +165,7 @@ function Grabadora() {
               onLoad={() => setElemtCargado(true)}
               className="osoVideo oso absolute left-0 z-[-1] "
               src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
-              alt=""
+              alt="Oso peluche Homenaje dia de las madres Inter rapidísimo"
             />
           )}
 

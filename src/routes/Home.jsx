@@ -9,6 +9,7 @@ import LoadingEnd from "../componentes/Loading";
 import IconPlayVideo from "../componentes/IconPlayVideo";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import Prospero from "../componentes/Prospero";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -214,6 +215,11 @@ const Home = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Operación mayo</title>
+        <link rel="canonical" href="/" />
+        <meta name="description" content="Homenaje para todas las madres" />
+      </Helmet>
       <div
         className={`w-full h-full bg-plate-500 flex justify-center items-center bg-black overflow-hidden`}
       >
@@ -222,7 +228,7 @@ const Home = () => {
           onLoad={() => setSoldado(true)}
           src="/imagenes/operacion-mayo.webp"
           className="hidden"
-          alt=""
+          alt="Operación mayo, homenaje dia de las madres"
         />
         <LoadVideo
           onLoadedData={() => setNeblina(true)}
@@ -250,12 +256,12 @@ const Home = () => {
                   : "/imagenes/operacion-mayo.webp"
               }`}
               className="bg-Img block"
-              alt=""
+              alt="Operación mayo, homenaje dia de las madres"
             />
 
             <h1 className="fixed h-full w-full z-10 left-0 top-0 pointer-events-none">
               <span className="absolute opacity-0 invisible left-0 top-0">
-                operacion mayo
+                Operación mayo, homenaje dia de las madres
               </span>
               <img
                 src={`${
@@ -266,7 +272,7 @@ const Home = () => {
                     : "/imagenes/logoHome.webp"
                 }`}
                 className="logoOperacion absolute top-0 opacity-0 "
-                alt=""
+                alt="Logo Operación mayo, homenaje dia de las madres"
               />
             </h1>
 

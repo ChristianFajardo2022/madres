@@ -7,7 +7,10 @@ const Prospero = ({ customStyle }) => {
       <span
         className={`${customStyle} prospero absolute z-50  inline-block w-6 h-auto`}
       >
-        <img src="/svg/prospero.svg" alt="" />
+        <img
+          src="/svg/prospero.svg"
+          alt="Logo inter rapidísimo homenaje a las madres"
+        />
       </span>
     </Link>
   );

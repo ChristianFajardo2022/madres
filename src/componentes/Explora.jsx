@@ -82,7 +82,7 @@ const Explora = () => {
                   <img
                     className="absolute top-0 left-0 z-0"
                     src={item.imagen}
-                    alt=""
+                    alt="Comercial de Homenaje dia de las madres Inter rapidísimo"
                   />
                   <h2 className="z-[5] absolute bottom-4 text-5xl left-1/2 translate-x-[-50%]">
                     {item.title}
@@ -132,7 +132,10 @@ const Explora = () => {
                     <h2 className="z-[5] absolute bottom-4 text-2xl left-1/2 translate-x-[-50%]">
                       {item.title}
                     </h2>
-                    <img src={item.imagen} alt="" />
+                    <img
+                      src={item.imagen}
+                      alt="Comercial de Homenaje dia de las madres Inter rapidísimo"
+                    />
                   </div>
                 ))}
               </div>

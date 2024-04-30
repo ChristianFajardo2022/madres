@@ -30,16 +30,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/onboarding",
-    element: (
-      <>
-        <ScrollToTopOnRouteChange />
-        <Onboarding />
-      </>
-    ),
-    errorElement: <ErrorPage />,
-  },
+
   {
     path: "/grabar-audio",
     element: (
@@ -50,16 +41,7 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
   },
-  {
-    path: "/formulario",
-    element: (
-      <>
-        <ScrollToTopOnRouteChange />
-        <Formulario />
-      </>
-    ),
-    errorElement: <ErrorPage />,
-  },
+
   {
     path: "/administrador",
     element: (

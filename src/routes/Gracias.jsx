@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { url, urlDev } from "../data/url";
 import Explora from "../componentes/Explora";
 import CompartirContenido from "../componentes/CompartirContenido";
+import { Helmet } from "react-helmet";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -91,6 +92,14 @@ const Gracias = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Gracias - operación mayo</title>
+        <link rel="canonical" href="/gracias" />
+        <meta
+          name="description"
+          content="Gracias por ser parte de esta entrega"
+        />
+      </Helmet>
       <div className="w-full relative h-[200vh]">
         {loading && <LoadingEnd elemtCargado={elemtCargado} />}
 

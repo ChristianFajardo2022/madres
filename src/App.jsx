@@ -17,7 +17,7 @@ const App = () => {
       <Helmet>
         <title>Operación mayo</title>
         <link rel="canonical" href="/" />
-        <meta name="description" content="Homenaje para todos las madres" />
+        <meta name="description" content="Homenaje para todas las madres" />
       </Helmet>
 
       <>
