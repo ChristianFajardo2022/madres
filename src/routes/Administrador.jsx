@@ -61,7 +61,7 @@ function Administrador() {
       <button className="btn active mb-12" onClick={descargarCSV}>
         descargar DB
       </button>
-      <div className="min-h-96 bg-zinc-700 py-4 px-4 flexCenter flex-wrap rounded-3xl">
+      <div className="min-h-96 bg-zinc-700 py-4 px-4 flexCenter flex-wrap rounded-3xl overflow-auto">
         <div className="w-full flex justify-evenly">
           <input
             type="text"
@@ -84,9 +84,9 @@ function Administrador() {
             Filtrar
           </button>
         </div>
-        <ul className="mr-5 my-5 h-full text-white">
+        <ul className=" text-white">
           {usuarios.map((usuario) => (
-            <>
+            <ul>
               <li key={usuario.id} className="w-full my-6">
                 <span className="text-xl font-black">{usuario.firstname}</span>{" "}
                 - {usuario.email}
@@ -96,7 +96,7 @@ function Administrador() {
                 controls
                 src={`${usuario.audioURL}.mp3`}
               ></audio>
-            </>
+            </ul>
           ))}
         </ul>
       </div>
