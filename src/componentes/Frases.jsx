@@ -3,9 +3,9 @@ import { gsap } from "gsap";
 
 const Frases = () => {
   const frases = [
-    "Estas siendo redireccionado al checkout de...",
-    "El osito de peluche, originalmente decía “I love you”.",
-    "El osito de peluche número uno, lo tiene Isabel en su habitación.",
+    "Estás siendo redireccionado al checkout de...",
+    "El osito de peluche originalmente decía “I love you”.",
+    "El osito de peluche número uno lo tiene Isabel en su habitación.",
     "Gracias a todos los héroes que se alejan de casa para protegernos.",
     "Existen todo tipo de madres que merecen ser celebradas.",
     "Este es un homenaje a quienes entendieron la entrega de ser mamá.",

@@ -13,7 +13,6 @@ function CompartirContenido({ texto, url }) {
         .share({
           title: "Compartir",
           text: texto,
-          url: url,
         })
         .then(() => console.log("Contenido compartido exitosamente"))
         .catch((error) => console.error("Error al compartir:", error));
@@ -31,9 +30,7 @@ function CompartirContenido({ texto, url }) {
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
-    alert(
-      "La URL se ha copiado al portapapeles. ¡pegala En facebook o donde quieras!"
-    );
+    alert("La URL se ha copiado. compartela en facebook o donde quieras!");
   };
 
   return (
@@ -44,36 +41,19 @@ function CompartirContenido({ texto, url }) {
         url={"/videos/backComparte.mp4"}
         loop={true}
       />
-      {navigator.share ? (
-        <>
-          <button
-            className="Bebas ajusteFuente w-full z-10"
-            onClick={compartirConWebShareAPI}
-          >
-            Comparte con tus contactos
-          </button>
-          <div className="flex w-96 items-center justify-between mb-16 z-10">
-            <div className="line"></div>
-            <div className=" w-4/12 p-12">
-              <img src="/svg/estrella.svg" alt="" />
-            </div>
-            <div className="line"></div>
-          </div>
-        </>
-      ) : (
-        <>
-          <button className="Bebas ajusteFuente w-full z-10">
-            Compartir con tus contactos
-          </button>
-          <div className="flex w-96 items-center justify-between mb-16 z-10">
-            <div className="line"></div>
-            <div className=" w-4/12 p-12">
-              <img src="/svg/estrella.svg" alt="" />
-            </div>
-            <div className="line"></div>
-          </div>
-        </>
-      )}
+
+      <h2 className="z-10 lg:text-5xl xs:text-4xl w-96 text-center">
+        Comparte con tus contactos
+      </h2>
+      <div className="flex w-96 items-center justify-between mt-6 mb-16 z-10">
+        <div className="line"></div>
+        <div className="flexCenter w-4/12 h-12">
+          <span className="w-8 h-8 inline-block">
+            <img src="/svg/estrella.svg" alt="" />
+          </span>
+        </div>
+        <div className="line"></div>
+      </div>
 
       <div className="flex  justify-between items-center  w-96 z-10 max-lg:flex-wrap">
         <WhatsappShareButton title={texto} url={url}>

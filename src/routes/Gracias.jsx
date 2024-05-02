@@ -100,22 +100,41 @@ const Gracias = () => {
           content="Gracias por ser parte de esta entrega"
         />
       </Helmet>
-      <div className="w-full relative h-[200vh]">
+      <div
+        className={`w-full relative  ${
+          !status == "" ? "h-[200vh]" : "h-[100vh]"
+        }`}
+      >
         {loading && <LoadingEnd elemtCargado={elemtCargado} />}
 
         <div id="graba" className="w-full h-screen ">
-          <img
-            onLoad={() => setElemtCargado(true)}
-            className="osoVideo oso absolute left-0 z-[-1]"
-            src={
-              tablet
-                ? "/imagenes/bg-gracias.webp"
-                : mobile
-                ? "/imagenes/GRACIAS-OSOM.webp"
-                : "/imagenes/bg-gracias.webp"
-            }
-            alt=""
-          />
+          {status == "" ? (
+            <img
+              onLoad={() => setElemtCargado(true)}
+              className={"osoVideo oso absolute left-0 z-[-1]"}
+              src={
+                tablet
+                  ? "/imagenes/graciasNone.webp"
+                  : mobile
+                  ? "/imagenes/bg-graciasNoneM.webp"
+                  : "/imagenes/bg-graciasNone.webp"
+              }
+              alt=""
+            />
+          ) : (
+            <img
+              onLoad={() => setElemtCargado(true)}
+              className={"osoVideo oso absolute left-0 z-[-1]"}
+              src={
+                tablet
+                  ? "/imagenes/bg-gracias.webp"
+                  : mobile
+                  ? "/imagenes/GRACIAS-OSOM.webp"
+                  : "/imagenes/bg-gracias.webp"
+              }
+              alt=""
+            />
+          )}
 
           <div className="lg:p-8 xs:p-0 w-full h-full flex max-lg:flex-col relative justify-between items-center">
             <div className=" w-full relative h-full flex flex-col items-center justify-between pb-48">
@@ -150,7 +169,8 @@ const Gracias = () => {
                 {error || status === "" || !status ? (
                   <>
                     <h2 className="w-1/2 m-auto mb-6 text-center">
-                      Te invitamos a grabar <br /> un mensaje a tu ser especial
+                      Graba un mensaje y envíaselo a los <br />
+                      que entendieron la entrega de ser mamá
                     </h2>
                   </>
                 ) : (
@@ -216,32 +236,38 @@ const Gracias = () => {
                     to="/grabar-audio"
                   >
                     {" "}
-                    Grabar mensaje
+                    {!status == "" ? "Grabar de nuevo" : "Iniciar"}
                   </Link>
 
-                  <a className="btn graciasBtn text-xl" href="#explora">
-                    detrás de cámaras
-                  </a>
+                  {!status == "" && (
+                    <a className="btn graciasBtn text-xl" href="#explora">
+                      detrás de cámaras
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="explora" className="w-full h-screen  relative">
-          <Explora />
+        {!status == "" && (
+          <div id="explora" className="w-full h-screen  relative">
+            <Explora />
+          </div>
+        )}
+      </div>
+      {!status == "" && (
+        <div
+          id="compartir"
+          className="w-full h-screen bg-black relative flexCenter text-[--yellow]"
+        >
+          <CompartirContenido
+            texto={
+              "En operacionmayo.com puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
+            }
+            url={"operacionmayo.com"}
+          />
         </div>
-      </div>
-      <div
-        id="compartir"
-        className="w-full h-screen bg-black relative flexCenter text-[--yellow]"
-      >
-        <CompartirContenido
-          texto={
-            "En operacionmayo.com puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
-          }
-          url={"operacionmayo.com"}
-        />
-      </div>
+      )}
     </>
   );
 };

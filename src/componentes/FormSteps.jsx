@@ -286,7 +286,7 @@ const FormSteps = ({
                       <div className="w-full">
                         <div className="flex flex-col w-full">
                           <p className="titulosForm">
-                            Primero, ¿Cuál es tu nombre?
+                            Primero, ¿cuál es tu nombre?
                           </p>
                           <input
                             type="text"
@@ -311,7 +311,7 @@ const FormSteps = ({
                           />
                         </div>
                         <div className="flex flex-col w-full">
-                          <p className="titulosForm">¿Tu email?</p>
+                          <p className="titulosForm">¿Tu e-mail?</p>
 
                           <input
                             type="email"
@@ -500,13 +500,13 @@ const FormSteps = ({
                     <img src="/svg/next.svg" alt="" />
                   </span>
                 )}
-                {paso < 4 && (
+                {paso < 3 && (
                   <span
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
                     }
                     className={`cursor-pointer absolute  right-0 inline-block w-6 h-auto ${
-                      paso === 3 || paso === 4 || (paso === 2 && irpaso6)
+                      paso === 4 || (paso === 2 && irpaso6)
                         ? "activebtn"
                         : paso === 1 &&
                           formData.firstname !== "" &&

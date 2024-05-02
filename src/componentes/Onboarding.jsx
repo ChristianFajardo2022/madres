@@ -70,7 +70,7 @@ const Onboarding = ({ setOnboarding }) => {
         {paso == 1 && (
           <>
             <h2 className="textNimate   text-center tracking-[-1px] font-inter font-semibold text-[--yellow] sm:w-1/2 xs:w-[80%] inline-block 2xl:text-[2.2rem] 2xl:leading-[2.5rem] lg:text-5xl xs:text-2xl">
-              A las abuelas, papás, hermanos, tíos o a quién haya asumido este
+              A las abuelas, papás, hermanos, tíos o a quien haya asumido este
               rol en tu vida,
             </h2>
             <span className="relative lottie inline-block sm:w-1/2 xs:w-[65%]  h-auto">
