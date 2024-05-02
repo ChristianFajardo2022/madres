@@ -90,6 +90,9 @@ const Gracias = () => {
       setLoading(false);
     });
   };
+
+  const vacio = status == null || status == "";
+  console.log(vacio);
   return (
     <>
       <Helmet>
@@ -100,15 +103,11 @@ const Gracias = () => {
           content="Gracias por ser parte de esta entrega"
         />
       </Helmet>
-      <div
-        className={`w-full relative  ${
-          !status == "" ? "h-[200vh]" : "h-[100vh]"
-        }`}
-      >
+      <div className={`w-full relative  ${vacio ? "h-[100vh]" : "h-[200vh]"}`}>
         {loading && <LoadingEnd elemtCargado={elemtCargado} />}
 
         <div id="graba" className="w-full h-screen ">
-          {status == "" ? (
+          {vacio ? (
             <img
               onLoad={() => setElemtCargado(true)}
               className={"osoVideo oso absolute left-0 z-[-1]"}
@@ -149,7 +148,7 @@ const Gracias = () => {
                     <img src="/svg/estrella.svg" alt="" />
                   </span>
                   <span className="my-2 ml-4 mr-3 lg:text-6xl xs:text-5xl uppercase">
-                    {(status === "" || !status) && "OPERACIÓN MAYO"}
+                    {vacio && "OPERACIÓN MAYO"}
                     {status === "approved" && "GRACIAS POR TU ENTREGA"}
                     {status === "pending" && "GRACIAS POR TU ENTREGA"}
                     {status === "canceled" && "misión fallida"}
@@ -166,9 +165,9 @@ const Gracias = () => {
               </h1>
 
               <div className="flex flex-col items-center px-[3rem] w-full">
-                {error || status === "" || !status ? (
+                {error || vacio ? (
                   <>
-                    <h2 className="w-1/2 m-auto mb-6 text-center">
+                    <h2 className="w-full m-auto mb-6 text-center">
                       Graba un mensaje y envíaselo a los <br />
                       que entendieron la entrega de ser mamá
                     </h2>
@@ -236,10 +235,10 @@ const Gracias = () => {
                     to="/grabar-audio"
                   >
                     {" "}
-                    {!status == "" ? "Grabar de nuevo" : "Iniciar"}
+                    {vacio ? "Iniciar" : "Grabar de nuevo"}
                   </Link>
 
-                  {!status == "" && (
+                  {!vacio && (
                     <a className="btn graciasBtn text-xl" href="#explora">
                       detrás de cámaras
                     </a>
@@ -249,13 +248,13 @@ const Gracias = () => {
             </div>
           </div>
         </div>
-        {!status == "" && (
+        {!vacio && (
           <div id="explora" className="w-full h-screen  relative">
             <Explora />
           </div>
         )}
       </div>
-      {!status == "" && (
+      {!vacio && (
         <div
           id="compartir"
           className="w-full h-screen bg-black relative flexCenter text-[--yellow]"

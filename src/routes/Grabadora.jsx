@@ -31,7 +31,7 @@ function Grabadora() {
   const [botonAudio, setBotonAudio] = useState(false);
   const [reproducir, setReproducir] = useState(false);
   const [elemtCargado, setElemtCargado] = useState(false);
-  const [stock, setStock] = useState(249);
+  const [stock, setStock] = useState(500);
 
   const videoLoad = useRef(null);
 

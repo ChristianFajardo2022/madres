@@ -67,7 +67,7 @@ const Explora = () => {
           dangerouslySetInnerHTML={{ __html: activeVideo.title }}
         />
 
-        <div className="videosCards my-6 w-full h-3/3 flex  items-center justify-between max-lg:flex-grow max-lg:flex-col">
+        <div className="videosCards my-6 w-full h-3/3 flex  cursor-pointer items-center justify-between max-lg:flex-grow max-lg:flex-col">
           {(full || laptop || minilaptop) && (
             <>
               {youtube.map((item) => (

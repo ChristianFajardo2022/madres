@@ -56,7 +56,7 @@ function CompartirContenido({ texto, url }) {
       </div>
 
       <div className="flex  justify-between items-center  w-96 z-10 max-lg:flex-wrap">
-        <WhatsappShareButton title={texto} url={url}>
+        <WhatsappShareButton title={texto}>
           <span className="iconSocial3 w-20 h-20 inline-block">
             <svg
               className="whtIcon"
@@ -98,7 +98,7 @@ function CompartirContenido({ texto, url }) {
             </svg>
           </span>
         </WhatsappShareButton>
-        <TwitterShareButton title={texto} url={url}>
+        <TwitterShareButton title={texto}>
           <span className="iconSocial2 w-20 h-20 inline-block">
             <svg
               className="Xicon"
