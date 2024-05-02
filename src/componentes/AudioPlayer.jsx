@@ -31,7 +31,7 @@ const AudioPlayer = ({
   const stopped = () => {
     stopRecording();
     setStop(true);
-    setMensaje("Ahora reproduce tu audio");
+    setMensaje("Reproduce tu audio, para continuar");
   };
   useEffect(() => {
     if (reproducir) {
