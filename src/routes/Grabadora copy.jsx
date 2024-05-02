@@ -80,7 +80,11 @@ function Grabadora() {
         {(mobile || tablet) && (
           <img
             className="osoVideo oso absolute left-0 z-[-1]"
-            src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
+            src={
+              tablet
+                ? "/imagenes/oso-fondo-tablet.jpg"
+                : "/imagenes/oso-fondo-mobile.jpg"
+            }
             alt=""
           />
         )}

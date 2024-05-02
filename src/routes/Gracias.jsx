@@ -234,8 +234,8 @@ const Gracias = () => {
                     className="btn graciasBtn active my-6 text-xl"
                     to="/grabar-audio"
                   >
-                    {" "}
-                    {vacio ? "Iniciar" : "Grabar de nuevo"}
+                    {/* Posible eliminacion */}
+                    {vacio ? "Iniciar" : "Regresar al Home"}
                   </Link>
 
                   {!vacio && (
