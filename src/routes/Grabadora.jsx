@@ -154,14 +154,11 @@ function Grabadora() {
           content="puedes grabar un mensaje de voz para enviárselo a mamá"
         />
       </Helmet>
-      <div className="fixed right-0 top-0 z-[200] hamburger text-white inter">
+      <header className="fixed lg:p-12 xs:p-6 w-full flex justify-between right-0 top-0 z-[200] hamburger text-white inter">
+        <Prospero />
         <Navbar handlePlayVideo={handlePlayVideo} />
-      </div>
-      <Prospero
-        customStyle={
-          "lg:left-20 xs:left-6 translate-x-[-50%] 2xl:top-10 xl:top-20 xs:top-6"
-        }
-      />
+      </header>
+
       <Comercial playVideo={playVideo} setPlayVideo={setPlayVideo} />
       <div id="graba" className="w-full h-full relative">
         <div className="w-full gradiente h-screen absolute z-[1]"></div>
@@ -187,13 +184,13 @@ function Grabadora() {
           )}
 
           <div className=" w-full h-full flex max-lg:flex-col relative justify-between items-center">
-            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 xs:pt-6 lg:pb-6 items-center lg:w-1/2 xs:w-full lg:h-full xs:h-1/2">
+            <div className="cajaOso z-20 flex flex-col relative justify-between 2xl:pt-28 xl:pt-48 xs:pt-3 lg:pb-6 items-center lg:w-1/2 xs:w-full lg:h-full xs:h-1/2">
               {/*           <p className="py-4">{status}</p> */}
               <Texto
                 customstyle={"textoStock w-full text-center"}
                 title={
                   <>
-                    <p className="lg:text-4xl xs:text-3xl">
+                    <p className="w-1/2 m-auto lg:text-4xl xs:text-3xl">
                       <span className="text-[var(--yellow)]">
                         {stock <= 250 && `Aún quedan: ${stock} osos gratis`}
                         {stock >= 250 && `Osos gratis disponibles: ${stock}`}

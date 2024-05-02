@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HamburgesaIcon from "./HamburgesaIcon";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
+import { full, laptop, minilaptop } from "../helpers/medidasResponsive";
 
 const Navbar = ({ gracias, handlePlayVideo }) => {
   const [active, setActive] = useState(false);
@@ -92,65 +93,69 @@ const Navbar = ({ gracias, handlePlayVideo }) => {
           <a href="#compartir">Compartir</a>
         </li>
       </nav>
-      {gracias ? (
+      {(full || laptop || minilaptop) && (
         <>
-          {seccioNumber == 2 && (
-            <a
-              href={`#graba`}
-              onClick={() => setseccioNumber(1)}
-              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
-          )}
+          {gracias ? (
+            <>
+              {seccioNumber == 2 && (
+                <a
+                  href={`#graba`}
+                  onClick={() => setseccioNumber(1)}
+                  className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
 
-          {seccioNumber == 1 && (
-            <a
-              href={`#explora`}
-              onClick={() => setseccioNumber(2)}
-              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
-          )}
-        </>
-      ) : (
-        <>
-          {seccioNumber == 2 && (
-            <a
-              href={`#graba`}
-              onClick={() => setseccioNumber(1)}
-              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
-          )}
-          {seccioNumber == 3 && (
-            <a
-              href={`#explora`}
-              onClick={() => setseccioNumber(2)}
-              className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
-          )}
-          {seccioNumber == 1 && (
-            <a
-              href={`#explora`}
-              onClick={() => setseccioNumber(2)}
-              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
-          )}
-          {seccioNumber == 2 && (
-            <a
-              href={`#compartir`}
-              onClick={() => setseccioNumber(3)}
-              className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
-            >
-              <img src="/svg/arrow.svg" alt="" />
-            </a>
+              {seccioNumber == 1 && (
+                <a
+                  href={`#explora`}
+                  onClick={() => setseccioNumber(2)}
+                  className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
+            </>
+          ) : (
+            <>
+              {seccioNumber == 2 && (
+                <a
+                  href={`#graba`}
+                  onClick={() => setseccioNumber(1)}
+                  className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
+              {seccioNumber == 3 && (
+                <a
+                  href={`#explora`}
+                  onClick={() => setseccioNumber(2)}
+                  className="fixed top-2 left-1/2 w-10 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
+              {seccioNumber == 1 && (
+                <a
+                  href={`#explora`}
+                  onClick={() => setseccioNumber(2)}
+                  className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
+              {seccioNumber == 2 && (
+                <a
+                  href={`#compartir`}
+                  onClick={() => setseccioNumber(3)}
+                  className="fixed bottom-2 rotate-180 w-10 left-1/2 translate-x-[-50%]"
+                >
+                  <img src="/svg/arrow.svg" alt="" />
+                </a>
+              )}
+            </>
           )}
         </>
       )}

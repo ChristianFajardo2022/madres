@@ -489,11 +489,7 @@ input[type="number"] {
 }
 
 .gradiente {
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(255, 255, 255, 0) 17%
-  );
+  background: linear-gradient(0deg, #000000 0%, #00000012 44.12%);
 }
 
 .textNimate {
