@@ -144,7 +144,7 @@ function Grabadora() {
                 }
                 incremento={"w-[3rem]"}
                 rotate={"translate-x-[-100%]"}
-                imagen={"/imagenes/heart.png"}
+                imagen={"/imagenes/heart.webp"}
                 texto={
                   "Tiene una cicatriz en el pecho, causada cuando el soldado Ramírez metió en su corazón el mejor regalo que una madre puede recibir."
                 }

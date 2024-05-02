@@ -17,7 +17,7 @@ const CorazonPalpitante = ({ handleClick, botonAudio }) => {
       >
         <img
           className="xs:w-[70%] lg:w-[80%] floatcenter h-auto"
-          src="/imagenPruebaCorazon.png"
+          src="/imagenes/imagenPruebaCorazon.webp"
           alt=""
         />
         <svg

@@ -168,7 +168,11 @@ function Grabadora() {
             <img
               onLoad={() => setElemtCargado(true)}
               className="osoVideo oso absolute left-0 z-[-1] "
-              src={tablet ? "/oso-fondo-tablet.jpg" : "/oso-fondo-mobile.jpg"}
+              src={
+                tablet
+                  ? "/imagenes/oso-fondo-tablet.webp"
+                  : "/imagenes/oso-fondo-mobile.webp"
+              }
               alt="Oso peluche Homenaje dia de las madres Inter rapidísimo"
             />
           )}

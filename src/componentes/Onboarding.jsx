@@ -40,7 +40,7 @@ const Onboarding = ({ setOnboarding }) => {
         {paso == 0 && (
           <>
             <span className="lg:w-1/2 xs:w-3/5 inline-block lg:mb-12">
-              <img src="/logo-operacion-mayo.svg" alt="" />
+              <img src="/svg/logo-operacion-mayo.svg" alt="" />
             </span>
             <div
               style={{

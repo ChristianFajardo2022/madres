@@ -25,19 +25,19 @@ const Explora = () => {
       id: 0,
       title: "MAKING OFF",
       url: "https://www.youtube.com/watch?v=JpjNBF1W4UA",
-      imagen: "/imagenesVideo/img-1.jpg",
+      imagen: "/imagenesVideo/making-off-operacion-mayo.webp",
     },
     {
       id: 1,
       title: "CABO RAMIREZ",
       url: "https://www.youtube.com/watch?v=A40AGZ9tPcw",
-      imagen: "/imagenesVideo/img-2.jpg",
+      imagen: "/imagenesVideo/cabo-ramirez.webp",
     },
     {
       id: 2,
-      title: "PESCADOR",
+      title: "SARGENTO",
       url: "https://www.youtube.com/watch?v=yHotu9zWfyM&t=363s",
-      imagen: "/imagenesVideo/img-3.jpg",
+      imagen: "/imagenesVideo/sargento-operacion-mayo.webp",
     },
   ];
 

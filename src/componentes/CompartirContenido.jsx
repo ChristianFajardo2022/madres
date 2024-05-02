@@ -52,7 +52,7 @@ function CompartirContenido({ texto, url }) {
         />
       ) : (
         <span className="w-full h-full absolute">
-          <img src="/imagenes/bg-Compartir.jpg" alt="" />
+          <img src="/imagenes/bg-Compartir.webp" alt="" />
         </span>
       )}
 

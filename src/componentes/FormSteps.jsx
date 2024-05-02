@@ -431,7 +431,7 @@ const FormSteps = ({
                         </p>
                         <span className="w-full h-auto inline-block relative">
                           <img
-                            src="/logo-operacion-mayo.svg"
+                            src="/svg/logo-operacion-mayo.svg"
                             alt="Operación mayo"
                           />
                         </span>
@@ -473,7 +473,7 @@ const FormSteps = ({
                               <Frases />
                             </p>
                             <span className=" w-3/5 h-auto">
-                              <img src="/Logoalcarrito.webp" alt="" />
+                              <img src="/imagenes/Logoalcarrito.webp" alt="" />
                             </span>
                             <div className="spinner"></div>
                           </>
