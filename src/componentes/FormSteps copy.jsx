@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import Espaciado from "./Espaciado";
 import { mobile, tablet } from "../helpers/medidasResponsive";
+import { urlServer } from "../data/url";
 
 const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
   const [paso, setpaso] = useState(1);
@@ -127,15 +128,11 @@ const FormSteps = ({ startRecording, stopRecording, status, mediaBlobUrl }) => {
       data.append("formData", JSON.stringify(formData));
       data.append("audio", audioBlob, "audio.mp3");
 
-      const response = await axios.post(
-        "https://audiosmadres.onrender.com/submit-form",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${urlServer}/submit-form`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Datos y audio enviados con éxito", response.data);
       alert("¡Formulario enviado con éxito!");

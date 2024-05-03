@@ -3,6 +3,7 @@ import { firestore, storage } from "../firebase/firebase-config";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import axios from "axios";
+import { urlServer } from "../data/url";
 
 function Administrador() {
   const [usuarios, setUsuarios] = useState([]);
@@ -38,12 +39,9 @@ function Administrador() {
 
   const descargarCSV = async () => {
     try {
-      const response = await axios.get(
-        "https://audiosmadres.onrender.com/export-users-csv",
-        {
-          responseType: "blob",
-        }
-      );
+      const response = await axios.get(`${urlServer}/export-users-csv`, {
+        responseType: "blob",
+      });
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;

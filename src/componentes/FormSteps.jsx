@@ -10,7 +10,7 @@ import Espaciado from "./Espaciado";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import Onboarding from "./Onboarding";
 import gsap from "gsap";
-import { url, urlAlcarrito, urlDev } from "../data/url";
+import { urlAlcarrito, urlServer } from "../data/url";
 import Frases from "./Frases";
 
 const FormSteps = ({
@@ -167,7 +167,7 @@ const FormSteps = ({
       localStorage.setItem("formData", JSON.stringify(formData));
       //localStorage.setItem("audioBlob", audioBlob);
 
-      const response = await axios.post(`${url}/submit-form`, data, {
+      const response = await axios.post(`${urlServer}/submit-form`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

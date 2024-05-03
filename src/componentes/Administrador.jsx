@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { urlServer } from "../data/url";
 
 function Administrador() {
   const [usuarios, setUsuarios] = useState([]);
@@ -11,9 +12,7 @@ function Administrador() {
     const obtenerUsuarios = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          "https://audiosmadres.onrender.com/get-all-users"
-        );
+        const response = await axios.get(`${urlServer}/get-all-users`);
         setUsuarios(response.data.users);
       } catch (error) {
         console.error("Error al obtener los usuarios:", error);
@@ -30,7 +29,7 @@ function Administrador() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://audiosmadres.onrender.com/filter-users?field=${filtro}&value=${textoFiltro}`
+        `${urlServer}/filter-users?field=${filtro}&value=${textoFiltro}`
       );
       setUsuarios(response.data.users);
     } catch (error) {
@@ -44,7 +43,7 @@ function Administrador() {
     const ref = audioRef.split("madres-2d8e4.appspot.com/")[1];
     try {
       const response = await axios.get(
-        `https://audiosmadres.onrender.com/download-audio?ref=${ref}`,
+        `${urlServer}/download-audio?ref=${ref}`,
         { responseType: "blob" }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -61,12 +60,9 @@ function Administrador() {
 
   const descargarCSV = async () => {
     try {
-      const response = await axios.get(
-        "https://audiosmadres.onrender.com/export-users-csv",
-        {
-          responseType: "blob",
-        }
-      );
+      const response = await axios.get(`${urlServer}/export-users-csv`, {
+        responseType: "blob",
+      });
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;

@@ -12,7 +12,7 @@ import {
 } from "../helpers/medidasResponsive";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
-import { url, urlDev } from "../data/url";
+import { urlServer } from "../data/url";
 import Explora from "../componentes/Explora";
 import CompartirContenido from "../componentes/CompartirContenido";
 import { Helmet } from "react-helmet";
@@ -44,7 +44,9 @@ const Gracias = () => {
       }
 
       fetch(
-        `${url}/get-user-data?customer_id=${encodeURIComponent(customer_id)}`
+        `${urlServer}/get-user-data?customer_id=${encodeURIComponent(
+          customer_id
+        )}`
       )
         .then((response) => response.json())
         .then((data) => {
