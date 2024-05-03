@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Video from "./Video";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
+import { videos } from "../data/videos";
 
 const Comercial = ({ playVideo, setPlayVideo }) => {
   const [close, setClose] = useState(false);
@@ -59,10 +60,7 @@ const Comercial = ({ playVideo, setPlayVideo }) => {
       <div
         className={`boxVideo opacity-0 z-[9] lg:w-[70%] xs:w-full h-full floatcenter  py-4 flex flex-col justify-center items-center`}
       >
-        <Video
-          play={playVideo}
-          url={"https://www.youtube.com/watch?v=YBGU3g6Tbrk"}
-        />
+        <Video play={playVideo} url={videos.comercial} />
       </div>
     </div>
   );

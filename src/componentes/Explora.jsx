@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import HamburgesaIcon from "./HamburgesaIcon";
-import gsap from "gsap";
+
 import {
   full,
   laptop,
@@ -9,7 +8,7 @@ import {
   tablet,
 } from "../helpers/medidasResponsive";
 import Video from "./Video";
-import IconPlayVideo from "./IconPlayVideo";
+import { videos } from "../data/videos";
 
 const Explora = () => {
   const [active, setActive] = useState(false);
@@ -24,19 +23,19 @@ const Explora = () => {
     {
       id: 0,
       title: "MAKING OFF",
-      url: "https://www.youtube.com/watch?v=JpjNBF1W4UA",
+      url: videos.makinOff,
       imagen: "/imagenesVideo/making-off-operacion-mayo.webp",
     },
     {
       id: 1,
       title: "CABO RAMIREZ",
-      url: "https://www.youtube.com/watch?v=A40AGZ9tPcw",
+      url: videos.caboRamirez,
       imagen: "/imagenesVideo/cabo-ramirez.webp",
     },
     {
       id: 2,
       title: "SARGENTO",
-      url: "https://www.youtube.com/watch?v=yHotu9zWfyM&t=363s",
+      url: videos.sargento,
       imagen: "/imagenesVideo/sargento-operacion-mayo.webp",
     },
   ];

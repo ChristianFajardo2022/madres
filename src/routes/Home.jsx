@@ -10,6 +10,7 @@ import IconPlayVideo from "../componentes/IconPlayVideo";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import Prospero from "../componentes/Prospero";
 import { Helmet } from "react-helmet";
+import { videos } from "../data/videos";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -321,7 +322,7 @@ const Home = () => {
                 setPlay={setOnPlay}
                 play={onplay}
                 VideoReady={onLoadVideo}
-                url={"https://www.youtube.com/watch?v=YBGU3g6Tbrk"}
+                url={videos.comercial}
               />
               <div className="cajaIcon m-6 p-4 relative w-full flex justify-end">
                 {omitir && (
