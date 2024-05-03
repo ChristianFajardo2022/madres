@@ -57,7 +57,7 @@ function CompartirContenido({ texto, url }) {
       )}
 
       <h2 className="z-10 lg:text-5xl xs:text-4xl w-96 text-center">
-        Comparte con tus contactos
+        Comparte esta experiencia
       </h2>
       <div className="flex w-96 items-center justify-between mt-6 mb-16 z-10">
         <div className="line"></div>
