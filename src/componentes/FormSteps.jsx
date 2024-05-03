@@ -10,7 +10,7 @@ import Espaciado from "./Espaciado";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import Onboarding from "./Onboarding";
 import gsap from "gsap";
-import { url, urlAlcarrito, urlAlcarritoDev, urlDev } from "../data/url";
+import { url, urlAlcarrito, urlDev } from "../data/url";
 import Frases from "./Frases";
 
 const FormSteps = ({
@@ -185,7 +185,7 @@ const FormSteps = ({
       const queryString = Object.keys(dataSend)
         .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
         .join("&");
-      window.location.href = `${urlAlcarritoDev}?${queryString}`;
+      window.location.href = `${urlAlcarrito}?${queryString}`;
     } catch (error) {
       console.error("Error al enviar los datos y audio", error);
       setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
