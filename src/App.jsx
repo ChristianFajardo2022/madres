@@ -4,6 +4,7 @@ import router from "./routes/Rutas";
 import { Helmet } from "react-helmet";
 import { RouterProvider } from "react-router-dom";
 import LoadingEnd from "./componentes/Loading";
+import GlobalSiteTags from "./scriptTag/operacionmayo";
 
 const App = () => {
   console.log("Ancho de la pantalla: " + screen.width + "px");
@@ -19,7 +20,7 @@ const App = () => {
         <link rel="canonical" href="/" />
         <meta name="description" content="Homenaje para todas las madres" />
       </Helmet>
-
+      <GlobalSiteTags />
       <>
         <React.StrictMode>
           <RouterProvider router={router} />

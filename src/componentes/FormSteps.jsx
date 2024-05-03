@@ -232,7 +232,9 @@ const FormSteps = ({
   const updateUsername = () => {
     if (formData.firstname) {
       const randomNumber = generateRandomNumber();
-      const newUsername = `${formData.firstname}${randomNumber}`;
+      // Reemplaza los espacios con guiones bajos antes de añadir el número aleatorio
+      const formattedFirstname = formData.firstname.replace(/\s+/g, "_");
+      const newUsername = `${formattedFirstname}${randomNumber}`;
       setFormData({
         ...formData,
         customer_id: newUsername,
