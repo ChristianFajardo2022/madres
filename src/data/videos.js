@@ -1,6 +1,6 @@
 export const videos = {
-  comercial: "https://www.youtube.com/watch?v=YBGU3g6Tbrk",
+  comercial: "https://www.youtube.com/watch?v=dI3sEA-cL10",
   makinOff: "https://www.youtube.com/watch?v=B1PYiOkP85k",
-  caboRamirez: "https://www.youtube.com/watch?v=YBGU3g6Tbrk",
-  sargento: "https://www.youtube.com/watch?v=YBGU3g6Tbrk",
+  caboRamirez: "https://www.youtube.com/shorts/_f6wHU-wpZg",
+  sargento: "https://www.youtube.com/shorts/TH2mvNWmjec",
 };
