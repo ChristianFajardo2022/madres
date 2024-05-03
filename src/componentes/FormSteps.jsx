@@ -193,6 +193,11 @@ const FormSteps = ({
     }
   };
 
+  const handleNextStep = async (data) => {
+    const newFormData = { ...formData, ...data };
+
+    submitHandler(newFormData);
+  };
   useEffect(() => {
     const handleTabKey = (event) => {
       if (event.key === "Tab" || event.key === "Enter") {
@@ -239,23 +244,13 @@ const FormSteps = ({
     }
   };
 
-  const dataSend = {
-    firstname: formData.firstname,
-    customer_id: formData.customer_id,
-    promoid: formData.promoid,
-  };
-  const queryString = Object.keys(dataSend)
-    .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
-    .join("&");
-
   return (
     <>
       {onboarding && <Onboarding setOnboarding={setOnboarding} />}
 
       {!onboarding && (
         <form
-          method="POST"
-          action={`https://alcarrito.com/operacionmayo/comprar?${queryString}`}
+          onSubmit={handleSubmit(handleNextStep)}
           className="form w-full h-full max-lg:overflow-hidden"
         >
           <div ref={padre} className="slidecards">
