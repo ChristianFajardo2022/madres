@@ -149,10 +149,10 @@ const Gracias = () => {
                   <span className="w-4 h-4 inline-block">
                     <img src="/svg/estrella.svg" alt="" />
                   </span>
-                  <span className="my-2 ml-4 mr-3 lg:text-6xl xs:text-5xl uppercase">
+                  <span className="my-2 ml-4 mr-3 lg:text-6xl xs:text-4xl uppercase">
                     {vacio && "OPERACIÓN MAYO"}
-                    {status === "approved" && "GRACIAS POR TU ENTREGA"}
-                    {status === "pending" && "GRACIAS POR TU ENTREGA"}
+                    {status === "approved" && "misión completada"}
+                    {status === "pending" && "misión completada"}
                     {status === "canceled" && "misión fallida"}
                     {status === "rejected" && "misión fallida"}
                   </span>
