@@ -167,7 +167,7 @@ const FormSteps = ({
       localStorage.setItem("formData", JSON.stringify(formData));
       //localStorage.setItem("audioBlob", audioBlob);
 
-      const response = await axios.post(`${urlServer}/submit-form`, data, {
+      const response = await axios.get(`${urlServer}/submit-form`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
