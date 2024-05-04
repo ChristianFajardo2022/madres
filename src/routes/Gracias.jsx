@@ -68,6 +68,7 @@ const Gracias = () => {
       if (status === "approved" && userData[0].stockUpdated === false) {
         restarStock();
         updateFirebaseStockStatus(userData[0].customer_id, true);
+        console.log("actualizado");
       }
     }
   }, [userData]);
