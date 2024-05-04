@@ -1,5 +1,5 @@
 export const urlServer = "https://audiosmadres.onrender.com";
-//export const urlServer = "http://localhost:3000";
+//export const urlServer = "http://localhost:3000";  url servidor
 
 //export const urlAlcarrito = "https://alcarrito.com/operacionmayo/comprar";
 export const urlAlcarrito =
