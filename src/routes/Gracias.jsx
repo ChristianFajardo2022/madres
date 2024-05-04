@@ -63,6 +63,7 @@ const Gracias = () => {
   useEffect(() => {
     if (userData) {
       setStatus(userData[0].trx_status);
+      console.log(status === "approved" && userData[0].stockUpdated === false);
 
       if (status === "approved" && userData[0].stockUpdated === false) {
         restarStock();
