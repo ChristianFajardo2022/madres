@@ -24,6 +24,7 @@ import Prospero from "../componentes/Prospero";
 import Video from "../componentes/Video";
 import Comercial from "../componentes/Comercial";
 import { Helmet } from "react-helmet";
+import { fetchStockData } from "../helpers/stockFunctions";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
@@ -31,47 +32,18 @@ function Grabadora() {
   const [botonAudio, setBotonAudio] = useState(false);
   const [reproducir, setReproducir] = useState(false);
   const [elemtCargado, setElemtCargado] = useState(false);
-  const [stock, setStock] = useState(500);
+  const [stock, setStock] = useState(null);
 
   const videoLoad = useRef(null);
 
+  //mostrar stock de firebase
+  useEffect(() => {
+    fetchStockData(setStock);
+    console.log(stock);
+  }, []);
+
   const { isRecording, startRecording, stopRecording, recordingBlob } =
     useAudioRecorder();
-  /* const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({
-      audio: true,
-      mimeType: "audio/wav",
-    }); */
-  const navigate = useNavigate();
-
-  const handleAudioSave = () => {
-    navigate("/formulario", { state: { mediaRecorder } });
-  };
-
-  const Ocultarpuntos = () => {
-    gsap.to(".line-1 .line, .line-1 .caja", {
-      opacity: 0,
-    });
-    gsap.to(".line-2 .line, .line-2 .caja", {
-      opacity: 0,
-    });
-    gsap.to(".line-3 .line, .line-3 .caja", {
-      opacity: 0,
-    });
-    gsap.to(".activeCapa", {
-      className: "capa",
-    });
-    gsap.to(".punto", {
-      opacity: 1,
-    });
-  };
-
-  //Compartir nativo de navegador
-
-  const share = (object) => {
-    if (navigator.share) {
-    }
-  };
 
   // Ejecutar el loading
   useEffect(() => {
@@ -79,6 +51,8 @@ function Grabadora() {
       avanzar();
     }
   }, [elemtCargado]);
+
+  //FUncion para avanzar de tarjeta
   const avanzar = () => {
     const tl = gsap.timeline();
     tl.delay(1);
@@ -134,7 +108,8 @@ function Grabadora() {
       });
     }
   }, [botonAudio]);
-  /*****Play al video */
+
+  //Play al video
 
   const handlePlayVideo = () => {
     if (playVideo) {
@@ -196,8 +171,14 @@ function Grabadora() {
                   <>
                     <p className="w-1/2 m-auto lg:text-4xl xs:text-3xl">
                       <span className="text-[var(--yellow)]">
-                        {stock <= 250 && `Aún quedan: ${stock} osos gratis`}
-                        {stock >= 250 && `Osos gratis disponibles: ${stock}`}
+                        {stock && (
+                          <>
+                            {stock.stock <= 250 &&
+                              `Aún quedan: ${stock.stock} osos gratis`}
+                            {stock.stock >= 250 &&
+                              `Osos gratis disponibles: ${stock.stock}`}
+                          </>
+                        )}
                       </span>
                     </p>
                   </>
