@@ -107,6 +107,9 @@ const Home = () => {
   }, [onplay]);
   useEffect(() => {
     if (play) {
+      gsap.to("body", {
+        overflow: "hidden",
+      });
       setOmitir(true);
       setOnPlay(true);
       const tl = gsap.timeline();
@@ -163,6 +166,18 @@ const Home = () => {
       );
       tl.fromTo(
         ".neblina",
+        {
+          opacity: 1,
+        },
+        {
+          opacity: 0,
+          duration: 1,
+          ease: "power1.in",
+        },
+        "<"
+      );
+      tl.fromTo(
+        ".prospero",
         {
           opacity: 1,
         },
@@ -330,6 +345,11 @@ const Home = () => {
                     {/* <IconPlayVideo onplay={onplay} setOnPlay={setOnPlay} /> */}
 
                     <Link
+                      onClick={() => {
+                        gsap.to("body", {
+                          overflow: "hidden auto",
+                        });
+                      }}
                       to={"/grabar-audio"}
                       className={`omitir invisible fade z-10 btn ${
                         end ? "active" : "opacity-30"
