@@ -1,21 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import Texto from "../componentes/Texto";
-import Navbar from "../componentes/Navbar";
-import LoadVideo from "../componentes/LoadVideo";
 import LoadingEnd from "../componentes/Loading";
-import {
-  full,
-  laptop,
-  minilaptop,
-  mobile,
-  tablet,
-} from "../helpers/medidasResponsive";
+import { mobile, tablet } from "../helpers/medidasResponsive";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 import { urlServer } from "../data/url";
 import Explora from "../componentes/Explora";
 import CompartirContenido from "../componentes/CompartirContenido";
 import { Helmet } from "react-helmet";
+import {
+  restarStock,
+  updateFirebaseStockStatus,
+} from "../helpers/stockFunctions";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -68,10 +63,14 @@ const Gracias = () => {
   useEffect(() => {
     if (userData) {
       setStatus(userData[0].trx_status);
-      //no me ajusta a los cambios
+
+      if (status === "approved" && userData[0].stockUpdated === false) {
+        restarStock();
+        updateFirebaseStockStatus(userData[0].customer_id, true);
+        console.log("actualizado");
+      }
     }
   }, [userData]);
-
   // Ejecutar el loading
 
   useEffect(() => {
