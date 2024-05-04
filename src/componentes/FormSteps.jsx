@@ -142,6 +142,62 @@ const FormSteps = ({
     formState: { errors },
   } = useForm();
 
+  /***********Funcion de envio de datos */
+  const submitHandler = async (e) => {
+    nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
+
+    if (!audiourl) {
+      setError("Por favor, graba un audio antes de enviar el formulario.");
+      alert("Por favor, graba un audio antes de enviar el formulario.");
+      return;
+    }
+
+    setIsLoading(true);
+    setOnboarding(false);
+    localStorage.setItem("onboarding", "false");
+    setError("");
+
+    try {
+      const audioBlob = await fetch(audiourl).then((r) => r.blob());
+      const data = new FormData();
+      data.append("formData", JSON.stringify(formData));
+      data.append("audio", audioBlob, "audio.mp3");
+
+      // Guardar formData y audioBlob en localStorage
+      localStorage.setItem("formData", JSON.stringify(formData));
+      //localStorage.setItem("audioBlob", audioBlob);
+
+      const response = await axios.post(`${urlServer}/submit-form`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Datos y audio enviados con éxito", response.data);
+
+      //setIsLoading(false);
+      // Redirigir al usuario a la URL con los parámetros en la cadena de consulta
+      const dataSend = {
+        firstname: formData.firstname,
+        customer_id: formData.customer_id,
+        promoid: formData.promoid,
+      };
+      const queryString = Object.keys(dataSend)
+        .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
+        .join("&");
+      window.location.href = `${urlAlcarrito}?${queryString}`;
+    } catch (error) {
+      console.error("Error al enviar los datos y audio", error);
+      setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
+      //setIsLoading(false);
+    }
+  };
+
+  const handleNextStep = async (data) => {
+    const newFormData = { ...formData, ...data };
+
+    submitHandler(newFormData);
+  };
   useEffect(() => {
     const handleTabKey = (event) => {
       if (event.key === "Tab" || event.key === "Enter") {
@@ -188,80 +244,14 @@ const FormSteps = ({
     }
   };
 
-  /***********Funcion de envio de datos */
-  const sendFormDataAndGetRedirect = async (formData) => {
-    try {
-      const audioBlob = await fetch(audiourl).then((r) => r.blob());
-      const data = new FormData();
-      data.append("formData", JSON.stringify(formData));
-      data.append("audio", audioBlob, "audio.mp3");
-
-      const response = await axios.post(`${urlServer}/submit-form`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Datos y audio enviados con éxito", response.data);
-
-      // Redirigir después de enviar los datos
-      const form = document.querySelector("form");
-      form.submit(); // Redirigir
-    } catch (error) {
-      console.error("Error al enviar los datos y audio", error);
-      setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
-      //setIsLoading(false);
-    }
-  };
-
-  // Modificar submitHandler para llamar a sendFormDataAndGetRedirect
-  const submitHandler = async (e) => {
-    e.preventDefault(); // Prevenir el envío del formulario por defecto
-
-    nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel);
-
-    if (!audiourl) {
-      setError("Por favor, graba un audio antes de enviar el formulario.");
-      alert("Por favor, graba un audio antes de enviar el formulario.");
-      return;
-    }
-
-    setIsLoading(true);
-    setOnboarding(false);
-    localStorage.setItem("onboarding", "false");
-    setError("");
-
-    try {
-      const newFormData = { ...formData };
-      // Guardar formData y audioBlob en localStorage
-      localStorage.setItem("formData", JSON.stringify(newFormData));
-      await sendFormDataAndGetRedirect(newFormData);
-    } catch (error) {
-      console.error("Error al enviar los datos y audio", error);
-      setError("Error al enviar el formulario. Por favor, inténtalo de nuevo.");
-      //setIsLoading(false);
-    }
-  };
-  /***Construir la URL */
-  const dataSend = {
-    firstname: formData.firstname,
-    customer_id: formData.customer_id,
-    promoid: formData.promoid,
-  };
-  const queryString = Object.keys(dataSend)
-    .map((key) => key + "=" + encodeURIComponent(dataSend[key]))
-    .join("&");
-
   return (
     <>
       {onboarding && <Onboarding setOnboarding={setOnboarding} />}
 
       {!onboarding && (
         <form
-          method="GET"
-          action={`${urlAlcarrito}?${queryString}`}
+          onSubmit={handleSubmit(handleNextStep)}
           className="form w-full h-full max-lg:overflow-hidden"
-          onSubmit={submitHandler}
         >
           <div ref={padre} className="slidecards">
             {/* navbar menu hamburgesa*/}
