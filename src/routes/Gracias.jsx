@@ -63,12 +63,14 @@ const Gracias = () => {
   useEffect(() => {
     if (userData) {
       setStatus(userData[0].trx_status);
-      console.log(status === "approved" && userData[0].stockUpdated === false);
+      console.log(
+        "el estado y el stock son " + status === "approved" &&
+          userData[0].stockUpdated === false
+      );
 
       if (status === "approved" && userData[0].stockUpdated === false) {
         restarStock();
         updateFirebaseStockStatus(userData[0].customer_id, true);
-        console.log("actualizado");
       }
     }
   }, [userData]);
@@ -94,7 +96,7 @@ const Gracias = () => {
   };
 
   const vacio = status == null || status == "";
-  console.log(vacio);
+
   return (
     <>
       <Helmet>
