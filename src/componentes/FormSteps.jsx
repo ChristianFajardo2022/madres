@@ -48,6 +48,7 @@ const FormSteps = ({
     promoid: "MMbear",
     trx_status: "",
     order_id: "",
+    stockUpdated: false,
   });
 
   //console.log(formData);

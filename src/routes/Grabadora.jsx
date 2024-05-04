@@ -24,6 +24,7 @@ import Prospero from "../componentes/Prospero";
 import Video from "../componentes/Video";
 import Comercial from "../componentes/Comercial";
 import { Helmet } from "react-helmet";
+import { fetchStockData } from "../helpers/stockFunctions";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
@@ -34,6 +35,10 @@ function Grabadora() {
   const [stock, setStock] = useState(500);
 
   const videoLoad = useRef(null);
+
+  useEffect(() => {
+    fetchStockData(setStock);
+  }, []);
 
   const { isRecording, startRecording, stopRecording, recordingBlob } =
     useAudioRecorder();
@@ -196,8 +201,14 @@ function Grabadora() {
                   <>
                     <p className="w-1/2 m-auto lg:text-4xl xs:text-3xl">
                       <span className="text-[var(--yellow)]">
-                        {stock <= 250 && `Aún quedan: ${stock} osos gratis`}
-                        {stock >= 250 && `Osos gratis disponibles: ${stock}`}
+                        {stock && (
+                          <>
+                            {stock.stock <= 250 &&
+                              `Aún quedan: ${stock.stock} osos gratis`}
+                            {stock.stock >= 250 &&
+                              `Osos gratis disponibles: ${stock.stock}`}
+                          </>
+                        )}
                       </span>
                     </p>
                   </>
