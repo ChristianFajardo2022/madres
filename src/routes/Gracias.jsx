@@ -68,6 +68,7 @@ const Gracias = () => {
   useEffect(() => {
     if (userData) {
       setStatus(userData[0].trx_status);
+      //no me ajusta a los cambios
     }
   }, [userData]);
 
