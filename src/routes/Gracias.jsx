@@ -101,7 +101,7 @@ const Gracias = () => {
         <link rel="canonical" href="/gracias" />
         <meta
           name="description"
-          content="Gracias por ser parte de esta entrega"
+          content="Gracias por ser parte de esta entrega."
         />
       </Helmet>
       <div className={`w-full relative  ${vacio ? "h-[100vh]" : "h-[200vh]"}`}>
