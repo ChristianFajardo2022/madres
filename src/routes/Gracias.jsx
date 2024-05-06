@@ -64,7 +64,7 @@ const Gracias = () => {
     if (userData) {
       setStatus(userData[0].trx_status);
 
-      let estad =
+      /* let estad =
         userData[0].trx_status === "approved" &&
         userData[0].stockUpdated === false;
       console.log(estad);
@@ -75,7 +75,7 @@ const Gracias = () => {
       ) {
         restarStock();
         updateFirebaseStockStatus(userData[0].customer_id, true);
-      }
+      } */
     }
   }, [userData]);
   // Ejecutar el loading
