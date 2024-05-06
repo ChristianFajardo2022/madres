@@ -421,8 +421,11 @@ const FormSteps = ({
                               setReadyToBuy(true);
                             }}
                           />
-                          <p className="pt-6 text-xs text-[--yellow] flexCenter bottom-12 text-center">
-                            Recuerda activar tu micrófono
+                          <p className="pt-8 flex items-end justify-center text-sm text-[--yellow] bottom-12 text-center">
+                            <span className="w-6 h-auto inline-block mr-2">
+                              <img src="/svg/warning.svg" alt="" />
+                            </span>
+                            <span>Recuerda activar tu micrófono</span>
                           </p>
                         </div>
                       </div>
