@@ -204,7 +204,7 @@ function Grabadora() {
                         {stock && (
                           <>
                             {stock.stock >= 250 &&
-                              `Osos gratis disponibles: ${stock.stock}`}
+                              `Osos disponibles: ${stock.stock}`}
                             {stock.stock == 0 && `Operacion mayo`}
                           </>
                         )}
