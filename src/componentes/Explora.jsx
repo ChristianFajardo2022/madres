@@ -22,7 +22,7 @@ const Explora = () => {
   const youtube = [
     {
       id: 0,
-      title: "MAKING OFF",
+      title: "MAKING OF",
       url: videos.makinOff,
       imagen: "/imagenesVideo/making-off-operacion-mayo.webp",
     },
