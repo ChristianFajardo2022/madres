@@ -36,15 +36,8 @@ function Grabadora() {
 
   const videoLoad = useRef(null);
 
-<<<<<<< HEAD
-  //mostrar stock de firebase
   useEffect(() => {
     fetchStockData(setStock);
-    console.log(stock);
-=======
-  useEffect(() => {
-    fetchStockData(setStock);
->>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
   }, []);
 
   const { isRecording, startRecording, stopRecording, recordingBlob } =
@@ -178,16 +171,9 @@ function Grabadora() {
                       <span className="text-[var(--yellow)]">
                         {stock && (
                           <>
-<<<<<<< HEAD
-                            {stock.stock <= 250 &&
-                              `Aún quedan: ${stock.stock} osos gratis`}
-                            {stock.stock >= 250 &&
-                              `Osos gratis disponibles: ${stock.stock}`}
-=======
                             {stock.stock >= 250 &&
                               `Osos disponibles: ${stock.stock}`}
                             {stock.stock == 0 && `Operacion mayo`}
->>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
                           </>
                         )}
                       </span>

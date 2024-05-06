@@ -1,8 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-<<<<<<< HEAD
-
-=======
->>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
 import LoadingEnd from "../componentes/Loading";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import gsap from "gsap";
@@ -11,10 +7,6 @@ import { urlServer } from "../data/url";
 import Explora from "../componentes/Explora";
 import CompartirContenido from "../componentes/CompartirContenido";
 import { Helmet } from "react-helmet";
-import {
-  restarStock,
-  updateFirebaseStockStatus,
-} from "../helpers/stockFunctions";
 
 const Gracias = () => {
   const [loading, setLoading] = useState(true);
@@ -68,13 +60,6 @@ const Gracias = () => {
     if (userData) {
       setStatus(userData[0].trx_status);
 
-<<<<<<< HEAD
-      if (status === "approved" && userData[0].stockUpdated === false) {
-        restarStock();
-        updateFirebaseStockStatus(userData[0].customer_id, true);
-        console.log("actualizado");
-      }
-=======
       /* let estad =
         userData[0].trx_status === "approved" &&
         userData[0].stockUpdated === false;
@@ -87,7 +72,6 @@ const Gracias = () => {
         restarStock();
         updateFirebaseStockStatus(userData[0].customer_id, true);
       } */
->>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
     }
   }, [userData]);
   // Ejecutar el loading
