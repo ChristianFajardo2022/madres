@@ -260,7 +260,7 @@ function Grabadora() {
       >
         <CompartirContenido
           texto={
-            "En operacionmayo.com puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
+            "En operacion mayo puedes grabar un mensaje de voz para enviárselo a mamá dentro de un osito peluche para celebrar el Día de las Madres. 🤩 🥰"
           }
           url={"operacionmayo.com"}
         />

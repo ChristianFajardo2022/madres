@@ -370,7 +370,9 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div className={`cardSingle ${paso > 2 && "opacity-0"}`}>
+                  <div
+                    className={`relative cardSingle ${paso > 2 && "opacity-0"}`}
+                  >
                     <div
                       className={`cajaCard ${
                         paso == 2 ? "opacity-100" : " Effectblur"
@@ -405,6 +407,9 @@ const FormSteps = ({
                               setReadyToBuy(true);
                             }}
                           />
+                          <p className="pt-6 text-xs text-[--yellow] flexCenter bottom-12 text-center">
+                            Recuerda activar tu micrófono
+                          </p>
                         </div>
                       </div>
                       <Espaciado />
