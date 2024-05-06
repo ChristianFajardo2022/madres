@@ -80,7 +80,7 @@ function Administrador() {
             className="hover:text-black hover:bg-white transition text-white border border-white px-4 py-2 rounded-full"
             onClick={filtrarUsuarios}
           >
-            Filtrar
+            Filtrar orden
           </button>
         </div>
         <ul className=" text-white">
