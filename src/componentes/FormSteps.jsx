@@ -224,6 +224,13 @@ const FormSteps = ({
     }
   };
 
+  // Función para normalizar los caracteres y convertir a minúsculas
+  const normalizeAndLowerCase = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
   // Función para generar un número aleatorio de 6 dígitos
   const generateRandomNumber = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -232,9 +239,16 @@ const FormSteps = ({
   // Función para actualizar el username
   const updateUsername = () => {
     if (formData.firstname) {
+      // Normaliza el primer nombre para eliminar tildes y convierte a minúsculas
+      const normalizedAndLowerCaseFirstname = normalizeAndLowerCase(
+        formData.firstname
+      );
       const randomNumber = generateRandomNumber();
       // Reemplaza los espacios con guiones bajos antes de añadir el número aleatorio
-      const formattedFirstname = formData.firstname.replace(/\s+/g, "_");
+      const formattedFirstname = normalizedAndLowerCaseFirstname.replace(
+        /\s+/g,
+        "_"
+      );
       const newUsername = `${formattedFirstname}${randomNumber}`;
       setFormData({
         ...formData,
@@ -370,7 +384,9 @@ const FormSteps = ({
                   className="cardPadre"
                   style={{ width: `${anchoHijoEnPixel}px` }}
                 >
-                  <div className={`cardSingle ${paso > 2 && "opacity-0"}`}>
+                  <div
+                    className={`relative cardSingle ${paso > 2 && "opacity-0"}`}
+                  >
                     <div
                       className={`cajaCard ${
                         paso == 2 ? "opacity-100" : " Effectblur"
@@ -405,6 +421,12 @@ const FormSteps = ({
                               setReadyToBuy(true);
                             }}
                           />
+                          <p className="pt-8 flex items-end justify-center text-sm text-[--yellow] bottom-12 text-center">
+                            <span className="w-6 h-auto inline-block mr-2">
+                              <img src="/svg/warning.svg" alt="" />
+                            </span>
+                            <span>Recuerda activar tu micrófono</span>
+                          </p>
                         </div>
                       </div>
                       <Espaciado />

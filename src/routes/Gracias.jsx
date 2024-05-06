@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+<<<<<<< HEAD
 
+=======
+>>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
 import LoadingEnd from "../componentes/Loading";
 import { mobile, tablet } from "../helpers/medidasResponsive";
 import gsap from "gsap";
@@ -65,14 +68,28 @@ const Gracias = () => {
     if (userData) {
       setStatus(userData[0].trx_status);
 
+<<<<<<< HEAD
       if (status === "approved" && userData[0].stockUpdated === false) {
         restarStock();
         updateFirebaseStockStatus(userData[0].customer_id, true);
         console.log("actualizado");
       }
+=======
+      /* let estad =
+        userData[0].trx_status === "approved" &&
+        userData[0].stockUpdated === false;
+      console.log(estad);
+
+      if (
+        userData[0].trx_status === "approved" &&
+        userData[0].stockUpdated === false
+      ) {
+        restarStock();
+        updateFirebaseStockStatus(userData[0].customer_id, true);
+      } */
+>>>>>>> c5c7d6b1be9466b6986a04cc621e48d21a8a490f
     }
   }, [userData]);
-
   // Ejecutar el loading
 
   useEffect(() => {
@@ -103,7 +120,7 @@ const Gracias = () => {
         <link rel="canonical" href="/gracias" />
         <meta
           name="description"
-          content="Gracias por ser parte de esta entrega"
+          content="Gracias por ser parte de esta entrega."
         />
       </Helmet>
       <div className={`w-full relative  ${vacio ? "h-[100vh]" : "h-[200vh]"}`}>
