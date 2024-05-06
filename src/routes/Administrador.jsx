@@ -72,6 +72,7 @@ function Administrador() {
             onChange={(e) => setFiltro(e.target.value)}
           >
             <option value="">Seleccione un filtro</option>
+            <option value="email">Email</option>
             <option value="order_id">ID de Orden</option> {/* Nuevo campo de filtro */}
           </select>
           <button
