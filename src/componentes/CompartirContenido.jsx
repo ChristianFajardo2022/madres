@@ -112,7 +112,7 @@ function CompartirContenido({ texto, url }) {
             </svg>
           </span>
         </WhatsappShareButton>
-        <TwitterShareButton title={texto}>
+        <TwitterShareButton title={texto} url={url}>
           <span className="iconSocial2 w-20 h-20 inline-block">
             <svg
               className="Xicon"
