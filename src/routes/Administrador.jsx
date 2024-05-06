@@ -59,7 +59,7 @@ function Administrador() {
       <button className="btn active mb-12" onClick={descargarCSV}>
         descargar DB
       </button>
-      <div className="min-h-96 bg-zinc-700 py-4 px-4 flexCenter flex-wrap rounded-3xl overflow-auto">
+      <div className="min-h-96 min-w-[40%] bg-zinc-700 py-4 px-4 flexCenter flex-wrap rounded-3xl overflow-auto">
         <div className="w-full flex justify-evenly">
           <input
             type="text"
@@ -73,7 +73,8 @@ function Administrador() {
           >
             <option value="">Seleccione un filtro</option>
             <option value="email">Email</option>
-            <option value="order_id">ID de Orden</option> {/* Nuevo campo de filtro */}
+            <option value="order_id">ID de Orden</option>{" "}
+            {/* Nuevo campo de filtro */}
           </select>
           <button
             className="hover:text-black hover:bg-white transition text-white border border-white px-4 py-2 rounded-full"
@@ -87,7 +88,8 @@ function Administrador() {
             <ul key={usuario.id}>
               <li className="w-full my-6">
                 <span className="text-xl font-black">{usuario.firstname}</span>{" "}
-                - {usuario.email}
+                - {usuario.email} <br />
+                <strong>orden #</strong> - {usuario.order_id}
               </li>
               <audio
                 id={`audioElement_${usuario.id}`}
