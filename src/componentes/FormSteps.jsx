@@ -224,6 +224,13 @@ const FormSteps = ({
     }
   };
 
+  // Función para normalizar los caracteres y convertir a minúsculas
+  const normalizeAndLowerCase = (str) => {
+    return str
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
   // Función para generar un número aleatorio de 6 dígitos
   const generateRandomNumber = () => {
     return Math.floor(100000 + Math.random() * 900000);
@@ -232,9 +239,16 @@ const FormSteps = ({
   // Función para actualizar el username
   const updateUsername = () => {
     if (formData.firstname) {
+      // Normaliza el primer nombre para eliminar tildes y convierte a minúsculas
+      const normalizedAndLowerCaseFirstname = normalizeAndLowerCase(
+        formData.firstname
+      );
       const randomNumber = generateRandomNumber();
       // Reemplaza los espacios con guiones bajos antes de añadir el número aleatorio
-      const formattedFirstname = formData.firstname.replace(/\s+/g, "_");
+      const formattedFirstname = normalizedAndLowerCaseFirstname.replace(
+        /\s+/g,
+        "_"
+      );
       const newUsername = `${formattedFirstname}${randomNumber}`;
       setFormData({
         ...formData,
