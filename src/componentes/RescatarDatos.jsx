@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 import gsap from "gsap";
 
 const RescatarDatos = () => {
-  const [error, setError] = useState(null);
   const [emailQuery, setEmailQuery] = useState("");
   const [userData, setUserData] = useState(null);
   const [status, setStatus] = useState(null);
@@ -18,15 +17,42 @@ const RescatarDatos = () => {
   const emailParam = queryParams.get("email");
 
   const filtrarUsuarios = async () => {
-    // Si hay un parámetro de email en la URL
     if (emailParam) {
       setEmailQuery(emailParam);
-    } else if (localStorageOrder) {
-      // Si no hay parámetro de email y localStorageOrder es true, buscar en el almacenamiento local
+    } else if (emailParam == null || !emailParam) {
       const storedData = localStorage.getItem("formData");
-      if (storedData) {
-        const { email } = JSON.parse(storedData);
-        setEmailQuery(email);
+      const { email } = JSON.parse(storedData);
+      setEmailQuery(email);
+      console.log(email);
+    }
+
+    if (emailParam) {
+      const q = query(
+        collection(firestore, "usuarios"),
+        where("email", "==", emailQuery)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      const userDoc = querySnapshot.docs[0];
+
+      const data = userDoc.data();
+
+      try {
+        const url = await getDownloadURL(ref(storage, data.audioRef));
+        setAudio(url);
+
+        setUserData({
+          email: data.email || "",
+          firstname: data.firstname || "",
+          customer_id: data.customer_id || "",
+          promoid: data.promoid || "MMbear",
+          trx_status: data.trx_status || "",
+          order_id: data.order_id || "",
+          stockUpdated: data.stockUpdated || false,
+        });
+      } catch (error) {
+        console.error("Error al obtener URL de descarga", error);
       }
     }
   };
