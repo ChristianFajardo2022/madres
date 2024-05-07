@@ -25,6 +25,7 @@ import Video from "../componentes/Video";
 import Comercial from "../componentes/Comercial";
 import { Helmet } from "react-helmet";
 import { fetchStockData } from "../helpers/stockFunctions";
+import RescatarDatos from "../componentes/RescatarDatos";
 
 function Grabadora() {
   const [loading, setLoading] = useState(true);
@@ -33,6 +34,15 @@ function Grabadora() {
   const [reproducir, setReproducir] = useState(false);
   const [elemtCargado, setElemtCargado] = useState(false);
   const [stock, setStock] = useState(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    firstname: "",
+    customer_id: "",
+    promoid: "MMbear",
+    trx_status: "",
+    order_id: "",
+    stockUpdated: false,
+  });
 
   const videoLoad = useRef(null);
 
@@ -131,6 +141,7 @@ function Grabadora() {
         <Prospero />
         <Navbar handlePlayVideo={handlePlayVideo} />
       </header>
+      <RescatarDatos setFormData={setFormData} />
 
       <Comercial playVideo={playVideo} setPlayVideo={setPlayVideo} />
       <div id="graba" className="w-full h-full relative">
@@ -212,6 +223,8 @@ function Grabadora() {
                 mediaBlobUrl={recordingBlob}
                 setReproducir={setReproducir}
                 reproducir={reproducir}
+                formData={formData}
+                setFormData={setFormData}
               />
             </div>
           </div>

@@ -21,6 +21,8 @@ const FormSteps = ({
   setBotonAudio,
   setReproducir,
   reproducir,
+  formData,
+  setFormData,
 }) => {
   const [paso, setpaso] = useState(1);
   const [readyToBuy, setReadyToBuy] = useState(false);
@@ -41,15 +43,6 @@ const FormSteps = ({
   const [onboarding, setOnboarding] = useState(true);
   const [error, setError] = useState("");
   const [audiourl, setAudiourl] = useState("");
-  const [formData, setFormData] = useState({
-    email: "",
-    firstname: "",
-    customer_id: "",
-    promoid: "MMbear",
-    trx_status: "",
-    order_id: "",
-    stockUpdated: false,
-  });
 
   //console.log(formData);
   //console.log(paso);
