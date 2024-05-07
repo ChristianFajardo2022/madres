@@ -23,7 +23,6 @@ const RescatarDatos = () => {
       const storedData = localStorage.getItem("formData");
       const { email } = JSON.parse(storedData);
       setEmailQuery(email);
-      console.log(email);
     }
 
     if (emailParam) {
@@ -144,29 +143,40 @@ const RescatarDatos = () => {
       {localStorageOrder && (
         <>
           {vacio && (
-            <div className="dataClient fixed w-full h-full z-[201] bg-black bg-opacity-20 backdrop-blur-xl top-0 left-0 flexCenter">
-              <div className="relative font-inter bg-white w-2/5 h-2/5 rounded-3xl flexCenter flex-col">
-                <span
-                  onClick={handleclose}
-                  className="absolute cursor-pointer -top-12 right-6 w-6 h-6 inline-block"
-                >
-                  <img src="/svg/close.svg" alt="" />
-                </span>
-                <h2 className="text-black">{userData && userData.firstname}</h2>
-                <p className="text-center my-12">
-                  Cuentas con un audio pendiente para incluir en tu oso, puedes
-                  revisarlo, y continuar con la compra o realizar un nuevo
-                  registro
-                </p>
-                <audio src={audio} controls></audio>
+            <div className="dataClient text-xl text-[--yellow] fixed w-full h-full z-[201] bg-black bg-opacity-20 backdrop-blur-xl top-0 left-0 flexCenter max-lg:p-6">
+              <div className="relative font-inter bg-black bg-opacity-30 lg:w-2/5 xs:w-full min-h-2/4 rounded-3xl flexCenter max-lg:flex-col p-12 border border-[--yellow]">
+                <div className="iconPopUp lg:w-1/2 xs:w-full">
+                  <span className="w-full h-auto inline-block">
+                    <img src="/svg/iconAudio.svg" alt="" />
+                  </span>
+                  <p className="text-2xl xs:text-center my-12 font-medium lg:text-start">
+                    {userData && userData.firstname} Tienes una grabación
+                    pendiente para poner en tu oso.
+                  </p>
+                </div>
+                <div className="audioBoxPopup lg:w-1/2 xs:w-full">
+                  <span
+                    onClick={handleclose}
+                    className="absolute cursor-pointer -top-12 right-6 w-6 h-6 inline-block"
+                  >
+                    <img src="/svg/close.svg" alt="" />
+                  </span>
 
-                <button onClick={submitHandler} className="btn active my-6">
-                  Ir al checkout
-                </button>
-                <button onClick={handleclose} className="btn ">
-                  Iniciar una <br />
-                  nueva grabación
-                </button>
+                  <p className="text-2xl text-center my-12">
+                    ¿Qué quieres hacer?
+                  </p>
+                  <audio className="w-full" src={audio} controls></audio>
+
+                  <button
+                    onClick={submitHandler}
+                    className="btn active my-6 w-full"
+                  >
+                    Continuar al checkout
+                  </button>
+                  <button onClick={handleclose} className="btn w-full">
+                    Grabar uno nuevo
+                  </button>
+                </div>
               </div>
             </div>
           )}
