@@ -56,9 +56,9 @@ function Administrador() {
 
   return (
     <div className="font-inter lowercase w-full h-screen flex flex-col justify-center items-center">
-      <button className="btn active mb-12" onClick={descargarCSV}>
+      {/* <button className="btn active mb-12 " onClick={descargarCSV}>
         descargar DB
-      </button>
+      </button> */}
       <div className="min-h-96 min-w-[40%] bg-zinc-700 py-4 px-4 flexCenter flex-wrap rounded-3xl overflow-auto">
         <div className="w-full flex justify-evenly">
           <input
