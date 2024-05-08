@@ -9,10 +9,12 @@ function Administrador() {
   const [usuarios, setUsuarios] = useState([]);
   const [filtro, setFiltro] = useState("");
   const [textoFiltro, setTextoFiltro] = useState("");
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
 
   const filtrarUsuarios = async () => {
     if (!textoFiltro) {
       setUsuarios([]);
+      setMostrarMensaje(false);
       return;
     }
 
@@ -34,7 +36,12 @@ function Administrador() {
       })
     );
 
-    setUsuarios(usuariosFiltrados);
+    if (usuariosFiltrados.length === 0) {
+      setMostrarMensaje(true);
+    } else {
+      setMostrarMensaje(false);
+      setUsuarios(usuariosFiltrados);
+    }
   };
 
   const descargarCSV = async () => {
@@ -83,22 +90,27 @@ function Administrador() {
             Filtrar orden
           </button>
         </div>
-        <ul className=" text-white">
-          {usuarios.map((usuario) => (
-            <ul key={usuario.id}>
-              <li className="w-full my-6">
-                <span className="text-xl font-black">{usuario.firstname}</span>{" "}
-                - {usuario.email} <br />
-                <strong>orden #</strong> - {usuario.order_id}
-              </li>
-              <audio
-                id={`audioElement_${usuario.id}`}
-                controls
-                src={`${usuario.audioURL}.mp3`}
-              ></audio>
-            </ul>
-          ))}
-        </ul>
+        {mostrarMensaje && (
+          <p className="text-white text-center mt-4">No se encontraron resultados.</p>
+        )}
+        {!mostrarMensaje && (
+          <ul className=" text-white">
+            {usuarios.map((usuario) => (
+              <ul key={usuario.id}>
+                <li className="w-full my-6">
+                  <span className="text-xl font-black">{usuario.firstname}</span>{" "}
+                  - {usuario.email} <br />
+                  <strong>orden #</strong> - {usuario.order_id}
+                </li>
+                <audio
+                  id={`audioElement_${usuario.id}`}
+                  controls
+                  src={`${usuario.audioURL}.mp3`}
+                ></audio>
+              </ul>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
