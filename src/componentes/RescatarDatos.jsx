@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
+import { urlAlcarrito } from "../data/url";
 
 const RescatarDatos = () => {
   const [emailQuery, setEmailQuery] = useState("");
