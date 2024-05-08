@@ -213,7 +213,6 @@ const FormSteps = ({
         `${formData.firstname}, graba un mensaje de 20 segundos. <br /> 
         Ella lo escuchará al oprimir el botón del pecho del oso`
       );
-      updateUsername();
     }
   };
 
@@ -251,6 +250,11 @@ const FormSteps = ({
       console.error("Firstname is required to generate username");
     }
   };
+  useEffect(() => {
+    if (paso == 2) {
+      updateUsername();
+    }
+  }, [paso]);
 
   return (
     <>
@@ -348,7 +352,6 @@ const FormSteps = ({
 
                       <span
                         onClick={() => {
-                          updateUsername();
                           nextSlide(
                             anchoContenedor,
                             valorinicial,

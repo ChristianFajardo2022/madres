@@ -242,7 +242,7 @@ input[type="number"] {
   border: none;
 
   position: absolute;
-  @apply lg:left-1/2 xs:left-4;
+  @apply -left-5;
 }
 
 /* Estilo del checkbox cuando está marcado */
@@ -275,7 +275,7 @@ input[type="number"] {
   position: absolute;
   left: 50%;
   top: 50%;
-  @apply lg:translate-x-[-48%] xs:translate-x-[-55%] -translate-y-1/2;
+  @apply -translate-x-1/2 -translate-y-1/2;
 }
 
 .itemnav {

@@ -116,58 +116,62 @@ const RescatarDatos = () => {
         <>
           {vacio && (
             <div className="dataClient text-xl text-[--yellow] fixed w-full h-full z-[201] bg-black bg-opacity-20 backdrop-blur-xl top-0 left-0 flexCenter max-lg:p-6">
-              <div className="relative font-inter bg-black bg-opacity-30 lg:w-2/5 xs:w-full min-h-2/4 rounded-3xl flexCenter max-lg:flex-col p-12 border border-[--yellow]">
-                <div className="iconPopUp lg:w-1/2 xs:w-full lg:pr-6">
-                  <span className="w-full h-auto inline-block">
-                    <img src="/svg/iconAudio.svg" alt="" />
-                  </span>
-                  <p className="text-2xl xs:text-center my-12 font-medium lg:text-start">
-                    {userData.length > 0 && userData[0].firstname}
+              <div className="relative lg:w-2/5 xs:w-full lg:h-[60%] xs:h-[80%] flexCenter">
+                <span
+                  onClick={handleClose}
+                  className="absolute cursor-pointer -top-12 right-6 w-6 h-6 inline-block"
+                >
+                  <img src="/svg/close.svg" alt="" />
+                </span>
 
-                    {userData.length < 2
-                      ? " tienes una grabación pendiente para poner en tu oso."
-                      : " tienes algunas grabaciones. Escoge la mejor y continúa para poner en tu oso."}
-                  </p>
-                </div>
-                <div className="audioBoxPopup lg:w-1/2 xs:w-full lg:pl-6">
-                  <span
-                    onClick={handleClose}
-                    className="absolute cursor-pointer -top-12 right-6 w-6 h-6 inline-block"
-                  >
-                    <img src="/svg/close.svg" alt="" />
-                  </span>
+                <div className="relative font-inter bg-black bg-opacity-30 h-full w-full overflow-hidden rounded-3xl flexCenter max-lg:flex-col lg:p-12 max-lg:px-12 border border-[--yellow]">
+                  <div className="iconPopUp lg:w-1/2 xs:w-full lg:h-full xs:h-[40%] lg:px-6 max-lg:pt-6 flexCenter flex-col">
+                    <span className="w-full h-auto inline-block">
+                      <img src="/svg/iconAudio.svg" alt="" />
+                    </span>
+                    <p className="text-2xl xs:text-center my-12 font-medium lg:text-start">
+                      {userData.length > 0 && userData[0].firstname}
 
-                  <p className="text-2xl text-center my-12 max-lg:text-white">
-                    ¿Qué quieres hacer?
-                  </p>
-                  {userData.map((user) => (
-                    <div
-                      key={user.id}
-                      className="checkbox-container flex items-center justify-between"
+                      {userData.length < 2
+                        ? " tienes una grabación pendiente para poner en tu oso."
+                        : " tienes algunas grabaciones. Escoge la mejor y continúa para poner en tu oso."}
+                    </p>
+                  </div>
+                  <div className="audioBoxPopup lg:h-full xs:h-[80%]  lg:w-1/2 xs:w-full overflow-y-auto lg:pl-6 max-lg:px-10">
+                    <p className="text-2xl text-center my-12 max-lg:text-white">
+                      ¿Qué quieres hacer?
+                    </p>
+                    {userData.map((user) => (
+                      <div
+                        key={user.id}
+                        className="relative checkbox-container flex items-center justify-between"
+                      >
+                        <audio
+                          className="w-full"
+                          src={user.audioURL}
+                          controls
+                        ></audio>
+                        <input
+                          type="checkbox"
+                          onChange={(event) =>
+                            handleCheckboxChange(event, user)
+                          }
+                          checked={selectedUsers.some(
+                            (selectedUser) => selectedUser.id === user.id
+                          )}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      onClick={submitHandler}
+                      className="btn active my-6 w-full"
                     >
-                      <audio
-                        className="w-full"
-                        src={user.audioURL}
-                        controls
-                      ></audio>
-                      <input
-                        type="checkbox"
-                        onChange={(event) => handleCheckboxChange(event, user)}
-                        checked={selectedUsers.some(
-                          (selectedUser) => selectedUser.id === user.id
-                        )}
-                      />
-                    </div>
-                  ))}
-                  <button
-                    onClick={submitHandler}
-                    className="btn active my-6 w-full"
-                  >
-                    Continuar al checkout
-                  </button>
-                  <button onClick={handleClose} className="btn w-full">
-                    Grabar uno nuevo
-                  </button>
+                      Continuar al checkout
+                    </button>
+                    <button onClick={handleClose} className="btn w-full">
+                      Grabar uno nuevo
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
