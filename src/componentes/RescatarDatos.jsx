@@ -137,7 +137,7 @@ const RescatarDatos = () => {
                     <img src="/svg/close.svg" alt="" />
                   </span>
 
-                  <p className="text-2xl text-center my-12">
+                  <p className="text-2xl text-center my-12 max-lg:text-white">
                     ¿Qué quieres hacer?
                   </p>
                   {userData.map((user) => (
