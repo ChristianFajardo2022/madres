@@ -224,14 +224,14 @@ input[type="number"] {
 .checkbox-container {
   @apply w-full;
 }
-.cajaCard .checkbox-container .caja {
+.audioBoxPopup .checkbox-container {
   @apply flex w-full justify-between items-center mb-4;
 }
-.cajaCard .checkbox-container input[type="checkbox"] {
+.audioBoxPopup .checkbox-container input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  min-width: 0.7em !important;
+
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 0.7rem;
@@ -240,21 +240,21 @@ input[type="number"] {
   margin: 0;
   padding: 0;
   border: none;
-  position: relative;
+
+  position: absolute;
+  @apply lg:left-1/2 xs:left-4;
 }
 
 /* Estilo del checkbox cuando está marcado */
-.cajaCard .checkbox-container input[type="checkbox"]:checked {
-  background-color: #ff0073; /* Cambiar el color de fondo cuando está marcado */
-}
-.cajaCard .checkbox-container input[type="checkbox"]:checked {
-  background-color: #ff0073; /* Cambiar el color de fondo cuando está marcado */
+.audioBoxPopup .checkbox-container input[type="checkbox"]:checked {
+  background-color: #ff0073;
+  /* Cambiar el color de fondo cuando está marcado */
 }
 
 /* Estilos para el pseudo-elemento del checkbox */
-.cajaCard .checkbox-container input[type="checkbox"]::before {
+.audioBoxPopup .checkbox-container input[type="checkbox"]::before {
   content: "";
-
+  position: absolute;
   display: inline-block;
   width: 0.7rem;
   height: 0.7rem;
@@ -264,18 +264,18 @@ input[type="number"] {
 }
 
 /* Estilo del pseudo-elemento cuando el checkbox está marcado */
-.cajaCard .checkbox-container input[type="checkbox"]:checked::before {
+.audioBoxPopup .checkbox-container input[type="checkbox"]:checked::before {
   content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: inline-block;
   border: 1px solid #ff0073;
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 1.1rem;
-  background-color: #ffffff00; /* Color del pseudo-elemento */
+  background-color: #ffffff00;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  @apply lg:translate-x-[-48%] xs:translate-x-[-55%] -translate-y-1/2;
 }
 
 .itemnav {
