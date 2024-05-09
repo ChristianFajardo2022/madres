@@ -138,7 +138,7 @@ const RescatarDatos = () => {
                         : " tienes algunas grabaciones. Escoge la mejor y continúa para poner en tu oso."}
                     </p>
                   </div>
-                  <div className="audioBoxPopup lg:h-full xs:h-[80%]  lg:w-1/2 xs:w-full overflow-y-auto lg:pl-6 max-lg:px-10">
+                  <div className="audioBoxPopup flex-col flexCenter lg:h-full lg:pl-6 lg:w-1/2 max-lg:px-10 overflow-y-auto xs:h-[80%] xs:w-full">
                     <p className="text-2xl text-center my-12 max-lg:text-white">
                       ¿Qué quieres hacer?
                     </p>
