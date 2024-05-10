@@ -182,9 +182,7 @@ function Grabadora() {
                       <span className="text-[var(--yellow)]">
                         {stock && (
                           <>
-                            {stock.stock >= 250 &&
-                              `Osos disponibles: ${stock.stock}`}
-                            {stock.stock == 0 && `Operacion mayo`}
+                            {stock.stock && `Osos disponibles: ${stock.stock}`}
                           </>
                         )}
                       </span>
