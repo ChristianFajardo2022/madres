@@ -25,14 +25,14 @@ const FormSteps = ({
   setFormData,
 }) => {
   const [paso, setpaso] = useState(1);
-  const [readyToBuy, setReadyToBuy] = useState(false);
+  const [readyToBuy, setReadyToBuy] = useState(true);
   const [anchoContenedor, setAnchoContenedor] = useState(0);
   const [mensaje, setMensaje] = useState(
     "graba un mensaje de 20 segundos. <br /> Ella lo escuchará al oprimir el botón del pecho del oso"
   );
   const [anchoHijoEnPixel, setAnchoHijoEnPixel] = useState(0);
   const [valorinicial, setValorInicial] = useState(0);
-  const [irpaso6, setIrpaso6] = useState(false);
+  const [irpaso6, setIrpaso6] = useState(true);
   const [translate, setTranslate] = useState(0);
   const input = useRef(null);
   const cards = useRef(null);
@@ -47,6 +47,9 @@ const FormSteps = ({
   //console.log(formData);
   //console.log(paso);
   // console.log(status);
+  useEffect(() => {
+    setAudiourl("/cortesias/edwin12.ogg");
+  }, []);
 
   useEffect(() => {
     gsap.fromTo(
@@ -296,9 +299,8 @@ const FormSteps = ({
                       }  ${paso > 1 && "none"}`}
                     >
                       <Espaciado />
-                      <p>Por el momento no contamos con osos disponibles</p>
-                      <Espaciado />
-                      {/* <div className="w-full">
+
+                      <div className="w-full">
                         <div className="flex flex-col w-full">
                           <p className="titulosForm">
                             Primero, ¿cuál es tu nombre?
@@ -370,7 +372,7 @@ const FormSteps = ({
                         }`}
                       >
                         <Texto title={"Continuar"} />
-                      </span> */}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -397,27 +399,7 @@ const FormSteps = ({
                             dangerouslySetInnerHTML={{ __html: mensaje }}
                           />
 
-                          <AudioPlayer
-                            setMensaje={setMensaje}
-                            audiourl={audiourl}
-                            setAudiourl={setAudiourl}
-                            startRecording={startRecording}
-                            setIrpaso6={setIrpaso6}
-                            stopRecording={stopRecording}
-                            status={status}
-                            mediaBlobUrl={mediaBlobUrl}
-                            setBotonAudio={setBotonAudio}
-                            setReproducir={setReproducir}
-                            reproducir={reproducir}
-                            funcionNext={() => {
-                              nextSlide(
-                                anchoContenedor,
-                                valorinicial,
-                                anchoHijoEnPixel
-                              );
-                              setReadyToBuy(true);
-                            }}
-                          />
+                          <audio src={audiourl} controls></audio>
                           <p className="pt-8 flex items-end justify-center text-sm text-[--yellow] bottom-12 text-center">
                             <span className="w-6 h-auto inline-block mr-2">
                               <img src="/svg/warning.svg" alt="" />
@@ -522,7 +504,7 @@ const FormSteps = ({
                     <img src="/svg/next.svg" alt="" />
                   </span>
                 )}
-                {/* {paso < 3 && (
+                {paso < 3 && (
                   <span
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
@@ -539,7 +521,7 @@ const FormSteps = ({
                   >
                     <img src="/svg/next.svg" alt="" />
                   </span>
-                )} */}
+                )}
               </div>
             </div>
             {/* Barra de progreso*/}
