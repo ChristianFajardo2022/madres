@@ -296,9 +296,9 @@ const FormSteps = ({
                       }  ${paso > 1 && "none"}`}
                     >
                       <Espaciado />
-                      <p>Por el momento no contamos con osos disponibles</p>
-                      <Espaciado />
-                      {/* <div className="w-full">
+                      {/* <p>Por el momento no contamos con osos disponibles</p>
+                      <Espaciado /> */}
+                      <div className="w-full">
                         <div className="flex flex-col w-full">
                           <p className="titulosForm">
                             Primero, ¿cuál es tu nombre?
@@ -370,7 +370,7 @@ const FormSteps = ({
                         }`}
                       >
                         <Texto title={"Continuar"} />
-                      </span> */}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -522,7 +522,7 @@ const FormSteps = ({
                     <img src="/svg/next.svg" alt="" />
                   </span>
                 )}
-                {/* {paso < 3 && (
+                {paso < 3 && (
                   <span
                     onClick={() =>
                       nextSlide(anchoContenedor, valorinicial, anchoHijoEnPixel)
@@ -539,7 +539,7 @@ const FormSteps = ({
                   >
                     <img src="/svg/next.svg" alt="" />
                   </span>
-                )} */}
+                )}
               </div>
             </div>
             {/* Barra de progreso*/}
