@@ -578,3 +578,7 @@ input[type="number"] {
 .iconSocial3:hover .whtIcon .border3 {
   fill: #002433;
 }
+
+.form .checkForm{
+  @apply w-6 h-6 m-0 min-w-1
+}

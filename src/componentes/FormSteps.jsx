@@ -25,6 +25,7 @@ const FormSteps = ({
   setFormData,
 }) => {
   const [paso, setpaso] = useState(1);
+  const [isChecked, setIsChecked] = useState(false);
   const [readyToBuy, setReadyToBuy] = useState(false);
   const [anchoContenedor, setAnchoContenedor] = useState(0);
   const [mensaje, setMensaje] = useState(
@@ -351,6 +352,22 @@ const FormSteps = ({
                         </div>
                       </div>
 
+                      <div className="flex gap-4 form-group ">
+                        <input
+                          checked={isChecked}
+                          onChange={(e) => setIsChecked(e.target.checked)}
+                          className="checkForm inline-block"
+                          type="checkbox"
+                        />
+                        <a
+                          target="_blank"
+                          className="max-lg:text-[0.65rem]"
+                          href="https://interrapidisimo.com/proteccion-de-datos-personales/"
+                        >
+                          <span> Autorizo tratamiento de datos</span>{" "}
+                          <span className="border-b-2 pb-[2px]">Leer aquí</span>{" "}
+                        </a>
+                      </div>
                       <span
                         onClick={() => {
                           nextSlide(
@@ -367,7 +384,9 @@ const FormSteps = ({
                           formData.firstname !== "" && formData.email !== ""
                             ? "active"
                             : "disable"
-                        }`}
+                        }
+                        ${!isChecked ? "opacity-50 cursor-not-allowed" : ""}
+                        `}
                       >
                         <Texto title={"Continuar"} />
                       </span>
